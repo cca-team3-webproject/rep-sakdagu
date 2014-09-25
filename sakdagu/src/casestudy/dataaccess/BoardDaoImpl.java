@@ -63,9 +63,9 @@ public class BoardDaoImpl implements BoardDao {
 
 		String query = "SELECT * FROM "
 				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, reply_step FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, reply_step  FROM board "
+				+ "(SELECT num, writer, title, read_count, reg_date, reply_step  FROM sakdagu_board "
 				+ whereSQL
-				+ " ORDER BY master_num DESC, reply_order) ) WHERE r BETWEEN ? AND ?";
+				+ " ORDER BY master_num	 DESC, reply_order) ) WHERE r BETWEEN ? AND ?";
 		System.out.println("BoardDAOImpl selectBoardList() query: " + query
 				+ "searchText: " + searchText);
 
@@ -172,7 +172,7 @@ public class BoardDaoImpl implements BoardDao {
 		}
 
 		// 4. SELECT 문에 생성된 WHERE 절을 붙인다.
-		String query = "SELECT count(num) FROM Board" + whereSQL;
+		String query = "SELECT count(num) FROM sakdagu_Board" + whereSQL;
 		System.out.println("BoardDAOImpl selectBoardCount() query: " + query);
 
 		Connection connection = null;

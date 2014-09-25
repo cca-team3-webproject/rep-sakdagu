@@ -19,26 +19,25 @@
 			<td><table id="sidebartable">
 					<tr>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
+							href="<c:url value="/board/list?category=베스트"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>베스트</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=women"/>"><img
-								src="<c:url value="/images/best.jpg"/>"><br>여성의류</a></td>
+							href="<c:url value="/board/list?category=여성의류"/>"><img
+								src="<c:url value="/images/women.gif"/>"><br>여성의류</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
-								src="<c:url value="/images/best.jpg"/>"><br>남성의류</a></td>
+							href="<c:url value="/board/list?category=남성의류"/>"><img
+								src="<c:url value="/images/man.gif"/>"><br>남성의류</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
+							href="<c:url value="/board/list?category=패션잡화"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>패션잡화</a></td>
-
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
+							href="<c:url value="/board/list?category=뷰티"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>뷰티</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
+							href="<c:url value="/board/list?category=스포츠"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>스포츠패션</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=best"/>"><img
+							href="<c:url value="/board/list?category=해외배송"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>해외배송</a></td>
 					</tr>
 				</table></td>
@@ -54,9 +53,6 @@
 							<td><a href='<c:url value="/registerProduct2.jsp"/>'>상품등록2</a></td>
 
 
-						</c:if>
-						<c:if test="${empty sessionScope.loginMember}">
-							<td><a href='<c:url value="/registerMember.jsp"/>'>회원가입</a></td>
 						</c:if>
 
 						<c:if test="${not empty sessionScope.loginMember}">

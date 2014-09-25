@@ -10,7 +10,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .tableCell { display: table-cell; vertical-align: top; }
 .topbar { display: table-cell; width: 1em; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #ccccff; }
 
-.category { padding: 20px; text-align: center;}
+.category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
 
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
@@ -21,7 +21,7 @@ h4 { text-align: center; font-size: 14px; color: blue; }
 td.label { text-align: right; }
 
 ul#loginerrormsg { padding: 0px 10px 0px 20px; }
-table#logintable, table#logouttable { width: 300px; }
+table#logintable, table#logouttable { width: 400px; }
 table#logintable td.label { text-align: center; color: red; font-weight: bold; }
 
 table#logouttable td { text-align: center; padding: 5px 0px 5px 0px; }
