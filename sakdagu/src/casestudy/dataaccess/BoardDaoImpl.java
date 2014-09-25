@@ -40,6 +40,8 @@ public class BoardDaoImpl implements BoardDao {
 
 		String searchType = (String) searchInfo.get("searchType");
 		String searchText = (String) searchInfo.get("searchText");
+		String category = (String) searchInfo.get("category");
+		String subCategory = (String) searchInfo.get("subCategory");
 		// 1.
 
 		int startRow = (Integer) searchInfo.get("startRow");
