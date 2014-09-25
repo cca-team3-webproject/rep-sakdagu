@@ -40,6 +40,8 @@ public class BoardDaoImpl implements BoardDao {
 
 		String searchType = (String) searchInfo.get("searchType");
 		String searchText = (String) searchInfo.get("searchText");
+		String category = (String) searchInfo.get("category");
+		String subCategory = (String) searchInfo.get("subCategory");
 		// 1.
 
 		int startRow = (Integer) searchInfo.get("startRow");
@@ -62,10 +64,10 @@ public class BoardDaoImpl implements BoardDao {
 		}
 
 		String query = "SELECT * FROM "
-				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, reply_step FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, reply_step  FROM board "
+				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
+				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM board "
 				+ whereSQL
-				+ " ORDER BY master_num DESC, reply_order) ) WHERE r BETWEEN ? AND ?";
+				+ " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
 		System.out.println("BoardDAOImpl selectBoardList() query: " + query
 				+ "searchText: " + searchText);
 

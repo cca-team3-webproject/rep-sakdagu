@@ -48,13 +48,7 @@ public class BoardController extends HttpServlet {
 				updateBoard(request, response);
 			} else if (action.equals("/remove")) {
 				removeBoard(request, response);
-			}
-			// 답글 관련 요청(/replyForm, /reply)에 대한 처리 추가
-			else if (action.equals("/replyForm")) {
-				replyBoardForm(request, response);
-			} else if (action.equals("/reply")) {
-				replyBoard(request, response);
-			} else {
+			}else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (Exception ex) {
@@ -70,6 +64,8 @@ public class BoardController extends HttpServlet {
 		// 1. searchType, searchText 요청파라미터 값을 구한다.
 		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
+		String category = request.getParameter("category");
+		String subCategory = request.getParameter("subCategory");
 		// 1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
 
@@ -109,6 +105,8 @@ public class BoardController extends HttpServlet {
 
 		searchInfo.put("searchType", searchType);
 		searchInfo.put("searchText", searchText);
+		searchInfo.put("category", category);
+		searchInfo.put("subCategory", subCategory);
 		// 4. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 		Board[] boardList = service.getBoardList(searchInfo);
 
@@ -139,7 +137,7 @@ public class BoardController extends HttpServlet {
 			DataNotFoundException {
 		// 1.1 요청 파라미터(num)로 부터 글 번호를 구한다.
 		int num = Integer.parseInt(request.getParameter("num"));
-
+		
 		String pageNumber = request.getParameter("pageNumber");
 
 		// (1) 현재 페이지 번호
@@ -270,75 +268,6 @@ public class BoardController extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-	/*
-	 * 답변글을 등록하는 요청을 처리한다.
-	 */
-	private void replyBoard(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException,
-			DataNotFoundException {
-
-		// 1. 요청 파라미터로 부터 글 번호(num), 원본글(masterNum),
-		// 작성자(writer), 제목(title),내용(contents)을 구한다.
-		String num = request.getParameter("num");
-		String masterNum = request.getParameter("masterNum");
-		String writer = request.getParameter("writer");
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
-		String replyOrder = request.getParameter("replyOrder");
-		String replyStep = request.getParameter("replyStep");
-
-		String ip = request.getRemoteAddr();
-
-		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
-		Board board = new Board(Integer.parseInt(num), writer, title, contents,
-				ip, Integer.parseInt(masterNum), Integer.parseInt(replyOrder),
-				Integer.parseInt(replyStep));
-
-		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
-		BoardService service = new BoardServiceImpl();
-		service.replyBoard(board);
-
-		// 4. request scope 속성(board)에 게시글을 저장한다.
-		request.setAttribute("board", board);
-		// 5. RequestDispatcher 객체를 통해 게시물 보기(read)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
-		dispatcher.forward(request, response);
-
-	}
-
-	/*
-	 * 답변글 작성을 위해 적절한 내용이 채워진 폼을 응답한다.
-	 */
-	private void replyBoardForm(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException,
-			DataNotFoundException {
-
-		// 요청 파라미터로 부터 글 번호(num)를 구한다.
-		String num = request.getParameter("num");
-
-		String pageNumber = request.getParameter("pageNumber");
-
-		// (1) 현재 페이지 번호
-		int currentPageNumber = 1;
-		if (pageNumber != null && pageNumber.length() != 0) {
-			currentPageNumber = Integer.parseInt(pageNumber);
-		}
-
-		// BoardService 객체를 통해 해당 번호의 게시글을 검색한다.
-		BoardService boardService = new BoardServiceImpl();
-		Board board = boardService.findBoard(Integer.parseInt(num));
-
-		// request scope 속성(board)에 검색한 게시글을 저장한다.
-		request.setAttribute("board", board);
-		request.setAttribute("currentPageNumber", currentPageNumber);
-		// request.setAttribute("searchType", searchType);
-		// request.setAttribute("searchText", searchText);
-
-		// RequestDispatcher 객체를 통해 뷰 페이지(updateForm.jsp)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("/WEB-INF/views/board/replyForm.jsp");
-		dispatcher.forward(request, response);
-	}
 
 	/*
 	 * 게시글을 삭제하는 요청을 처리한다.
