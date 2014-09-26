@@ -17,6 +17,13 @@ public class Board {
 	/* 답변 글깊이 */
 	private int replyStep;
 
+	/* 카테고리 */
+	private String category;
+	/* 서브카테고리 */
+	private String subCategory;
+
+	private String photoDir;
+
 	public Board() {
 
 	}
@@ -65,25 +72,30 @@ public class Board {
 
 	// 리스트 조회용
 	public Board(int num, String writer, String title, int readCount,
-			String regDate, int replyStep) {
+			String regDate, String category, String subCategory, String photoDir) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.title = title;
 		this.readCount = readCount;
 		this.regDate = regDate;
-
-		this.replyStep = replyStep;
+		this.category = category;
+		this.subCategory = subCategory;
+		this.photoDir = photoDir;
+		// this.replyStep = replyStep;
 	}
 
 	// 게시글 쓰기용
-	public Board(String writer, String title, String contents, String ip) {
+	public Board(String writer, String title, String contents, String ip,
+			String category, String subCategory, String photoDir) {
 		super();
 		this.writer = writer;
 		this.title = title;
 		this.contents = contents;
 		this.ip = ip;
-
+		this.category = category;
+		this.subCategory = subCategory;
+		this.setPhotoDir(photoDir);
 	}
 
 	// 게시글 수정용
@@ -184,13 +196,39 @@ public class Board {
 		this.modDate = modDate;
 	}
 
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(String subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	public String getPhotoDir() {
+		return photoDir;
+	}
+
+	public void setPhotoDir(String photoDir) {
+		this.photoDir = photoDir;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [num=" + num + ", writer=" + writer + ", title=" + title
 				+ ", contents=" + contents + ", ip=" + ip + ", readCount="
 				+ readCount + ", regDate=" + regDate + ", modDate=" + modDate
 				+ ", masterNum=" + masterNum + ", replyOrder=" + replyOrder
-				+ ", replyStep=" + replyStep + "]";
+				+ ", replyStep=" + replyStep + ", category=" + category
+				+ ", subCategory=" + subCategory + ", photoDir=" + photoDir
+				+ "]";
 	}
 
 }

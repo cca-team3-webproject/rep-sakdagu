@@ -11,10 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import casestudy.business.domain.Board;
+import casestudy.business.domain.Member;
 import casestudy.business.service.BoardService;
 import casestudy.business.service.BoardServiceImpl;
 import casestudy.business.service.DataNotFoundException;
 import casestudy.util.PageHandler;
+
+import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class BoardController
@@ -48,7 +51,7 @@ public class BoardController extends HttpServlet {
 				updateBoard(request, response);
 			} else if (action.equals("/remove")) {
 				removeBoard(request, response);
-			}else {
+			} else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (Exception ex) {
@@ -62,9 +65,12 @@ public class BoardController extends HttpServlet {
 	private void selectBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 1. searchType, searchText 요청파라미터 값을 구한다.
-		String searchType = request.getParameter("searchType");
 		String searchText = request.getParameter("searchText");
 		String category = request.getParameter("category");
+		if (category == null || category.length() == 0) {
+			category = "베스트";
+		}
+
 		String subCategory = request.getParameter("subCategory");
 		// 1.2 pageNumber 요청 파라미터 값을 구한다.
 		String pageNumber = request.getParameter("pageNumber");
@@ -103,10 +109,11 @@ public class BoardController extends HttpServlet {
 		searchInfo.put("startRow", startRow);
 		searchInfo.put("endRow", endRow);
 
-		searchInfo.put("searchType", searchType);
 		searchInfo.put("searchText", searchText);
+
 		searchInfo.put("category", category);
 		searchInfo.put("subCategory", subCategory);
+
 		// 4. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 		Board[] boardList = service.getBoardList(searchInfo);
 
@@ -123,8 +130,18 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("totalPageCount", totalPageCount);
 
 		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+		Member member = ((Member)request.getSession(false).getAttribute(
+				"loginMember"));
+		System.out.println("memememe" + member);
+		RequestDispatcher dispatcher;
+		if (member != null && member.getMemberID().equals("duke")) {
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+		} else {
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
+
+		}
 		dispatcher.forward(request, response);
 
 	}
@@ -137,7 +154,7 @@ public class BoardController extends HttpServlet {
 			DataNotFoundException {
 		// 1.1 요청 파라미터(num)로 부터 글 번호를 구한다.
 		int num = Integer.parseInt(request.getParameter("num"));
-		
+
 		String pageNumber = request.getParameter("pageNumber");
 
 		// (1) 현재 페이지 번호
@@ -183,26 +200,38 @@ public class BoardController extends HttpServlet {
 	/*
 	 * 게시글을 등록하는 요청을 처리한다.
 	 */
-	private void writeBoard(HttpServletRequest request,
+	private void writeBoard(HttpServletRequest request_source,
 			HttpServletResponse response) throws ServletException, IOException,
 			DataNotFoundException {
+
+		String upPath = getServletContext().getRealPath("/images");
+		int mb = 10;
+		MultipartRequest request = new MultipartRequest(request_source, upPath,
+				mb * 1024 * 1024, "utf-8");
+
 		// 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
 		String writer = request.getParameter("writer");
 		String title = request.getParameter("title");
+		String photoDir = request.getFilesystemName("photoDir");
 		String contents = request.getParameter("contents");
 
-		String ip = request.getRemoteAddr();
+		String category = request.getParameter("category");
+		String subCategory = request.getParameter("subCategory");
+
+		String ip = request_source.getRemoteAddr();
 		System.err.println(ip);
 		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
-		Board board = new Board(writer, title, contents, ip);
+		Board board = new Board(writer, title, contents, ip, category,
+				subCategory, photoDir);
 
 		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 		BoardService service = new BoardServiceImpl();
 		service.writeBoard(board);
 
 		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
-		RequestDispatcher dispatcher = request.getRequestDispatcher("list");
-		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request_source
+				.getRequestDispatcher("list");
+		dispatcher.forward(request_source, response);
 	}
 
 	/*
@@ -267,7 +296,6 @@ public class BoardController extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("read");
 		dispatcher.forward(request, response);
 	}
-
 
 	/*
 	 * 게시글을 삭제하는 요청을 처리한다.
