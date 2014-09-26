@@ -22,51 +22,63 @@
 					<caption>게시글 목록</caption>
 					<thead>
 						<tr>
-							<th class="num"></th>
-							<th class="title">제 목</th>
-							<th class="writer">글쓴이</th>
-							<th class="regdate">작성일</th>
-							<th class="readcount">조회</th>
+							<th class="location" colspan="2"><a
+								href="<c:url value="/board/list?category=${param.category}"/>">
+									${param.category}</a> <c:if test="${not empty param.subCategory}">&gt;</c:if>
+								<a
+								href="<c:url value="/board/list?category=${param.category}&subCategory=${param.subCategory}"/>">
+									${param.subCategory}</a></th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:choose>
-							<c:when test="${empty boardList }">
-								<tr>
+
+						<tr>
+							<c:choose>
+								<c:when test="${empty boardList }">
 									<td colspan="5">등록된 게시물이 없습니다.</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
+								</c:when>
+								<c:otherwise>
 
-								<c:forEach items="${boardList}" var="board"
-									varStatus="loopState">
+									<c:forEach items="${boardList}" var="board"
+										varStatus="loopState">
+										<c:if test="${loopState.count % 2 eq 1}">
+											<tr>
+										</c:if>
+										<td>
+											<table>
 
-									<tr>
-										<td class="num">${board.num}</td>
+												<tr>
+													<td class="image" rowspan="6"><img
+														src="<c:url value="/images/${board.photoDir}"/>"></td>
+												</tr>
+												<tr>
+													<%-- <td class="num">${board.num}</td> --%>
 
-										<td class="title"><c:forEach begin="1"
-												end="${board.replyStep}">
-												<c:out value="&nbsp;" escapeXml="false" />
-											</c:forEach> <c:choose>
-												<c:when test="${not empty sessionScope.loginMember}">
-													<a
+													<td class="title"><a
 														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}">${board.title}</a>
-												</c:when>
-												<c:otherwise>
-													<c:out value="${board.title}" />
-												</c:otherwise>
-											</c:choose></td>
-
-										<td class="writer">${board.writer}</td>
-										<td class="regdate">${board.regDate}</td>
-										<td class="readcount">${board.readCount}</td>
-									</tr>
-								</c:forEach>
-
-							</c:otherwise>
-						</c:choose>
-
+													</td>
+												</tr>
+												<tr>
+													<td class="writer">${board.writer}</td>
+												</tr>
+												<tr>
+													<td class="regdate">${board.regDate}</td>
+												</tr>
+												<tr>
+													<td class="readcount">${board.readCount}</td>
+												</tr>
+												<tr>
+													<td class="category">${board.category}&gt;
+														${board.subCategory}</td>
+												</tr>
+											</table>
+										</td>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tr>
 					</tbody>
+
 					<tfoot>
 						<tr>
 							<td id="pagenavigator" colspan="5"><c:if
