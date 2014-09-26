@@ -40,20 +40,22 @@ public class BoardDaoImpl implements BoardDao {
 
 		String searchType = (String) searchInfo.get("searchType");
 		String searchText = (String) searchInfo.get("searchText");
+		String category = (String) searchInfo.get("category");
+		String subCategory = (String) searchInfo.get("subCategory");
 		// 1.
 
 		int startRow = (Integer) searchInfo.get("startRow");
 		int endRow = (Integer) searchInfo.get("endRow");
 
 		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
-		String whereSQL = "";
+		String whereSQL = "WHERE category = ? and sub_category = ?";
 		if ((searchType == null) || (searchType.length() == 0)) {
-			whereSQL = "";
+			// whereSQL = "";
 		} else if (searchType.equals("all")) {
-			whereSQL = "WHERE title LIKE ? OR writer LIKE ? OR contents LIKE ?";
+			whereSQL = "AND title LIKE ? OR writer LIKE ? OR contents LIKE ?";
 		} else if (searchType.equals("title") || searchType.equals("writer")
 				|| searchType.equals("contents")) {
-			whereSQL = "WHERE " + searchType + " LIKE ?";
+			whereSQL = "AND " + searchType + " LIKE ?";
 		}
 
 		// 3. LIKE절에 포항될 수 있도록 searchText값 앞뒤에 % 기호를 붙인다.
@@ -62,10 +64,10 @@ public class BoardDaoImpl implements BoardDao {
 		}
 
 		String query = "SELECT * FROM "
-				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, reply_step FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, reply_step  FROM sakdagu_board "
+				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
+				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM sakdagu_board "
 				+ whereSQL
-				+ " ORDER BY master_num	 DESC, reply_order) ) WHERE r BETWEEN ? AND ?";
+				+ " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
 		System.out.println("BoardDAOImpl selectBoardList() query: " + query
 				+ "searchText: " + searchText);
 
@@ -83,20 +85,26 @@ public class BoardDaoImpl implements BoardDao {
 			// 5. searchType 값에 따라 prepareStatement의 파라미터값을 설정한다.
 			// startRow, endRow 값 포함
 			if ((searchType == null) || (searchType.length() == 0)) {
-				stmt.setInt(1, startRow);
-				stmt.setInt(2, endRow);
+				stmt.setString(1, category);
+				stmt.setString(2, subCategory);
+				stmt.setInt(3, startRow);
+				stmt.setInt(4, endRow);
 			} else if (searchType.equals("all")) {
-				stmt.setString(1, searchText);
-				stmt.setString(2, searchText);
+				stmt.setString(1, category);
+				stmt.setString(2, subCategory);
 				stmt.setString(3, searchText);
-				stmt.setInt(4, startRow);
-				stmt.setInt(5, endRow);
+				stmt.setString(4, searchText);
+				stmt.setString(5, searchText);
+				stmt.setInt(6, startRow);
+				stmt.setInt(7, endRow);
 			} else if (searchType.equals("title")
 					|| searchType.equals("writer")
 					|| searchType.equals("contents")) {
-				stmt.setString(1, searchText);
-				stmt.setInt(2, startRow);
-				stmt.setInt(3, endRow);
+				stmt.setString(1, category);
+				stmt.setString(2, subCategory);
+				stmt.setString(3, searchText);
+				stmt.setInt(4, startRow);
+				stmt.setInt(5, endRow);
 			}
 
 			rs = stmt.executeQuery();
@@ -240,7 +248,7 @@ public class BoardDaoImpl implements BoardDao {
 	public Board selectBoard(int num) {
 		String query = "SELECT num,writer,title,contents,ip,read_count,reg_date,mod_date "
 				+ ", master_num, reply_order, reply_step "
-				+ "FROM board WHERE num=?";
+				+ "FROM sakdagu_board WHERE num=?";
 		System.out.println("BoardDAOImpl selectBoard() query: " + query);
 
 		Connection connection = null;
@@ -297,7 +305,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public void addReadCount(int num) {
-		String query = "UPDATE board SET read_count=read_count+1 WHERE num=?";
+		String query = "UPDATE sakdagu_board SET read_count=read_count+1 WHERE num=?";
 		System.out.println("BoardDAOImpl addReadCount() query: " + query);
 
 		Connection connection = null;
@@ -336,7 +344,7 @@ public class BoardDaoImpl implements BoardDao {
 	public boolean boardNumExists(int num) {
 		boolean result = false;
 
-		String query = "SELECT num FROM board WHERE num=?";
+		String query = "SELECT num FROM sakdagu_board WHERE num=?";
 		System.out.println("BoardDAOImpl boardNumExists() query: " + query);
 
 		Connection connection = null;
@@ -381,7 +389,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public void insertBoard(Board board) {
-		String query = "INSERT INTO board "
+		String query = "INSERT INTO sakdagu_board "
 				+ "(num, writer, title, contents, ip, read_count, reg_date,"
 				+ "mod_date, master_num) VALUES (board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, board_num_seq.CURRVAL)";
 
@@ -423,7 +431,7 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public void updateBoard(Board board) {
-		String query = "UPDATE board SET writer=?, title=?, contents=?, ip=?, mod_date=SYSDATE WHERE num=?";
+		String query = "UPDATE sakdagu_board SET writer=?, title=?, contents=?, ip=?, mod_date=SYSDATE WHERE num=?";
 
 		System.out.println("BoardDAOImpl updateBoard() query: " + query);
 
@@ -469,7 +477,7 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public void deleteBoard(int num) {
-		String query = "DELETE FROM board WHERE num = ?";
+		String query = "DELETE FROM sakdagu_board WHERE num = ?";
 
 		System.out.println("BoardDAOImpl deleteBoard() query: " + query);
 
@@ -514,11 +522,11 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public void insertReplyBoard(Board board) {
-		String query1 = "UPDATE board SET reply_order = reply_order + 1 "
+		String query1 = "UPDATE sakdagu_board SET reply_order = reply_order + 1 "
 				+ "WHERE master_num = ? AND reply_order > ?";
 		System.out.println("BoardDAOImpl insertReplyBoard() query: " + query1);
 
-		String query2 = "INSERT INTO board "
+		String query2 = "INSERT INTO sakdagu_board"
 				+ "(num, writer, title, contents, ip, read_count, reg_date,	mod_date, "
 				+ "master_num, reply_order, reply_step) "
 				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE,"
@@ -542,8 +550,10 @@ public class BoardDaoImpl implements BoardDao {
 			stmt.setString(3, board.getContents());
 			stmt.setString(4, board.getIp());
 			stmt.setInt(5, board.getMasterNum());
-			stmt.setInt(6, board.getReplyOrder() + 1);	// 현재 게시글 다음에 위치시켜야 하므로 reply_order + 1
-			stmt.setInt(7, board.getReplyStep() + 1);	// 현재 게시글에 대한 답글이므로 reply_step + 1
+			stmt.setInt(6, board.getReplyOrder() + 1); // 현재 게시글 다음에 위치시켜야 하므로
+														// reply_order + 1
+			stmt.setInt(7, board.getReplyStep() + 1); // 현재 게시글에 대한 답글이므로
+														// reply_step + 1
 			stmt.executeUpdate();
 
 		} catch (SQLException se) {
