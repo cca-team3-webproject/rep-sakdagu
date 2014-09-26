@@ -14,12 +14,16 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable th, .maintable td { border: 1px solid black; padding: 2px; height: 21px; }
 /* .maintable th, .maintable td { border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px; height: 21px; } */
 .maintable th { background-color: #cc6600; }
+.maintable table{width : 100%;}
 
-#listtable .num { width: 45px; text-align: center; }
-#listtable .title { width: 300px; }
-#listtable .writer { width: 84px; text-align: center; }
-#listtable .regdate { width: 90px; text-align: center; }
-#listtable .readcount { width: 55px; text-align: center; }
+#listtable .num { width: 100px; text-align: center; }
+#listtable .title { width: 100px; text-align: center; }
+#listtable .writer { width: 100px; text-align: center; }
+#listtable .regdate { width: 100px; text-align: center; }
+#listtable .readcount { width: 100px; text-align: center; }
+#listtable .category { width: 100px; text-align: center; }
+#listtable .subCategory { width: 100px; text-align: center; }
+#listtable .image img{width: 300px; height: 300px; text-align: center; }
 
 #searchinput { width: 200px; }
 

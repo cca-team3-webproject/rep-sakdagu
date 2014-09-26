@@ -38,7 +38,6 @@ public class BoardDaoImpl implements BoardDao {
 
 		// 1. searchInfo로부터 검색 조건을 구한다.
 
-		String searchType = (String) searchInfo.get("searchType");
 		String searchText = (String) searchInfo.get("searchText");
 		String category = (String) searchInfo.get("category");
 		String subCategory = (String) searchInfo.get("subCategory");
@@ -48,28 +47,45 @@ public class BoardDaoImpl implements BoardDao {
 		int endRow = (Integer) searchInfo.get("endRow");
 
 		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
-		String whereSQL = "WHERE category = ? and sub_category = ?";
-		if ((searchType == null) || (searchType.length() == 0)) {
-			// whereSQL = "";
-		} else if (searchType.equals("all")) {
-			whereSQL = "AND title LIKE ? OR writer LIKE ? OR contents LIKE ?";
-		} else if (searchType.equals("title") || searchType.equals("writer")
-				|| searchType.equals("contents")) {
-			whereSQL = "AND " + searchType + " LIKE ?";
+		String whereSQL = "";
+		//
+
+		if ((category == null) || (category.length() == 0)
+				|| (category.equals("전체"))) {
+			// whereSQL = "WHERE ";
+		} else if (category.equals("베스트")) {
+			whereSQL = "WHERE read_count > 2 ";
+		} else {
+			whereSQL = "WHERE category = ? ";
+		}
+
+		if ((searchText != null) && (searchText.length() != 0)) {
+			if (whereSQL.equals("")) {
+				whereSQL = "WHERE ";
+			} else {
+				whereSQL += "AND ";
+			}
+			whereSQL += "title LIKE ? OR writer LIKE ? OR contents LIKE ?";
+		}
+		if (subCategory != null && subCategory.length() != 0) {
+			whereSQL += "AND sub_category = ? ";
 		}
 
 		// 3. LIKE절에 포항될 수 있도록 searchText값 앞뒤에 % 기호를 붙인다.
-		if (searchText != null) {
+		if (searchText != null && !searchText.equals("")) {
 			searchText = "%" + searchText.trim() + "%";
 		}
 
 		String query = "SELECT * FROM "
-				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM sakdagu_board "
+				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category, photo_dir FROM "
+				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category, photo_dir FROM sakdagu_board "
 				+ whereSQL
 				+ " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
+
 		System.out.println("BoardDAOImpl selectBoardList() query: " + query
-				+ "searchText: " + searchText);
+				+ "\n searchText: " + searchText + "\n category: " + category
+				+ "\n subCategory: " + subCategory + "\n startRow: " + startRow
+				+ "\n endRow: " + endRow);
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
@@ -84,29 +100,22 @@ public class BoardDaoImpl implements BoardDao {
 
 			// 5. searchType 값에 따라 prepareStatement의 파라미터값을 설정한다.
 			// startRow, endRow 값 포함
-			if ((searchType == null) || (searchType.length() == 0)) {
-				stmt.setString(1, category);
-				stmt.setString(2, subCategory);
-				stmt.setInt(3, startRow);
-				stmt.setInt(4, endRow);
-			} else if (searchType.equals("all")) {
-				stmt.setString(1, category);
-				stmt.setString(2, subCategory);
-				stmt.setString(3, searchText);
-				stmt.setString(4, searchText);
-				stmt.setString(5, searchText);
-				stmt.setInt(6, startRow);
-				stmt.setInt(7, endRow);
-			} else if (searchType.equals("title")
-					|| searchType.equals("writer")
-					|| searchType.equals("contents")) {
-				stmt.setString(1, category);
-				stmt.setString(2, subCategory);
-				stmt.setString(3, searchText);
-				stmt.setInt(4, startRow);
-				stmt.setInt(5, endRow);
+			int index = 1;
+			if (!category.equals("전체") && !category.equals("베스트")) {
+				stmt.setString(index++, category);
 			}
 
+			if ((searchText != null) && (searchText.length() != 0)) {
+				stmt.setString(index++, searchText);
+				stmt.setString(index++, searchText);
+				stmt.setString(index++, searchText);
+			}
+			if (subCategory != null && subCategory.length() != 0) {
+				stmt.setString(index++, subCategory);
+			}
+
+			stmt.setInt(index++, startRow);
+			stmt.setInt(index++, endRow);
 			rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -117,7 +126,8 @@ public class BoardDaoImpl implements BoardDao {
 				}
 				Board = new Board(rs.getInt("num"), rs.getString("writer"),
 						title, rs.getInt("read_count"),
-						rs.getString("reg_date"), rs.getInt("reply_step"));
+						rs.getString("reg_date"), rs.getString("category"),
+						rs.getString("sub_category"),rs.getString("photo_dir"));
 				temp.add(Board);
 			}
 
@@ -389,9 +399,10 @@ public class BoardDaoImpl implements BoardDao {
 
 	@Override
 	public void insertBoard(Board board) {
+		System.out.println(board);
 		String query = "INSERT INTO sakdagu_board "
-				+ "(num, writer, title, contents, ip, read_count, reg_date,"
-				+ "mod_date, master_num) VALUES (board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, board_num_seq.CURRVAL)";
+				+ "(num, writer, title, contents, ip, read_count, reg_date, "
+				+ "mod_date, master_num, category, sub_category, photo_dir) VALUES (sakdagu_board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, sakdagu_board_num_seq.CURRVAL, ?, ?, ?)";
 
 		System.out.println("BoardDAOImpl insertBoard() query: " + query);
 
@@ -404,6 +415,9 @@ public class BoardDaoImpl implements BoardDao {
 			stmt.setString(2, board.getTitle());
 			stmt.setString(3, board.getContents());
 			stmt.setString(4, board.getIp());
+			stmt.setString(5, board.getCategory());
+			stmt.setString(6, board.getSubCategory());
+			stmt.setString(7, board.getPhotoDir());
 			stmt.executeUpdate();
 
 		} catch (SQLException se) {
