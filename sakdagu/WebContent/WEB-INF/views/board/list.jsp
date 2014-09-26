@@ -27,13 +27,15 @@
 							<th class="writer">글쓴이</th>
 							<th class="regdate">작성일</th>
 							<th class="readcount">조회</th>
+							<th class="category">카테고리</th>
+							<th class="subCategory">세부 카테고리</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:choose>
 							<c:when test="${empty boardList }">
 								<tr>
-									<td colspan="5">등록된 게시물이 없습니다.</td>
+									<td colspan="7">등록된 게시물이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
@@ -60,6 +62,8 @@
 										<td class="writer">${board.writer}</td>
 										<td class="regdate">${board.regDate}</td>
 										<td class="readcount">${board.readCount}</td>
+										<td class="category">${board.category}</td>
+										<td class="subCategory">${board.subCategory}</td>
 									</tr>
 								</c:forEach>
 
@@ -69,7 +73,7 @@
 					</tbody>
 					<tfoot>
 						<tr>
-							<td id="pagenavigator" colspan="5"><c:if
+							<td id="pagenavigator" colspan="7"><c:if
 									test="${currentPageNumber > 1}">
 									<a
 										href="list?pageNumber=${startPageNumber-1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
@@ -93,6 +97,7 @@
 				</table>
 				<div class="buttonbar">
 					<form name="searchForm" action="list" method="GET">
+						<input type="hidden" name="category" value="${param.category}">
 						<select name="searchType">
 							<option value="all"
 								<c:if test="${empty param.searchType}"> selected="selected"</c:if>>전체검색</option>
@@ -111,18 +116,18 @@
 					<c:if test="${not empty sessionScope.loginMember}">
 						<form name="writeForm" action="writeForm" method="GET">
 							<select name="category">
-									<option value="여성의류"
-											<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>
-										<option value="남성의류"
-											<c:if test="${param.category eq '남성의류'}"> selected="selected"</c:if>>남성의류</option>
-										<option value="패션잡화"
-											<c:if test="${param.category eq '패션잡화'}"> selected="selected"</c:if>>패션잡화</option>
-										<option value="뷰티"
-											<c:if test="${param.category eq '뷰티'}"> selected="selected"</c:if>>뷰티</option>
-										<option value="스포츠패션"
-											<c:if test="${param.category eq '스포츠패션'}"> selected="selected"</c:if>>스포츠패션</option>
-										<option value="해외배송"
-											<c:if test="${param.category eq '해외배송'}"> selected="selected"</c:if>>해외배송</option>
+								<option value="여성의류"
+									<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>
+								<option value="남성의류"
+									<c:if test="${param.category eq '남성의류'}"> selected="selected"</c:if>>남성의류</option>
+								<option value="패션잡화"
+									<c:if test="${param.category eq '패션잡화'}"> selected="selected"</c:if>>패션잡화</option>
+								<option value="뷰티"
+									<c:if test="${param.category eq '뷰티'}"> selected="selected"</c:if>>뷰티</option>
+								<option value="스포츠패션"
+									<c:if test="${param.category eq '스포츠패션'}"> selected="selected"</c:if>>스포츠패션</option>
+								<option value="해외배송"
+									<c:if test="${param.category eq '해외배송'}"> selected="selected"</c:if>>해외배송</option>
 							</select><input type="submit" value="글쓰기">
 						</form>
 					</c:if>
