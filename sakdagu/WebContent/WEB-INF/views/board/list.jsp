@@ -106,10 +106,26 @@
 							value="${param.searchText}" onclick="select();"> <input
 							type="submit" value="검색"> <input type="button" value="목록"
 							onclick="goUrl('list');">
-						<c:if test="${not empty sessionScope.loginMember}">
-							<input type="button" value="글쓰기" onclick="goUrl('writeForm');">
-						</c:if>
+
 					</form>
+					<c:if test="${not empty sessionScope.loginMember}">
+						<form name="writeForm" action="writeForm" method="GET">
+							<select name="category">
+									<option value="여성의류"
+											<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>
+										<option value="남성의류"
+											<c:if test="${param.category eq '남성의류'}"> selected="selected"</c:if>>남성의류</option>
+										<option value="패션잡화"
+											<c:if test="${param.category eq '패션잡화'}"> selected="selected"</c:if>>패션잡화</option>
+										<option value="뷰티"
+											<c:if test="${param.category eq '뷰티'}"> selected="selected"</c:if>>뷰티</option>
+										<option value="스포츠패션"
+											<c:if test="${param.category eq '스포츠패션'}"> selected="selected"</c:if>>스포츠패션</option>
+										<option value="해외배송"
+											<c:if test="${param.category eq '해외배송'}"> selected="selected"</c:if>>해외배송</option>
+							</select><input type="submit" value="글쓰기">
+						</form>
+					</c:if>
 				</div>
 			</div>
 		</div>

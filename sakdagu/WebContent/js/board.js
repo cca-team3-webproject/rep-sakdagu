@@ -32,11 +32,11 @@ function boardWriteCheck(form) {
 		form.writer.focus();
 		return false;
 	}
-//	if (form.contents.value.length == 0) {
-//		alert('내용을 입력하세요');
-//		form.contents.focus();
-//		return false;
-//	}
+	// if (form.contents.value.length == 0) {
+	// alert('내용을 입력하세요');
+	// form.contents.focus();
+	// return false;
+	// }
 	if (CKEDITOR.instances.contents.getData().length == 0) {
 		alert('내용을 입력하세요');
 		CKEDITOR.instances.contents.focus();
@@ -51,5 +51,8 @@ function checkNotEmpty(inputField, errorSpan) {
 	} else {
 		errorSpan.innerHTML = "";
 	}
+}
 
+function changeSelect() {
+	
 }
