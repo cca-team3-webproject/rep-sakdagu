@@ -32,6 +32,13 @@ function boardWriteCheck(form) {
 		form.writer.focus();
 		return false;
 	}
+	if (form.photoDir.value.length == 0) {
+		alert('사진을 등록하세요');
+		form.photoDir.focus();
+		return false;
+	}
+	
+	
 	// if (form.contents.value.length == 0) {
 	// alert('내용을 입력하세요');
 	// form.contents.focus();

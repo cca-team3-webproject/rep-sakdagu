@@ -15,19 +15,37 @@
 		<div class="tableRow">
 			<c:import url="/top-bar.jsp" />
 		</div>
-
 		<div class="tableRow">
 			<div class="boardpage">
 				<table id="listtable" class="maintable">
-					<caption>게시글 목록</caption>
 					<thead>
 						<tr>
 							<th class="location" colspan="2"><a
 								href="<c:url value="/board/list?category=${param.category}"/>">
-									${param.category}</a> <c:if test="${not empty param.subCategory}">&gt;</c:if>
-								<a
-								href="<c:url value="/board/list?category=${param.category}&subCategory=${param.subCategory}"/>">
-									${param.subCategory}</a></th>
+									${param.category}</a> &gt;<br> <a
+								href="<c:url value="/board/list?category=${param.category}"/>">
+									<c:choose>
+										<c:when test="${empty param.subCategory}">
+											<b>전체</b>
+										</c:when>
+										<c:otherwise>
+								전체
+								</c:otherwise>
+									</c:choose>
+							</a> <c:forEach items="${subCategoryList}" var="subCategory">
+									<a
+										href="<c:url value="/board/list?category=${param.category}&subCategory=${subCategory}"/>">
+										<c:choose>
+											<c:when test="${param.subCategory eq subCategory}">
+												<b>${subCategory}</b>
+											</c:when>
+											<c:otherwise>
+											${subCategory}
+								</c:otherwise>
+										</c:choose>
+
+									</a>
+								</c:forEach></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -48,14 +66,16 @@
 											<table>
 
 												<tr>
-													<td class="image" rowspan="6"><img
-														src="<c:url value="/images/${board.photoDir}"/>"></td>
+													<td class="image" rowspan="6"><a
+														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">
+															<img src="<c:url value="/images/${board.photoDir}"/>">
+													</a></td>
 												</tr>
 												<tr>
 													<%-- <td class="num">${board.num}</td> --%>
 
 													<td class="title"><a
-														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}">${board.title}</a>
+														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">${board.title}</a>
 													</td>
 												</tr>
 												<tr>
@@ -68,8 +88,15 @@
 													<td class="readcount">${board.readCount}</td>
 												</tr>
 												<tr>
-													<td class="category">${board.category}&gt;
-														${board.subCategory}</td>
+													<td class="category"><a
+														href="<c:url value="/board/list?category=${board.category}"/>">
+															${board.category}</a> <c:if
+															test="${not empty board.subCategory}">
+															&gt;<br>
+															<a
+																href="<c:url value="/board/list?category=${board.category}&subCategory=${board.subCategory}"/>">
+																${board.subCategory}</a>
+														</c:if></td>
 												</tr>
 											</table>
 										</td>
@@ -84,7 +111,7 @@
 							<td id="pagenavigator" colspan="5"><c:if
 									test="${currentPageNumber > 1}">
 									<a
-										href="list?pageNumber=${startPageNumber-1}&searchType=${param.searchType}&searchText=${param.searchText}">이전</a>
+										href="list?pageNumber=${startPageNumber-1}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">이전</a>
 								</c:if> <c:forEach begin="${startPageNumber}" end="${endPageNumber}"
 									var="pageNumber">
 									<c:choose>
@@ -93,36 +120,16 @@
 										</c:when>
 										<c:otherwise>
 											<a class="pagenumber"
-												href="list?pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}">${pageNumber}</a>
+												href="list?pageNumber=${pageNumber}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">${pageNumber}</a>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach> <c:if test="${endPageNumber < totalPageCount}">
 									<a
-										href="list?pageNumber=${endPageNumber+1}&searchType=${param.searchType}&searchText=${param.searchText}">다음</a>
+										href="list?pageNumber=${endPageNumber+1}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">다음</a>
 								</c:if></td>
 						</tr>
 					</tfoot>
 				</table>
-				<div class="buttonbar">
-					<form name="searchForm" action="list" method="GET">
-						<select name="searchType">
-							<option value="all"
-								<c:if test="${empty param.searchType}"> selected="selected"</c:if>>전체검색</option>
-							<option value="title"
-								<c:if test="${param.searchType eq 'title'}"> selected="selected"</c:if>>제목</option>
-							<option value="writer"
-								<c:if test="${param.searchType eq 'writer'}"> selected="selected"</c:if>>글쓴이</option>
-							<option value="contents"
-								<c:if test="${param.searchType eq 'contents'}"> selected="selected"</c:if>>내용</option>
-						</select> <input id="searchinput" type="text" name="searchText"
-							value="${param.searchText}" onclick="select();"> <input
-							type="submit" value="검색"> <input type="button" value="목록"
-							onclick="goUrl('list');">
-						<c:if test="${not empty sessionScope.loginMember}">
-							<input type="button" value="글쓰기" onclick="goUrl('writeForm');">
-						</c:if>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>

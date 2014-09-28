@@ -68,7 +68,10 @@ public class BoardController extends HttpServlet {
 		String searchText = request.getParameter("searchText");
 		String category = request.getParameter("category");
 		if (category == null || category.length() == 0) {
-			category = "베스트";
+			category = (String) request.getAttribute("category");
+			if (category == null || category.length() == 0) {
+				category = "베스트";
+			}
 		}
 
 		String subCategory = request.getParameter("subCategory");
@@ -83,6 +86,20 @@ public class BoardController extends HttpServlet {
 
 		// 1.2 검색 옵션을 담고 있는 Map 객체를 생성하여 searchType, searchText 값을 저장한다.
 		Map<String, Object> searchInfo = new HashMap<String, Object>();
+
+		// 현재 페이지의 게시글 목록에서 처음 보여질 게시글의 행 번호
+		int startRow = PageHandler.getStartRow(currentPageNumber);
+
+		// 현재 페이지의 게시글 목록에서 마지막에 보여질 게시글의 행 번호
+		int endRow = PageHandler.getEndRow(currentPageNumber);
+		// 3.1 검색옵션 Map() startRow와 endRow 값을 저장한다.
+		searchInfo.put("startRow", startRow);
+		searchInfo.put("endRow", endRow);
+
+		searchInfo.put("searchText", searchText);
+
+		searchInfo.put("category", category);
+		searchInfo.put("subCategory", subCategory);
 
 		// 2. BoardService 객체를 생성한다.
 		BoardService service = new BoardServiceImpl();
@@ -99,26 +116,13 @@ public class BoardController extends HttpServlet {
 		int endPageNumber = PageHandler.getEndPageNumber(startPageNumber,
 				totalBoardCount);
 
-		// 현재 페이지의 게시글 목록에서 처음 보여질 게시글의 행 번호
-		int startRow = PageHandler.getStartRow(currentPageNumber);
-
-		// 현재 페이지의 게시글 목록에서 마지막에 보여질 게시글의 행 번호
-		int endRow = PageHandler.getEndRow(currentPageNumber);
-
-		// 3.1 검색옵션 Map() startRow와 endRow 값을 저장한다.
-		searchInfo.put("startRow", startRow);
-		searchInfo.put("endRow", endRow);
-
-		searchInfo.put("searchText", searchText);
-
-		searchInfo.put("category", category);
-		searchInfo.put("subCategory", subCategory);
-
 		// 4. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 		Board[] boardList = service.getBoardList(searchInfo);
-
+		String[] subCategoryList = service.getSubCategoryList(category);
 		// 5. request scope 속성(boardList)에 게시글 리스트를 저장한다.
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("subCategoryList", subCategoryList);
+
 		// 2. request scope 속성으로 searchType, searchText를 저장한다.
 		// request.setAttribute("searchType", searchType);
 		// request.setAttribute("searchText", searchText);
@@ -130,7 +134,7 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("totalPageCount", totalPageCount);
 
 		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
-		Member member = ((Member)request.getSession(false).getAttribute(
+		Member member = ((Member) request.getSession(false).getAttribute(
 				"loginMember"));
 		System.out.println("memememe" + member);
 		RequestDispatcher dispatcher;
@@ -190,7 +194,10 @@ public class BoardController extends HttpServlet {
 	private void writeBoardForm(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException,
 			DataNotFoundException {
-
+		BoardService service = new BoardServiceImpl();
+		String category = request.getParameter("category");
+		String[] subCategoryList = service.getSubCategoryList(category);
+		request.setAttribute("subCategoryList", subCategoryList);
 		// RequestDispatcher 객체를 통해 뷰 페이지(writeForm.jsp)로 요청을 전달한다.
 		RequestDispatcher dispatcher = request
 				.getRequestDispatcher("/WEB-INF/views/board/writeForm.jsp");
@@ -228,6 +235,7 @@ public class BoardController extends HttpServlet {
 		BoardService service = new BoardServiceImpl();
 		service.writeBoard(board);
 
+		request_source.setAttribute("category", category);
 		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
 		RequestDispatcher dispatcher = request_source
 				.getRequestDispatcher("list");
