@@ -85,4 +85,6 @@ public interface BoardService {
 	 */
 	public void removeBoard(int num) throws DataNotFoundException;
 
+	public String[] getSubCategoryList(String category);
+
 }
