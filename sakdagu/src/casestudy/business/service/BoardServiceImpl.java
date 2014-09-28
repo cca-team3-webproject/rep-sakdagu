@@ -115,4 +115,9 @@ public class BoardServiceImpl implements BoardService {
 		BoardDataAccess.insertReplyBoard(board);
 	}
 
+	@Override
+	public String[] getSubCategoryList(String category) {
+		return BoardDataAccess.getSubCategoryList(category).toArray(new String[0]);
+	}
+
 }

@@ -9,7 +9,6 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .tableRow { display: table-row; }
 .tableCell { display: table-cell; vertical-align: top; }
 .topbar { display: table-cell; width: 1em; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #ccccff; }
-
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
 
