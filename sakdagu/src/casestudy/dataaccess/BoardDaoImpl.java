@@ -127,7 +127,7 @@ public class BoardDaoImpl implements BoardDao {
 				Board = new Board(rs.getInt("num"), rs.getString("writer"),
 						title, rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("category"),
-						rs.getString("sub_category"),rs.getString("photo_dir"));
+						rs.getString("sub_category"), rs.getString("photo_dir"));
 				temp.add(Board);
 			}
 
@@ -170,27 +170,41 @@ public class BoardDaoImpl implements BoardDao {
 	public int selectBoardCount(Map<String, Object> searchInfo) {
 		// 1. searchInfo로부터 검색 조건을 구한다.
 
-		String searchType = (String) searchInfo.get("searchType");
 		String searchText = (String) searchInfo.get("searchText");
-
+		String category = (String) searchInfo.get("category");
+		String subCategory = (String) searchInfo.get("subCategory");
+		System.err.println(searchText + category + subCategory);
 		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
 		String whereSQL = "";
-		if ((searchType == null) || (searchType.length() == 0)) {
-			whereSQL = "";
-		} else if (searchType.equals("all")) {
-			whereSQL = "WHERE title LIKE ? OR writer LIKE ? OR contents LIKE ?";
-		} else if (searchType.equals("title") || searchType.equals("writer")
-				|| searchType.equals("contents")) {
-			whereSQL = "WHERE " + searchType + " LIKE ?";
+		//
+
+		if ((category == null) || (category.length() == 0)
+				|| (category.equals("전체"))) {
+			// whereSQL = "WHERE ";
+		} else if (category.equals("베스트")) {
+			whereSQL = "WHERE read_count > 2 ";
+		} else {
+			whereSQL = "WHERE category = ? ";
+		}
+		if ((searchText != null) && (searchText.length() != 0)) {
+			if (whereSQL.equals("")) {
+				whereSQL = "WHERE ";
+			} else {
+				whereSQL += "AND ";
+			}
+			whereSQL += "title LIKE ? OR writer LIKE ? OR contents LIKE ?";
+		}
+		if (subCategory != null && subCategory.length() != 0) {
+			whereSQL += "AND sub_category = ? ";
 		}
 
 		// 3. LIKE절에 포항될 수 있도록 searchText값 앞뒤에 % 기호를 붙인다.
-		if (searchText != null) {
+		if (searchText != null && !searchText.equals("")) {
 			searchText = "%" + searchText.trim() + "%";
 		}
 
 		// 4. SELECT 문에 생성된 WHERE 절을 붙인다.
-		String query = "SELECT count(num) FROM sakdagu_Board" + whereSQL;
+		String query = "SELECT count(num) FROM sakdagu_Board " + whereSQL;
 		System.out.println("BoardDAOImpl selectBoardCount() query: " + query);
 
 		Connection connection = null;
@@ -204,17 +218,18 @@ public class BoardDaoImpl implements BoardDao {
 			stmt = connection.prepareStatement(query);
 
 			// 5. searchType 값에 따라 prepareStatement의 파라미터값을 설정한다.
-			if ((searchType == null) || (searchType.length() == 0)) {
+			int index = 1;
+			if (!category.equals("전체") && !category.equals("베스트")) {
+				stmt.setString(index++, category);
+			}
 
-			} else if (searchType.equals("all")) {
-				stmt.setString(1, searchText);
-				stmt.setString(2, searchText);
-				stmt.setString(3, searchText);
-			} else if (searchType.equals("title")
-					|| searchType.equals("writer")
-					|| searchType.equals("contents")) {
-				stmt.setString(1, searchText);
-
+			if ((searchText != null) && (searchText.length() != 0)) {
+				stmt.setString(index++, searchText);
+				stmt.setString(index++, searchText);
+				stmt.setString(index++, searchText);
+			}
+			if (subCategory != null && subCategory.length() != 0) {
+				stmt.setString(index++, subCategory);
 			}
 
 			rs = stmt.executeQuery();
@@ -591,5 +606,54 @@ public class BoardDaoImpl implements BoardDao {
 				ex.printStackTrace(System.err);
 			}
 		}
+	}
+
+	@Override
+	public List<String> getSubCategoryList(String category) {
+		String query;
+		if (category.equals("베스트")) {
+			query = "select sub_category FROM sakdagu_board WHERE read_count > 2 ";
+		} else {
+			query = "select sub_category FROM sakdagu_category WHERE category = ?";
+		}
+		System.out.println("BoardDAOImpl getSubCategoryList() query: " + query);
+
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ArrayList<String> sub_category = new ArrayList<String>();
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			if (!category.equals("베스트")) {
+				stmt.setString(1, category);
+			}
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				sub_category.add(rs.getString(1));
+				System.err.println(rs.getString(1));
+			}
+		} catch (SQLException se) {
+			System.err.println("BoardDAOImpl getSubCategoryList() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occurred. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+		}
+
+		return sub_category;
 	}
 }

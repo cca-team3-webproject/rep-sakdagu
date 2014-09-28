@@ -90,5 +90,10 @@ public interface BoardDao {
 	 *            삭제하려는 게시글의 번호
 	 */
 	public void deleteBoard(int num);
+	
+	/*
+	 * 
+	 */
+	public List<String> getSubCategoryList(String category);
 
 }

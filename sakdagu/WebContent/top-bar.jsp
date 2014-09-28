@@ -17,7 +17,8 @@
 
 			<td>
 
-				<form name="searchForm" action="<c:url value="/board/list"/>" method="GET">
+				<form name="searchForm" action="<c:url value="/board/list"/>"
+					method="GET">
 					<table>
 						<tr>
 							<td><select name="category">
@@ -63,7 +64,7 @@
 							href="<c:url value="/board/list?category=뷰티"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>뷰티</a></td>
 						<td class="category"><a
-							href="<c:url value="/board/list?category=스포츠"/>"><img
+							href="<c:url value="/board/list?category=스포츠패션"/>"><img
 								src="<c:url value="/images/best.jpg"/>"><br>스포츠패션</a></td>
 						<td class="category"><a
 							href="<c:url value="/board/list?category=해외배송"/>"><img
