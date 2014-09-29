@@ -64,39 +64,24 @@
 										</c:if>
 										<td>
 											<table>
-
 												<tr>
-													<td class="image" rowspan="6"><a
+													<td><a
 														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">
-															<img src="<c:url value="/images/${board.photoDir}"/>">
-													</a></td>
-												</tr>
-												<tr>
-													<%-- <td class="num">${board.num}</td> --%>
-
-													<td class="title"><a
-														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">${board.title}</a>
-													</td>
-												</tr>
-												<tr>
-													<td class="writer">${board.writer}</td>
-												</tr>
-												<tr>
-													<td class="regdate">${board.regDate}</td>
-												</tr>
-												<tr>
-													<td class="readcount">${board.readCount}</td>
-												</tr>
-												<tr>
-													<td class="category"><a
-														href="<c:url value="/board/list?category=${board.category}"/>">
-															${board.category}</a> <c:if
-															test="${not empty board.subCategory}">
-															&gt;<br>
-															<a
-																href="<c:url value="/board/list?category=${board.category}&subCategory=${board.subCategory}"/>">
-																${board.subCategory}</a>
-														</c:if></td>
+															<em class="image"><img
+																src="<c:url value="/images/${board.photoDir}"/>">
+														</em> <br> <%-- <td class="num">${board.num}</td> --%> <em
+															class="title">${board.title} </em> <em class="writer">${board.writer}</em>
+															<em class="regdate">${board.regDate}</em> <em
+															class="readcount">${board.readCount}</em>
+													</a> <em class="category"><a
+															href="<c:url value="/board/list?category=${board.category}"/>">
+																${board.category}</a> <c:if
+																test="${not empty board.subCategory}">
+															&nbsp;&gt;&nbsp;
+																<a
+																	href="<c:url value="/board/list?category=${board.category}&subCategory=${board.subCategory}"/>">
+																	${board.subCategory}</a>
+															</c:if></em></td>
 												</tr>
 											</table>
 										</td>
