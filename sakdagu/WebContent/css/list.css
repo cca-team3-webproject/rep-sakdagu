@@ -1,0 +1,750 @@
+.product-list .prod-type,.product-list .condition span,.product-list .open-new,.product-list span.near-soldout,.product-list span.soldout,.product-list span.badge span,.product-list .number,.product-align li,.product-align .selected a,.product-list .premium,.no-list-item em
+	{
+	background-image:
+		url('//imgs.coupangcdn.com/image/coupang/list/bg_list_sprite.png');
+	background-repeat: no-repeat
+}
+
+.product-list {
+	width: 980px;
+	overflow: hidden
+}
+
+.product-list ul {
+	width: 996px
+}
+
+.product-list li {
+	width: 314px;
+	height: 445px;
+	float: left;
+	margin: 0 16px 16px 0;
+	position: relative;
+	border: 1px solid #d6d6d6
+}
+
+.product-list a {
+	cursor: pointer
+}
+
+.product-list a,.product-list .title,.product-list .title span,.product-list .title em,.product-list .prod-price,.product-list .condition
+	{
+	display: block
+}
+
+.product-list .detail-link {
+	padding: 10px;
+	height: 423px;
+	background: #fff;
+	border: 1px solid #fff
+}
+
+.product-list .detail-link img {
+	width: 292px;
+	height: 292px
+}
+
+.product-list .title {
+	padding: 15px 5px;
+	font-size: 14px;
+	color: #33353d
+}
+
+.product-list .title span {
+	height: 13px;
+	font-size: 11px;
+	color: #95979f;
+	font-weight: normal;
+	display: none
+}
+
+.product-list .title em {
+	height: 17px;
+	padding-top: 3px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 17px;
+	overflow: hidden
+}
+
+.product-list .prod-price {
+	height: 63px;
+	padding: 0 0 0 5px;
+	margin-top: -2px;
+	overflow: hidden
+}
+
+.product-list .sale-persent,.product-list .prod-type,.product-list .price-detail
+	{
+	float: left
+}
+
+.product-list .sale-persent {
+	width: 73px;
+	margin-top: -4px;
+	font: normal 22px Tahoma;
+	color: #e30f13
+}
+
+.product-list .sale-persent em {
+	font-size: 35px
+}
+
+.product-list .prod-type {
+	height: 22px;
+	margin-top: 9px;
+	text-indent: -9999em
+}
+
+.product-list .event {
+	width: 60px;
+	margin-right: 13px;
+	background-position: 0 0
+}
+
+.product-list .coupang-price {
+	width: 62px;
+	margin-right: 11px;
+	background-position: -80px 0
+}
+
+.product-list .total-price {
+	width: 66px;
+	margin-top: 15px;
+	margin-right: 11px;
+	background-position: -300px -35px
+}
+
+.product-list .use-ticket {
+	width: 59px;
+	margin-right: 14px;
+	background-position: -153px 0
+}
+
+.product-list .sale-ticket {
+	width: 59px;
+	margin-right: 14px;
+	background-position: -225px 0
+}
+
+.product-list .change-ticket {
+	width: 60px;
+	margin-right: 13px;
+	background-position: 0 -35px
+}
+
+.product-list .flat-price {
+	width: 62px;
+	margin-right: 11px;
+	background-position: -80px -35px
+}
+
+.product-list .contract-sale {
+	width: 31px;
+	margin-right: 42px;
+	height: 35px;
+	margin-top: 0;
+	background-position: -153px -35px
+}
+
+.product-list .present-ticket {
+	width: 60px;
+	margin-right: 13px;
+	background-position: -225px -35px
+}
+
+.product-list .price-detail {
+	height: 40px;
+	padding: 17px 0 0 0;
+	position: relative
+}
+
+.product-list .price-detail .original {
+	display: block;
+	height: 18px;
+	position: absolute;
+	top: -1px;
+	left: 0;
+	font-size: 12px;
+	color: #95979f;
+	font-family: Tahoma, µ¸¿ò
+}
+
+.product-list .price-detail .original span {
+	font-size: 14px
+}
+
+.product-list .price-detail .price {
+	display: block;
+	margin: -4px 0 3px;
+	font-size: 14px;
+	color: #33353d
+}
+
+.product-list .price-detail .price em {
+	font: bold 18px Tahoma
+}
+
+.product-list .price-detail .comment {
+	display: block;
+	height: 15px;
+	font-size: 11px;
+	line-height: 14px;
+	color: #95979f;
+	overflow: hidden
+}
+
+.product-list .price-detail .unit-price {
+	display: block;
+	margin-top: -2px;
+	color: #ff6c00;
+	font-size: 12px
+}
+
+.product-list .price-detail .unit-price em {
+	font-weight: bold;
+	font-size: 15px
+}
+
+.product-list .condition {
+	height: 26px;
+	padding: 4px 0 0 0;
+	border-top: 1px solid #e6e6e6;
+	font-size: 11px;
+	color: #95979f;
+	font-family: Tahoma, µ¸¿ò;
+	text-align: right;
+	overflow: hidden
+}
+
+.product-list .condition em {
+	font-size: 15px;
+	color: #0085da
+}
+
+.product-list .condition span {
+	float: left;
+	width: 51px;
+	height: 18px;
+	margin: 2px 0 0 0;
+	text-align: left;
+	text-indent: -9999em
+}
+
+.product-list .condition .today-open {
+	background-position: 0 -84px
+}
+
+.product-list .condition .today-close {
+	background-position: 0 -104px
+}
+
+.product-list .condition .discount {
+	width: auto;
+	height: 18px;
+	padding: 0 6px;
+	background-image: none;
+	background: #ff9002;
+	color: #fff;
+	text-indent: 0;
+	line-height: 19px
+}
+
+.product-list .condition .discount strong {
+	font-weight: normal;
+	color: #fffc00
+}
+
+.product-list .condition .delivery-free {
+	background-position: -101px -84px
+}
+
+.product-list .condition .delivery-9800 {
+	width: 111px;
+	background-position: -101px -104px
+}
+
+.product-list .condition .delivery-coupang {
+	background-position: -101px -124px
+}
+
+.product-list .condition .direct-use {
+	background-position: -232px -84px
+}
+
+.product-list .condition .point-save {
+	width: 62px;
+	background-position: -232px -104px
+}
+
+.product-list .condition .encore {
+	width: 31px;
+	background-position: -232px -124px
+}
+
+.product-list .condition .comment {
+	display: inline-block;
+	padding: 5px 0 0 0;
+	font-size: 11px;
+	color: #95979f
+}
+
+.product-list .dete,.product-list .dete span,.product-list .dete em {
+	display: block;
+	width: 292px;
+	height: 23px;
+	position: absolute
+}
+
+.product-list .dete {
+	left: 11px;
+	top: 280px
+}
+
+.product-list .dete em {
+	top: 5px;
+	right: 12px;
+	color: #e3e3e3;
+	font-size: 12px;
+	z-index: 2;
+	text-align: right
+}
+
+.product-list .dete .bg {
+	background: #000;
+	filter: Alpha(opacity = 60);
+	opacity: .6;
+	z-index: 1;
+	text-indent: -9999em
+}
+
+.product-list li:hover,.product-list li:hover .detail-link {
+	border: 1px solid #0085da
+}
+
+.product-list .open-new {
+	display: block;
+	width: 15px;
+	height: 12px;
+	position: absolute;
+	right: 16px;
+	top: 369px;
+	background-position: -342px -10px;
+	text-indent: -9999em
+}
+
+.product-list .open-new:hover {
+	background-position: -372px -10px
+}
+
+.product-list span.shadow,.product-list span.near-soldout,.product-list span.soldout,.product-list span.badge
+	{
+	display: block;
+	position: absolute;
+	text-indent: -9999em
+}
+
+.product-list span.badge {
+	width: 288px;
+	height: 10px;
+	padding-left: 4px;
+	left: 11px;
+	top: 293px
+}
+
+.product-list span.badge span {
+	display: block;
+	width: 70px;
+	height: 78px;
+	margin-left: 2px
+}
+
+.product-list span.badge .delivery-today {
+	width: 105px;
+	height: 90px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	background-position: -436px -84px
+}
+
+.product-list span.badge .delivery-free,.product-list span.badge .delivery-9800,.product-list span.badge .discount
+	{
+	float: left;
+	margin-top: -74px
+}
+
+.product-list span.badge .delivery-9800 {
+	background-position: -470px 0
+}
+
+.product-list span.badge .delivery-free {
+	background-position: -550px 0
+}
+
+.product-list span.badge .discount {
+	background-position: -630px 0
+}
+
+.product-list span.badge .discount em {
+	display: block;
+	padding: 27px 0 0 0;
+	color: #fff;
+	font-size: 11px;
+	color: #fff;
+	text-indent: 0;
+	text-align: center
+}
+
+.product-list span.badge .discount strong {
+	font-size: 12px;
+	letter-spacing: 0
+}
+
+.product-list .number {
+	display: block;
+	width: 39px;
+	height: 52px;
+	position: absolute;
+	left: 11px;
+	top: -1px;
+	z-index: 1;
+	text-indent: -9999em
+}
+
+.product-list .no-1 {
+	background-position: 0 -192px
+}
+
+.product-list .no-2 {
+	background-position: -58px -192px
+}
+
+.product-list .no-3 {
+	background-position: -116px -192px
+}
+
+.product-list .no-4 {
+	background-position: -174px -192px
+}
+
+.product-list .no-5 {
+	background-position: -232px -192px
+}
+
+.product-list .no-6 {
+	background-position: 0 -246px
+}
+
+.product-list .no-7 {
+	background-position: -58px -246px
+}
+
+.product-list .no-8 {
+	background-position: -116px -246px
+}
+
+.product-list .no-9 {
+	background-position: -174px -246px
+}
+
+.product-list .no-10 {
+	background-position: -232px -246px
+}
+
+.product-list span.shadow {
+	width: 292px;
+	height: 292px;
+	left: 11px;
+	top: 11px;
+	background: #000;
+	filter: Alpha(opacity = 30);
+	opacity: .3;
+	display: none
+}
+
+.product-list span.near-soldout {
+	width: 292px;
+	height: 50px;
+	left: 11px;
+	top: 253px;
+	background-position: 0 -349px;
+	display: none
+}
+
+.product-list span.soldout {
+	width: 125px;
+	height: 219px;
+	left: 50%;
+	top: 11px;
+	margin-left: -62px;
+	background-position: -334px -192px;
+	display: none
+}
+
+.product-list li.soldout span.shadow,.product-list li.soldout span.soldout
+	{
+	display: block
+}
+
+.product-align {
+	position: absolute;
+	right: -12px;
+	top: -26px
+}
+
+.product-align li {
+	float: left;
+	padding: 0 12px 0 10px;
+	font-size: 11px;
+	background-position: 100% -212px
+}
+
+.product-align a {
+	color: #55575f
+}
+
+.product-align li.selected {
+	padding-left: 0
+}
+
+.product-align li.selected a {
+	padding-left: 15px;
+	margin-left: 10px;
+	color: #0085da;
+	background-position: -691px -192px
+}
+
+.product-list .term {
+	display: block;
+	position: absolute;
+	left: 11px;
+	top: 280px;
+	width: 292px;
+	height: 23px;
+	text-align: right
+}
+
+.product-list .term .bg {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background-color: #000;
+	opacity: .6;
+	filter: Alpha(opacity = 60)
+}
+
+.product-list .term span {
+	display: block;
+	position: absolute;
+	right: 12px;
+	top: 5px;
+	text-align: right;
+	font-weight: normal;
+	font-size: 12px;
+	line-height: 14px;
+	color: #e3e3e3
+}
+
+.product-list .premium {
+	display: block;
+	position: absolute;
+	right: 11px;
+	top: 11px;
+	width: 64px;
+	height: 45px;
+	background-position: -342px -84px;
+	text-indent: -9999em
+}
+
+.product-list.travel .term {
+	top: 284px;
+	width: 460px
+}
+
+.product-list.travel .condition {
+	padding-top: 2px
+}
+
+.product-list.travel span.shadow {
+	width: 460px;
+	height: 296px
+}
+
+.no-list-item {
+	width: 490px;
+	height: 68px;
+	margin: 0 auto 0;
+	padding: 100px 0 150px
+}
+
+.no-list-item em {
+	display: block;
+	width: 490px;
+	height: 68px;
+	background-position: 0 -752px;
+	text-indent: -9999em
+}
+
+.no-list-item.tonight {
+	width: 980px;
+	height: 1293px;
+	padding: 0
+}
+
+.no-list-item.tonight em {
+	width: 980px;
+	height: 1293px;
+	background:
+		url('//imgs.coupangcdn.com/image/coupang/travel/info_today_hotel_2.jpg')
+		no-repeat 0 0
+}
+
+.list-section {
+	position: relative;
+	width: 980px
+}
+
+.loading {
+	width: 90px;
+	height: 90px;
+	position: absolute;
+	left: 50%;
+	bottom: 200px;
+	margin-left: -45px;
+	background:
+		url('//imgs.coupangcdn.com/image/coupang/list/ico_list_loading.gif')
+		no-repeat;
+	text-indent: -9999em
+}
+
+.personalization,.personalization h2,.personalization .prod-price .coupang-price
+	{
+	background:
+		url('//imgs.coupangcdn.com/image/coupang/list/bg_personalization.png')
+		no-repeat
+}
+
+.personalization {
+	height: 657px;
+	position: relative;
+	margin: 24px 0 0;
+	padding: 3px 3px 3px 232px;
+	overflow: hidden
+}
+
+.personalization h2 {
+	width: 246px;
+	height: 663px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-indent: -9999em
+}
+
+.personalization ul {
+	padding: 1px 0 0 1px;
+	overflow: hidden
+}
+
+.personalization ul li {
+	float: left;
+	width: 247px;
+	height: 327px;
+	border: 1px solid #d7d5d8;
+	margin: -1px 0 0 -1px
+}
+
+.personalization a {
+	display: block;
+	width: 217px;
+	height: 310px;
+	padding: 15px 14px 0;
+	background: #fbfbfd;
+	border: 1px solid #fbfbfd;
+	cursor: pointer
+}
+
+.personalization a:hover {
+	background: #e7e7e8
+}
+
+.personalization img {
+	width: 217px;
+	height: 217px
+}
+
+.personalization .title {
+	display: block;
+	height: 40px;
+	padding: 10px 0 0 0;
+	font-size: 12px;
+	color: #33353d
+}
+
+.personalization .prod-price {
+	display: block;
+	width: 217px;
+	overflow: hidden
+}
+
+.personalization .prod-price span,.personalization .prod-price strong {
+	float: left
+}
+
+.personalization .prod-price .sale-persent {
+	margin-top: -5px;
+	font: normal 22px 'Tahoma';
+	color: #e30f13
+}
+
+.personalization .prod-price .sale-persent em {
+	font-size: 28px
+}
+
+.personalization .prod-price .coupang-price {
+	width: 52px;
+	height: 19px;
+	margin-top: 5px;
+	background-position: 0 -673px;
+	text-indent: -9999em
+}
+
+.personalization .price {
+	padding: 5px 0 0 15px;
+	font-size: 14px;
+	color: #33353d
+}
+
+.personalization .price em {
+	font: bold 17px 'Tahoma'
+}
+
+.prod-not-find {
+	margin: 0 0 16px 0;
+	padding: 60px 0;
+	border: 1px solid #d6d6d6;
+	border-top: 0;
+	background: #fff
+}
+
+.prod-not-find p {
+	width: 442px;
+	height: 199px;
+	margin: 0 auto 40px;
+	background-position: 0 -847px
+}
+
+.prod-not-find p strong,.prod-not-find p span {
+	display: block;
+	text-indent: -9999em
+}
+
+.prod-not-find a {
+	display: block;
+	width: 173px;
+	height: 50px;
+	margin: 0 auto 0;
+	background-position: 0 -1056px;
+	text-indent: -9999em
+}
