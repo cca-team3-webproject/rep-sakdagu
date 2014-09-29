@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import casestudy.business.domain.Board;
 import casestudy.business.domain.Member;
@@ -134,8 +135,12 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("totalPageCount", totalPageCount);
 
 		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
-		Member member = ((Member) request.getSession(false).getAttribute(
-				"loginMember"));
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if (session != null) {
+			member = ((Member) session.getAttribute("loginMember"));
+
+		}
 		System.out.println("memememe" + member);
 		RequestDispatcher dispatcher;
 		if (member != null && member.getMemberID().equals("duke")) {
