@@ -14,7 +14,7 @@
 
     <div class="tableContainer">
         <div class="tableRow">
-            <c:import url="side-bar.jsp"/>
+            <c:import url="top-bar.jsp"/>
             <!-- START of main content-->
             <div class="main">
                 <h4>[상품 리스트 정보]</h4>
