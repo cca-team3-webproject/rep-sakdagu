@@ -17,7 +17,8 @@
 		</div>
 		<div class="tableRow">
 			<div class="boardpage">
-				<table id="listtable" class="maintable">
+			
+			<table id="listtableHead" class="maintable">
 					<thead>
 						<tr>
 							<th class="location" colspan="2"><a
@@ -48,6 +49,10 @@
 								</c:forEach></th>
 						</tr>
 					</thead>
+				</table>
+					
+					
+				<table id="listtable" class="maintable">
 					<tbody>
 
 						<tr>
@@ -59,7 +64,7 @@
 
 									<c:forEach items="${boardList}" var="board"
 										varStatus="loopState">
-										<c:if test="${loopState.count % 2 eq 1}">
+										<c:if test="${loopState.count % 3 eq 1}">
 											<tr>
 										</c:if>
 										<td>

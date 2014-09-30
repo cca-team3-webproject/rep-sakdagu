@@ -7,9 +7,9 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
 .tableContainer { display:table; border-spacing: 5px; width: 95%; margin-left: auto;
 					margin-right: auto;}
-.tableRow { display: table-row; \: }
+.tableRow {display: table-row;}
 .tableCell { display: table-cell; vertical-align: top; }
-.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #d8d8d8;}
+.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #d8d8d8; width: 100%;}
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
@@ -21,7 +21,11 @@ td.label { text-align: right; }
 
 ul#loginerrormsg { padding: 0px 10px 0px 20px; }
 table#logintable, table#logouttable { float: right;}
-table#logintable td.label { text-align: center; color: red; font-weight: bold; }
+table#logintable td.label { text-align: center; color: red; font-weight: bold;}
+
+
+table#listtableHead{width: 100%; text-align:left;  background-color: #d9d9d9;}
+
 
 table#logouttable td { text-align: center; padding: 5px 0px 5px 0px; }
 table#logouttable td.message { color: red; font-family: Helvetica, sans-serif; }

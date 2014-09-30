@@ -14,7 +14,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="/side-bar.jsp"/>
+			<c:import url="/top-bar.jsp"/>
 	<div class="boardpage">
 		<form name="writeForm" action="update?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}" method="POST"  onsubmit="return boardWriteCheck(writeForm);">
 			<table id="updatetable" class="maintable">
