@@ -11,7 +11,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="side-bar.jsp"/>
+			<c:import url="top-bar.jsp"/>
 			<!-- START of main content-->
 			<div class="main">
 				<h4>[회원정보 등록(수정)결과]</h4>
