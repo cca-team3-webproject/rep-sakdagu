@@ -5,13 +5,13 @@ a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
-.tableContainer { display:table; border-spacing: 5px; width: 95%; }
-.tableRow { display: table-row; }
+.tableContainer { display:table; border-spacing: 5px; width: 95%; margin-left: auto;
+					margin-right: auto;}
+.tableRow { display: table-row; \: }
 .tableCell { display: table-cell; vertical-align: top; }
-.topbar { display: table-cell; width: 1em; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #ccccff; }
+.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #d8d8d8;}
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
-
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
 
 h1 { font-size: 25px; }
@@ -20,14 +20,13 @@ h4 { text-align: center; font-size: 14px; color: blue; }
 td.label { text-align: right; }
 
 ul#loginerrormsg { padding: 0px 10px 0px 20px; }
-table#logintable, table#logouttable { width: 400px; }
+table#logintable, table#logouttable { float: right;}
 table#logintable td.label { text-align: center; color: red; font-weight: bold; }
 
 table#logouttable td { text-align: center; padding: 5px 0px 5px 0px; }
 table#logouttable td.message { color: red; font-family: Helvetica, sans-serif; }
-
+table.categoryPosition{ float:right;}
 table.registertable td { padding: 5px; }
-
 table#productlist { border: 1px solid black; border-spacing: 0px; }
 table#productlist th, table#productlist td { border: 1px solid black; }   
 
@@ -36,7 +35,7 @@ h4#error { width: 400px; height: 25px; background-color: orange; color: black; }
 table#sidebartable { margin: 20px 10px 10px 10px; }
 table#sidebartable hr { margin: 0px 0px 5px 0px; width: 120px; }
 td#menulabel { color: red; font-weight: bold; }
-
+table#categoryPosition{float: right;}
 table#allproductlist { width: 600px; text-align: center; }
 table#allproductlist th { background-color: #9999FF; color: #FFFFFF; white-space: nowrap; }
 table#allproductlist td.productno { width: 5%; }
