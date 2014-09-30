@@ -7,17 +7,18 @@
         있으면 로그아웃 페이지(logout.jsp)를 포함시킨다.(include 액션 사용) --%>
 	<table>
 		<tr>
+			<td rowspan="2"><a
+							href="<c:url value="/board/list"/>">
+			<img src="<c:url value="/images/logo.png"/>"></a></td>
 			<td><c:if test="${empty sessionScope.loginMember}">
 					<c:import url="/login.jsp" />
 				</c:if> <c:if test="${not empty sessionScope.loginMember}">
 					<c:import url="/logout.jsp" />
 				</c:if></td>
-
 		</tr>
 		<tr>
-		<td>
-				<form name="searchForm" action="<c:url value="/board/list"/>"
-					method="GET">
+			<td colspan="2">
+				<form name="searchForm" action="<c:url value="/board/list"/>"method="GET">
 					<table id="categoryPosition">
 						<tr>
 							<td><select name="category">
@@ -44,9 +45,10 @@
 				</form>
 			</td>
 		</tr>
-		</div>
 		<tr>
-			<td colspan="2"><table id="sidebartable">
+			<td colspan="2">
+			
+			<table id="sidebartable">
 					<tr>
 						<td class="category"><a
 							href="<c:url value="/board/list?category=베스트"/>"><img
