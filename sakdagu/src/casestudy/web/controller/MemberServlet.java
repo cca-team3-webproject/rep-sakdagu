@@ -277,7 +277,9 @@ public class MemberServlet extends HttpServlet {
 		// 1.1. memberID password요청파라미터 값을 확인한다.
 		String memberID = request.getParameter("memberID");
 		String password = request.getParameter("password");
-
+		String url = request.getHeader("referer");
+		url=url.substring(url.indexOf("/board"));
+		System.out.println("url	"+url);
 		// 1.2. 비즈니스 로직을 수행할 MemberService 객체를 생성하여
 		MemberService memberService = new MemberServiceImpl();
 
@@ -292,7 +294,7 @@ public class MemberServlet extends HttpServlet {
 			session.setAttribute("loginMember", member);
 
 			RequestDispatcher dispatcher = request
-					.getRequestDispatcher("/index.jsp");
+					.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 
 		} else {
