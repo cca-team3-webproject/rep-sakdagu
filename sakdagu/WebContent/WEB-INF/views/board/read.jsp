@@ -18,7 +18,13 @@
 		<div class="tableRow">
 			<div class="boardpage">
 				<table id="readtable" class="maintable">
-					<caption>게시글 보기</caption>
+					<caption class="location">
+						<a href="<c:url value="/board/list?category=${board.category}"/>">
+							${board.category}</a> &gt;<br> <a
+							href="<c:url value="/board/list?category=${board.category}&subCategory=${board.subCategory}"/>">
+							<b>${board.subCategory}</b>
+						</a>
+					</caption>
 					<thead>
 						<tr>
 							<th>제 목</th>
