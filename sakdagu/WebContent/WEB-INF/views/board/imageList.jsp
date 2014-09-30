@@ -25,14 +25,7 @@
 								href="<c:url value="/board/list?category=${param.category}"/>">
 									${param.category}</a> &gt;<br> <a
 								href="<c:url value="/board/list?category=${param.category}"/>">
-									<c:choose>
-										<c:when test="${empty param.subCategory}">
-											<b>전체</b>
-										</c:when>
-										<c:otherwise>
-								전체
-								</c:otherwise>
-									</c:choose>
+											전체
 							</a> <c:forEach items="${subCategoryList}" var="subCategory">
 									<a
 										href="<c:url value="/board/list?category=${param.category}&subCategory=${subCategory}"/>">
