@@ -6,11 +6,11 @@ a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .location b{text-decoration: underline;}
 .boardpage { /* width: 800px; */ }
-.maintable { margin-top: 15px; margin-bottom: 8px; }
+.maintable { margin-top: 15px; margin-bottom: 8px;}
 .buttonbar { text-align: right; }
 
-.maintable { caption-side: top; border-collapse: collapse; }
-.maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px; }
+.maintable { caption-side: top; border-collapse: collapse;}
+.maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
  .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
