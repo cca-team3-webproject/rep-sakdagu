@@ -15,7 +15,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
  .maintable th { background-color: #d8d8d8; }
-.maintable table{width : 100%;}
+.maintable table{width : 100%; margin-right: 100px; text-align: center;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}
 #listtable .writer { width: 100px; text-align: center; }
