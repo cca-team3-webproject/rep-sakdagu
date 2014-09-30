@@ -55,7 +55,7 @@ public class Board {
 	// 게시글 상세 조회용
 	public Board(int num, String writer, String title, String contents,
 			String ip, int readCount, String regDate, String modDate,
-			int masterNum, int replyOrder, int replyStep) {
+			int masterNum, int replyOrder, int replyStep, String photoDir) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -68,6 +68,7 @@ public class Board {
 		this.masterNum = masterNum;
 		this.replyOrder = replyOrder;
 		this.replyStep = replyStep;
+		this.photoDir = photoDir;
 	}
 
 	// 리스트 조회용
