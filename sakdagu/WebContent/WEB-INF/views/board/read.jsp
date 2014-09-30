@@ -34,6 +34,11 @@
 						</tr>
 					</thead>
 					<tbody>
+
+						<tr>
+							<td class="image" colspan="6"><img
+								src="<c:url value="/images/${board.photoDir}"/>"></td>
+						</tr>
 						<tr>
 							<td class="contents" colspan="6">${board.contents}</td>
 						</tr>

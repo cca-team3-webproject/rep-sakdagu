@@ -272,7 +272,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Board selectBoard(int num) {
 		String query = "SELECT num,writer,title,contents,ip,read_count,reg_date,mod_date "
-				+ ", master_num, reply_order, reply_step "
+				+ ", master_num, reply_order, reply_step, photo_dir "
 				+ "FROM sakdagu_board WHERE num=?";
 		System.out.println("BoardDAOImpl selectBoard() query: " + query);
 
@@ -294,7 +294,7 @@ public class BoardDaoImpl implements BoardDao {
 						rs.getString("ip"), rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("mod_date"),
 						rs.getInt("master_num"), rs.getInt("reply_order"),
-						rs.getInt("reply_step"));
+						rs.getInt("reply_step"),rs.getString("photo_dir"));
 			}
 
 		} catch (SQLException se) {
