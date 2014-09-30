@@ -1,9 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="casestudy.business.domain.Member"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script type="text/javascript" src="js/script.js">
-	
-</script>
+<script type="text/javascript" src="js/script.js"></script>
 <div class="topbar">
 	<%-- 1. session scope에 설정된 "loginMember" 속성이 없으면 로그인 페이지(login.jsp)를,
         있으면 로그아웃 페이지(logout.jsp)를 포함시킨다.(include 액션 사용) --%>
@@ -15,11 +13,12 @@
 					<c:import url="/logout.jsp" />
 				</c:if></td>
 
-			<td>
-
+		</tr>
+		<tr>
+		<td>
 				<form name="searchForm" action="<c:url value="/board/list"/>"
 					method="GET">
-					<table>
+					<table id="categoryPosition">
 						<tr>
 							<td><select name="category">
 									<option value="전체"
@@ -45,6 +44,7 @@
 				</form>
 			</td>
 		</tr>
+		</div>
 		<tr>
 			<td colspan="2"><table id="sidebartable">
 					<tr>
@@ -72,7 +72,7 @@
 					</tr>
 				</table></td>
 		</tr>
-		<tr>
+		<%-- <tr>
 			<td><table id="sidebartable">
 					<tr>
 						<td id="menulabel">Menu</td>
@@ -94,7 +94,7 @@
 					</tr>
 
 				</table></td>
-		</tr>
+		</tr> --%>
 	</table>
 </div>
 
