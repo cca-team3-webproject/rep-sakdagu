@@ -11,10 +11,10 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
 .maintable { caption-side: top; border-collapse: collapse; }
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px; }
- .maintable th { border: 1px solid black; padding: 2px; height: 21px; }
-.maintable th, .maintable tr { border-top: 1px solid black; border-bottom: 1px solid black; padding: 2px; height: 21px; } 
+ .maintable th { border: 1px;  padding: 2px; height: 21px; }
+.maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
- .maintable th { background-color: #cc6600; }
+ .maintable th { background-color: #d8d8d8; }
 .maintable table{width : 100%;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}

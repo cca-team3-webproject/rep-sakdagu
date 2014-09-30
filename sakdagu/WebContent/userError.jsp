@@ -12,7 +12,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="side-bar.jsp" />
+			<c:import url="top-bar.jsp" />
 			<!-- START of main content-->
 			<div class="main">
 				<h4 id="error">입력 정보 오류</h4>
