@@ -22,40 +22,38 @@
 
 				<table class="maintable">
 					<caption>게시글 입력</caption>
-					<thead>
-						<tr>
-							<th>카테고리</th>
-							<td>
-								<form name="categoryForm" action="writeForm" method="GET">
-									<select name="category" onchange="submit();">
-										<option value="여성의류"
-											<c:if test="${param.category eq '여성의류'}"> selected="selected"</c:if>>여성의류</option>
-										<option value="남성의류"
-											<c:if test="${param.category eq '남성의류'}"> selected="selected"</c:if>>남성의류</option>
-										<option value="패션잡화"
-											<c:if test="${param.category eq '패션잡화'}"> selected="selected"</c:if>>패션잡화</option>
-										<option value="뷰티"
-											<c:if test="${param.category eq '뷰티'}"> selected="selected"</c:if>>뷰티</option>
-										<option value="스포츠패션"
-											<c:if test="${param.category eq '스포츠패션'}"> selected="selected"</c:if>>스포츠패션</option>
-										<option value="해외배송"
-											<c:if test="${param.category eq '해외배송'}"> selected="selected"</c:if>>해외배송</option>
-									</select>
-								</form>
-							</td>
-						</tr>
-					</thead>
+					<tr>
+						<th>카테고리</th>
+						<td>
+							<form name="categoryForm" action="writeForm" method="GET">
+								<select name="category" onchange=" submit();">
+									<option value="여성의류"
+										<c:if test="${param.category eq '여성의류'}"> selected="selected"</c:if>>여성의류</option>
+									<option value="남성의류"
+										<c:if test="${param.category eq '남성의류'}"> selected="selected"</c:if>>남성의류</option>
+									<option value="패션잡화"
+										<c:if test="${param.category eq '패션잡화'}"> selected="selected"</c:if>>패션잡화</option>
+									<option value="뷰티"
+										<c:if test="${param.category eq '뷰티'}"> selected="selected"</c:if>>뷰티</option>
+									<option value="스포츠패션"
+										<c:if test="${param.category eq '스포츠패션'}"> selected="selected"</c:if>>스포츠패션</option>
+									<option value="해외배송"
+										<c:if test="${param.category eq '해외배송'}"> selected="selected"</c:if>>해외배송</option>
+								</select>
+							</form>
+						</td>
+					</tr>
 				</table>
 				<form name="writeForm" action="write" method="POST"
 					onsubmit="return boardWriteCheck(writeForm);"
 					enctype="multipart/form-data">
-					<input type="hidden" name="category" value="${param.category}">
 					<table id="writetable" class="maintable">
 						<thead>
 							<c:if test="${param.category!='해외배송'}">
 								<tr>
 									<th>세부 카테고리</th>
-									<td><select name="subCategory">
+									<td><input type="hidden" name="category"
+										value="${param.category}"> <select name="subCategory">
 											<c:forEach items="${subCategoryList}" var="subCategoryitem">
 												<option value="${subCategoryitem}">${subCategoryitem}</option>
 											</c:forEach>
@@ -78,19 +76,80 @@
 							</tr>
 						</thead>
 						<tbody>
+
 							<tr>
+								<th>구매시<br>주의사항
+								</th>
+
 								<td colspan="2"><textarea id="ckeditor"
-										class="contentsinput" name="contents"></textarea> <script>
-											CKEDITOR.replace('ckeditor');
-										</script></td>
+										class="contentsinput" name="contents">
+<c:import url="default_info.jsp" />
+
+</textarea> <script>
+	CKEDITOR.replace('ckeditor');
+</script></td>
 							</tr>
+							<!-- 상품정보 등록 -->
+							<tr>
+								<th>상품 추가</th>
+								<td><input type="button" name="btnAddProduct" value="상품 추가"></td>
+								<td>
+									<table>
+										<tr>
+											<th>선택 1</th>
+
+											<td>
+												<table>
+
+													<tr>
+														<th>제목</th>
+														<td><input type="text" name="select" width="100px"></td>
+													</tr>
+													<tr>
+														<td><input type="button" name="btnAddOption"
+															value="옵션 추가"></td>
+													</tr>
+
+													<tr>
+														<td colspan="2">
+															<table>
+																<tr>
+																	<td rowspan="2">옵션 1</td>
+																	<th>제목</th>
+																	<td><input type="text" name="option"></td>
+																	<th>시중가</th>
+																	<td><input type="text" name="option"></td>
+																	<th>판매가</th>
+																	<td><input type="text" name="option"></td>
+																</tr>
+																<tr>
+																	<th>수량</th>
+																	<td><input type="text" name="option"></td>
+																	<th>사진</th>
+																	<td><input type="file" name="option"></td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+								</td>
+
+							</tr>
+
 						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="2"><div class="buttonbar">
+										<input type="submit" value="등록"> <input type="button"
+											value="취소" onclick="goUrl('list');">
+									</div></td>
+							</tr>
+						</tfoot>
 					</table>
 
-					<div class="buttonbar">
-						<input type="submit" value="등록"> <input type="button"
-							value="취소" onclick="goUrl('list');">
-					</div>
 
 				</form>
 			</div>
