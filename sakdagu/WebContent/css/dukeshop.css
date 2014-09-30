@@ -1,5 +1,7 @@
 @charset "utf-8";
 
+body{background-image: url("/sakdagu/images/0.jpg");  background-repeat: repeat-y; background-size:100%;}
+
 * { font-family: 굴림, gulim, tahoma, sans-serif;}
 a:link { text-decoration: none; color: #000000;}
 a:visited { text-decoration: none; color: #000000;}
@@ -9,7 +11,7 @@ a:hover, a:active { text-decoration: underline; color: blue;}
 					margin-right: auto;}
 .tableRow {display: table-row;}
 .tableCell { display: table-cell; vertical-align: top; }
-.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; background-color: #d8d8d8; width: 100%;}
+.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; width: 100%;}
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
@@ -24,7 +26,7 @@ table#logintable, table#logouttable { float: right;}
 table#logotable {float: left;}
 table#logintable td.label { text-align: center; color: red; font-weight: bold;}
 
-table#listtableHead {width: 100%; text-align:left;  background-color: #d9d9d9; }
+table#listtableHead {width: 100%; text-align:left; }
 
 table#logouttable td { text-align: center; padding: 5px 0px 5px 0px; }
 table#logouttable td.message { color: red; font-family: Helvetica, sans-serif; }
