@@ -14,7 +14,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="/side-bar.jsp"/>
+			<c:import url="/top-bar.jsp"/>
 	<div class="boardpage">
 		<form name="writeForm"
 			action="reply?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&masterNum=${board.masterNum}&replyOrder=${board.replyOrder}&replyStep=${board.replyStep}"
