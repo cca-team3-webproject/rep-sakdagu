@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 정보 수정</title>
-    <link rel="stylesheet" href="css/dukeshop.css">
+    <link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
 </head>
 <body>
 
@@ -14,7 +14,8 @@
     <div class="tableContainer">
         <div class="tableRow">
            <c:import url="top-bar.jsp"/> 
-            <!-- START of main content-->
+            </div><div class="tableRow">
+			<!-- START of main content-->
             <div class="main">
                 <h4>[회원 정보 수정]</h4>
                 <form action="member?action=update" method="POST">

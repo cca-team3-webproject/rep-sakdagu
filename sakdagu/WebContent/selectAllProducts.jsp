@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>상품 리스트</title>
-    <link rel="stylesheet" href="css/dukeshop.css">
+    <link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
 </head>
 <body>
 
@@ -15,7 +15,8 @@
     <div class="tableContainer">
         <div class="tableRow">
             <c:import url="top-bar.jsp"/>
-            <!-- START of main content-->
+            </div><div class="tableRow">
+			<!-- START of main content-->
             <div class="main">
                 <h4>[상품 리스트 정보]</h4>
                 <table id="allproductlist">
