@@ -12,7 +12,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
 .maintable { caption-side: top; border-collapse: collapse;}
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
- .maintable th { border: 1px;  padding: 2px; height: 21px; }
+.maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}

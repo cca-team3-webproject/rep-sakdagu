@@ -1,7 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
+<script>
+	function openDaumPostcode() {
+		new daum.Postcode({
+			oncomplete: function(data) {
+				document.getElementById('zipcode1').value = data.postcode1;
+				document.getElementById('zipcode2').value = data.postcode2;
+				document.getElementById('addr').value = data.address;
+			}
+		}).open();
+	}
+</script>
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
@@ -42,12 +55,13 @@
 						</tr>
 						<tr>
 							<td class="label">우편번호 :</td>
-							<td><input type="text" name="zipcode" size="15"
-								maxlength="7"></td>
+							<td><input id="zipcode1" type="text" name="zipcode" size="3"
+								maxlength="7">-<input id="zipcode2" type="text" name="zipcode" size="3"
+								maxlength="7"><input type="button" name="search" value="우편번호검색" onclick="openDaumPostcode()"></td>
 						</tr>
 						<tr>
 							<td class="label">주소 :</td>
-							<td><input type="text" name="address" size="50"
+							<td><input id="addr" type="text" name="address" size="50"
 								maxlength="70"></td>
 						</tr>
 						<tr>
