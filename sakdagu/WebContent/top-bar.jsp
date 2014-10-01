@@ -5,7 +5,7 @@
 <div class="topbar">
    <%-- 1. session scope에 설정된 "loginMember" 속성이 없으면 로그인 페이지(login.jsp)를,
         있으면 로그아웃 페이지(logout.jsp)를 포함시킨다.(include 액션 사용) --%>
-   <table>
+   <table id="topbartable">
       <tr>
          <td rowspan="2"><a
                      href="<c:url value="/board/list"/>">

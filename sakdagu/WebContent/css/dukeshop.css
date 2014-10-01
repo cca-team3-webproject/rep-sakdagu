@@ -7,6 +7,7 @@ a:link { text-decoration: none; color: #000000;}
 a:visited { text-decoration: none; color: #000000;}
 a:hover, a:active { text-decoration: underline; color: blue;}
 
+
 .tableContainer { display:table; border-spacing: 5px; width: 95%; margin-left: auto;
 					margin-right: auto;}
 .tableRow {display: table-row;}
@@ -15,6 +16,8 @@ a:hover, a:active { text-decoration: underline; color: blue;}
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 .category img{width: 100px; height: 100px;}
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
+
+table#topbartable {margin:0 auto;}
 
 h1 { font-size: 25px; }
 li { color: red; }
@@ -28,6 +31,7 @@ table#logintable td.label { text-align: center; color: red; font-weight: bold;}
 
 table#listtableHead {width: 100%; text-align:left;  background-color: #d9d9d9; }
 table#listtable.maintable {width: 100%; margin: 0 auto;}
+
 table#logouttable td { text-align: center; padding: 5px 0px 5px 0px; }
 table#logouttable td.message { color: red; font-family: Helvetica, sans-serif; }
 table.categoryPosition{ float:right;}
@@ -36,6 +40,10 @@ table#productlist { border: 1px solid black; border-spacing: 0px; }
 table#productlist th, table#productlist td { border: 1px solid black; }   
 
 h4#error { width: 400px; height: 25px; background-color: orange; color: black; }
+
+table#listtable a:link{font-size: 15px;}
+table#listtable em{font-size: 15px;}
+
 
 table#sidebartable { margin: 20px 10px 10px 10px;}
 table#sidebartable hr { margin: 0px 0px 5px 0px; width: 120px; }
