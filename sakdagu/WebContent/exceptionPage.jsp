@@ -7,12 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>${pageContext.errorData.throwable.message}</title>
-<link rel="stylesheet" href="css/dukeshop.css">
+<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="side-bar.jsp" />
+			<c:import url="top-bar.jsp" />
+		</div>
+		<div class="tableRow"></div><div class="tableRow">
 			<!-- START of main content-->
 			<div class="main">
 				<p class="exceptionname">${pageContext.exception}</p>
