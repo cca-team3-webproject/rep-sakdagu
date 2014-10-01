@@ -93,6 +93,7 @@
 							<tr>
 								<th>상품 추가</th>
 								<td><input type="button" name="btnAddProduct" value="상품 추가"></td>
+								<!-- 상품들 -->
 								<td>
 									<table>
 										<tr>
@@ -109,7 +110,7 @@
 														<td><input type="button" name="btnAddOption"
 															value="옵션 추가"></td>
 													</tr>
-
+													<!-- 옵션들 -->
 													<tr>
 														<td colspan="2">
 															<table>

@@ -252,8 +252,11 @@ public class ProductDaoImpl implements ProductDao {
 	@Override
 	public void insertProduct(Product product) {
 		String query = "INSERT INTO sakdagu_product VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ? )";
-		
-		//INSERT INTO  "SKU"."PRODUCT" (PRODUCTID, MALLID, PRODUCTNAME, COMPANY, PRICE1, PRICE2, INSTALLMENT, KEYWORD, DETAIL, PRODUCTDATE, PHOTODIR) VALUES ('1', '2', '3', '4', '5', '6', '7', '8', '9', TO_DATE('2014-09-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '11')
+
+		// INSERT INTO "SKU"."PRODUCT" (PRODUCTID, MALLID, PRODUCTNAME, COMPANY,
+		// PRICE1, PRICE2, INSTALLMENT, KEYWORD, DETAIL, PRODUCTDATE, PHOTODIR)
+		// VALUES ('1', '2', '3', '4', '5', '6', '7', '8', '9',
+		// TO_DATE('2014-09-11 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '11')
 
 		/*
 		 * "INSERT INTO product VALUES ('" + product.getproductID() + "', '" +
