@@ -9,10 +9,18 @@
 <link rel="stylesheet" href="<c:url value="/css/board.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
 <script src="../js/board.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    // 문서가 로드되면 호출된다. $(document).ready(function(){}); 과 동일
+    $(function() {
+    	$('.maintable table').mouseenter(function() { $(this).addClass('hover'); });
+    	$('.maintable table').mouseleave(function() { $(this).removeClass('hover'); });
+    });
+</script>
 </head>
 <body>
 	<div class="tableContainer">
-		<div class="tableRow">
+		<div id="tableRowThin" class="tableRow">
 			<c:import url="/top-bar.jsp" />
 		</div>
 		<div class="tableRow">
