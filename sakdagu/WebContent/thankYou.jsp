@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>등록(변경) 성공</title>
-<link rel="stylesheet" href="css/dukeshop.css">
+<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
 			<c:import url="top-bar.jsp"/>
+			</div><div class="tableRow">
 			<!-- START of main content-->
 			<div class="main">
 				<h4>[회원정보 등록(수정)결과]</h4>
