@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
@@ -14,7 +15,6 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
  .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
- .maintable th { background-color: #d8d8d8; }
 .maintable table{width : 100%; margin-right: 100px; text-align: center;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}
