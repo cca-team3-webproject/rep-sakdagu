@@ -17,6 +17,8 @@ a:hover, a:active { text-decoration: underline; color: blue;}
 .category img{width: 100px; height: 100px;}
 .main { display: table-cell; padding: 0px 20px 20px 20px; vertical-align: top; }
 
+table#topbartable {margin:0 auto;}
+
 h1 { font-size: 25px; }
 li { color: red; }
 h4 { text-align: center; font-size: 14px; color: blue; }

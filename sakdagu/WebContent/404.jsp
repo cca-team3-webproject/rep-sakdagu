@@ -10,7 +10,7 @@
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="side-bar.jsp" />
+			<c:import url="top-bar.jsp" />
 			<div class="main">
 				<p class="notfound"><img src="<c:url value='/images/surfing.gif'/>"></p>
 				<p class="notfound">요청하신 페이지를 찾을 수 없습니다.</p>
