@@ -15,7 +15,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import casestudy.business.domain.Image;
+import casestudy.business.domain.productPhoto;
 
 public class ImageDao {
 	private DataSource dataSource;
@@ -27,7 +27,7 @@ public class ImageDao {
 		try {
 			Context context = new InitialContext();
 			dataSource = (DataSource) context
-					.lookup("java:comp/env/jdbc/imageDB");
+					.lookup("java:comp/env/jdbc/sakdaguDB");
 		} catch (NamingException ne) {
 			System.err.println("A JNDI error occured.");
 			ne.printStackTrace(System.err);
@@ -43,11 +43,11 @@ public class ImageDao {
 		return dataSource.getConnection();
 	}
 
-	public Image selectImage(int imageId) {
-		String query = "SELECT image_name, content_type, contents FROM sakdagu_product_image WHERE image_id=?";
+	public productPhoto selectImage(int imageId) {
+		String query = "SELECT image_name, content_type, contents FROM images WHERE image_id=?";
 		System.out.println("ImageDao selectImage() query: " + query);
 
-		Image image = null;
+		productPhoto image = null;
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
@@ -63,7 +63,7 @@ public class ImageDao {
 				String imageName = rs.getString("image_name");
 				String contentType = rs.getString("content_type");
 				Blob contents = rs.getBlob("contents");
-				image = new Image(imageId, imageName, contentType,
+				image = new productPhoto(imageId, imageName, contentType,
 						contents.getBytes(1L, (int) contents.length()));
 			}
 
@@ -98,16 +98,16 @@ public class ImageDao {
 		return image;
 	}
 
-	public Image[] selectAllImages() {
+	public productPhoto[] selectAllImages() {
 		String query = "SELECT image_id, image_name, content_type FROM sakdagu_product_image";
 		System.out.println("ImageDao selectAllImages() query: " + query);
 
-		Image image = null;
+		productPhoto image = null;
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<Image> imageList = new ArrayList<Image>();
+		List<productPhoto> imageList = new ArrayList<productPhoto>();
 
 		try {
 			connection = obtainConnection();
@@ -118,7 +118,7 @@ public class ImageDao {
 				int imageId = rs.getInt("image_id");
 				String imageName = rs.getString("image_name");
 				String contentType = rs.getString("content_type");
-				image = new Image(imageId, imageName, contentType);
+				image = new productPhoto(imageId, imageName, contentType);
 				imageList.add(image);
 			}
 
@@ -150,48 +150,38 @@ public class ImageDao {
 			}
 		}
 
-		return imageList.toArray(new Image[0]);
+		return imageList.toArray(new productPhoto[0]);
 	}
 
-	public void insertImage(int optionID, Image image) {
-		String query = "INSERT INTO sakdagu_product_image (optionID, contents) VALUES (?, ?)";
-		System.out.println("ImageDao insertImage() query: " + query);
+	public void insertImage(productPhoto productPhoto) {
+		String query = "INSERT INTO sakdagu_product_image (image_id, image_name, content_type, contents) VALUES (image_id_seq.NEXTVAL, ?, ?, ?)";
+        System.out.println("ImageDao insertImage() query: " + query);
+        
+        Connection connection = null;
+        PreparedStatement stmt = null;
+        
+        try {
+            connection = obtainConnection();
+            stmt = connection.prepareStatement(query);
+            
+            byte[] contents = productPhoto.getContents();
+            // first, create an input stream
+            InputStream is = new ByteArrayInputStream(contents);
+            
+            stmt.setString(1, productPhoto.getImageName());
+            stmt.setString(2, productPhoto.getContentType());
+            // set the value of the input parameter to the input stream
+            stmt.setBinaryStream(3, is, contents.length);
+            stmt.executeUpdate();
 
-		Connection connection = null;
-		PreparedStatement stmt = null;
+        } catch(SQLException se) {
+            System.err.println("ImageDao insertImage() Error :" + se.getMessage());
+            se.printStackTrace(System.err);  
+            throw new RuntimeException("A database error occurred. " + se.getMessage());
 
-		try {
-			connection = obtainConnection();
-			stmt = connection.prepareStatement(query);
-
-			byte[] contents = image.getContents();
-			// first, create an input stream
-			InputStream is = new ByteArrayInputStream(contents);
-			stmt.setInt(1, optionID);
-			// set the value of the input parameter to the input stream
-			stmt.setBinaryStream(2, is, contents.length);
-			stmt.executeUpdate();
-
-		} catch (SQLException se) {
-			System.err.println("ImageDao insertImage() Error :"
-					+ se.getMessage());
-			se.printStackTrace(System.err);
-			throw new RuntimeException("A database error occurred. "
-					+ se.getMessage());
-
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
-			}
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
-			}
-		}
+        } finally {
+            try { if (stmt != null) stmt.close(); } catch(SQLException ex) { ex.printStackTrace(System.err); }
+            try { if (connection != null) connection.close(); } catch(SQLException ex){ ex.printStackTrace(System.err); }
+        }
 	}
 }

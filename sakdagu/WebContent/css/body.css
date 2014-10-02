@@ -11,8 +11,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable { margin-top: 15px; margin-bottom: 8px;}
 .buttonbar { text-align: right; }
 
-
-.maintable { caption-side: top; border-collapse: collapse;}
+.maintable { caption-side: top; border-collapse: collapse; width: 100%; text-align: left;}
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
 .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
@@ -23,6 +22,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable table.hover{border-color: blue; border-spacing: 2px;}
 
 #listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: 'Dotum','돋움';}
+
 #listtable .image img{width: 300px; height: 300px; text-align: center;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}
