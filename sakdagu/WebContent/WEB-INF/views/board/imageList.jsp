@@ -76,12 +76,9 @@
 															<em class="image"><img
 																src="<c:url value="/images/${board.photoDir}"/>">
 														</em> <br> <%-- <td class="num">${board.num}</td> --%> <br><br><em
-															class="title">${board.title} </em> <em class="writer">${board.writer}</em>
-															<em class="regdate">${board.regDate}</em> <em
-															class="readcount">${board.readCount}</em>
- 
+															class="title">${board.title} </em> 
 															
-													</a> <em class="category"><a
+													</a><br> <em class="category"><a
 
 															href="<c:url value="/board/list?category=${board.category}"/>">
 																${board.category}</a> <c:if
