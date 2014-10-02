@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>회원 정보 수정</title>
-    <link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 </head>
 <body>
 

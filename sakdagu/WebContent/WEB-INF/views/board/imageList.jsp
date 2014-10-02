@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
-<link rel="stylesheet" href="<c:url value="/css/board.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <script src="../js/board.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
@@ -31,7 +31,7 @@
 						<tr>
 							<th class="location" colspan="2"><a
 								href="<c:url value="/board/list?category=${param.category}"/>">
-									${param.category}</a> &gt;<br> <a
+									${param.category}</a> &gt; <a
 								href="<c:url value="/board/list?category=${param.category}"/>">
 											전체
 							</a> <c:forEach items="${subCategoryList}" var="subCategory">
@@ -79,7 +79,10 @@
 															class="title">${board.title} </em> <em class="writer">${board.writer}</em>
 															<em class="regdate">${board.regDate}</em> <em
 															class="readcount">${board.readCount}</em>
-													</a> <br><em class="category"><a
+ 
+															
+													</a> <em class="category"><a
+
 															href="<c:url value="/board/list?category=${board.category}"/>">
 																${board.category}</a> <c:if
 																test="${not empty board.subCategory}">
