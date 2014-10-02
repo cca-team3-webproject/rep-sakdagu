@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 등록</title>
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <!--  -->
 <script src="../ckeditor/ckeditor.js"></script>
 <script src="../js/board.js"></script>

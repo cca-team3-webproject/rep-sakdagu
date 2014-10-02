@@ -31,7 +31,7 @@
 						<tr>
 							<th class="location" colspan="2"><a
 								href="<c:url value="/board/list?category=${param.category}"/>">
-									${param.category}</a> &gt; <a
+									${param.category}</a>&gt;<a
 								href="<c:url value="/board/list?category=${param.category}"/>">
 											전체
 							</a> <c:forEach items="${subCategoryList}" var="subCategory">
