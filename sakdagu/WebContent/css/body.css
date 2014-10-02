@@ -1,5 +1,6 @@
 ﻿@charset "utf-8";
 
+div.tableContainer{width: 100%; text-align: center;}
 
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
 a:link { text-decoration: none; color: #000000; }
@@ -20,17 +21,17 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
 .maintable table.hover{border-color: blue;}
 
-table#listtableHead {font-size: 15px;}
 
-#listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: src:css/훈하얀고양이R.ttf;}
+#listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: 'Dotum','돋움';}
+
 #listtable .image img{width: 300px; height: 300px; text-align: center;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}
 #listtable .writer { width: 100px; text-align: center; }
 #listtable .regdate { width: 100px; text-align: center; }
 #listtable .readcount { width: 100px; text-align: center; }
-#listtable .category { width: 100px; text-align: left; font-family: "HY동녘B"; }
-#listtable .subCategory { width: 100px; text-align: left; font-family: "HY동녘B";}
+#listtable .category { width: 100px; text-align: left; font-family: font-family: 'Dotum','돋움';}
+#listtable .subCategory { width: 100px; text-align: left; font-family: font-family: 'Dotum','돋움';}
 #searchinput { width: 200px; }
 
 #readtable th { width: 75px; }

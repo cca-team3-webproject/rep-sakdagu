@@ -5,8 +5,6 @@
  */
 package casestudy.business.domain;
 
-import java.sql.Date;
-
 /**
  * 상품과 관련한 정보를 저장하고 있는 객체를 정의한 도메인 클래스.<br/>
  * 비즈니스 로직 층은 유스케이스로 표현되는 특정 업무나 특정 부서 처리의 통합인 서비스 및 도메인으로 구성된다.<br/>
@@ -22,7 +20,16 @@ public class Product {
 	private String boardNum;
 	private String productID;
 	private String productName;
-	private productOption option;
+	private productOption[] option;
+
+	public Product(String boardNum, String productID, String productName,
+			productOption[] option) {
+		super();
+		this.boardNum = boardNum;
+		this.productID = productID;
+		this.productName = productName;
+		this.setOption(option);
+	}
 
 	public Product() {
 
@@ -32,14 +39,6 @@ public class Product {
 		this.boardNum = boardNum;
 		this.productID = productID;
 		this.productName = productName;
-	}
-
-	public Product(String boardNum, String productID, String productName,
-			productOption option) {
-		this.boardNum = boardNum;
-		this.productID = productID;
-		this.productName = productName;
-		this.setOption(option);
 	}
 
 	public String getBoardNum() {
@@ -72,11 +71,11 @@ public class Product {
 				+ ", productName=" + productName + "]";
 	}
 
-	public productOption getOption() {
+	public productOption[] getOption() {
 		return option;
 	}
 
-	public void setOption(productOption option) {
+	public void setOption(productOption[] option) {
 		this.option = option;
 	}
 

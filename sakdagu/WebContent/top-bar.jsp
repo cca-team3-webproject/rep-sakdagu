@@ -80,7 +80,7 @@
 			</td>
 		</tr>
 		<%-- <tr>
-         <td><table id="sidebartable">
+          <td><table id="sidebartable">
                <tr>
                   <td id="menulabel">Menu</td>
                   <td><a href='<c:url value="/product?action=select-all"/>'>상품보기</a></td>
