@@ -42,7 +42,8 @@
 						</tr>
 						<tr>
 							<td class="label">우편번호 :</td>
-							<td><input type="text" name="zipcode" size="15"
+							<td><input type="text" name="zipcode1" size="15"
+								maxlength="7">-<input type="text" name="zipcode2" size="15"
 								maxlength="7"></td>
 						</tr>
 						<tr>

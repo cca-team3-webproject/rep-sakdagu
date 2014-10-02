@@ -14,8 +14,9 @@
 
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="top-bar.jsp"/>
-			</div><div class="tableRow">
+			<c:import url="top-bar.jsp" />
+		</div>
+		<div class="tableRow">
 			<!-- START of main content-->
 			<div class="main">
 				<h4>[상품 상세 정보]</h4>
@@ -50,8 +51,7 @@
                             </c:out>
 
 								</c:otherwise>
-							</c:choose>
-							</td>
+							</c:choose></td>
 					</tr>
 					<tr>
 						<td colspan="3" id="details">
