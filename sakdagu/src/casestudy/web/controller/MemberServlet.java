@@ -58,7 +58,12 @@ public class MemberServlet extends HttpServlet {
 			throw new ServletException(dde);
 		}
 	}
-
+	
+	public String writeForm() {
+		return null;
+	}
+	
+	
 	private void removeMember(HttpServletRequest request, HttpServletResponse response) throws IOException, DataNotFoundException, ServletException {
 		//1.1 session scope 속성에서 회원정보를 찾아 
 		HttpSession session = request.getSession(false);

@@ -613,7 +613,7 @@ public class BoardDaoImpl implements BoardDao {
 	public List<String> getSubCategoryList(String category) {
 		String query;
 		if (category.equals("º£½ºÆ®")) {
-			query = "select sub_category FROM sakdagu_board WHERE read_count > 2 ";
+			query = "select distinct sub_category FROM sakdagu_board WHERE read_count > 2 ";
 		} else {
 			query = "select sub_category FROM sakdagu_category WHERE category = ?";
 		}

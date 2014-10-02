@@ -9,10 +9,18 @@
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <script src="../js/board.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+    // 문서가 로드되면 호출된다. $(document).ready(function(){}); 과 동일
+    $(function() {
+    	$('.maintable table').mouseenter(function() { $(this).addClass('hover'); });
+    	$('.maintable table').mouseleave(function() { $(this).removeClass('hover'); });
+    });
+</script>
 </head>
 <body>
 	<div class="tableContainer">
-		<div class="tableRow">
+		<div id="tableRowThin" class="tableRow">
 			<c:import url="/top-bar.jsp" />
 		</div>
 		<div class="tableRow">
@@ -67,12 +75,14 @@
 														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">
 															<em class="image"><img
 																src="<c:url value="/images/${board.photoDir}"/>">
-														</em> <br> <%-- <td class="num">${board.num}</td> --%> <em
+														</em> <br> <%-- <td class="num">${board.num}</td> --%> <br><br><em
 															class="title">${board.title} </em> <em class="writer">${board.writer}</em>
 															<em class="regdate">${board.regDate}</em> <em
 															class="readcount">${board.readCount}</em>
+ 
 															
 													</a> <em class="category"><a
+
 															href="<c:url value="/board/list?category=${board.category}"/>">
 																${board.category}</a> <c:if
 																test="${not empty board.subCategory}">

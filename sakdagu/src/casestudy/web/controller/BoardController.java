@@ -1,21 +1,32 @@
 package casestudy.web.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 import casestudy.business.domain.Board;
+import casestudy.business.domain.Image;
 import casestudy.business.domain.Member;
 import casestudy.business.service.BoardService;
 import casestudy.business.service.BoardServiceImpl;
 import casestudy.business.service.DataNotFoundException;
+import casestudy.dataaccess.ImageDao;
 import casestudy.util.PageHandler;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -218,6 +229,7 @@ public class BoardController extends HttpServlet {
 
 		String upPath = getServletContext().getRealPath("/images");
 		int mb = 10;
+
 		MultipartRequest request = new MultipartRequest(request_source, upPath,
 				mb * 1024 * 1024, "utf-8");
 
@@ -242,6 +254,105 @@ public class BoardController extends HttpServlet {
 
 		request_source.setAttribute("category", category);
 		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
+
+		/*
+		 * RequestDispatcher dispatcher = request_source
+		 * .getRequestDispatcher("list"); dispatcher.forward(request_source,
+		 * response);
+		 */
+		saveImage(request_source, response);
+	}
+
+	private void saveImage(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+System.out.println("세이브");
+		List<Image> imageList = new ArrayList<Image>();
+		// 디스크 기반의 FileItem factory 생성
+		DiskFileItemFactory factory = new DiskFileItemFactory();
+		// factory 제약 설정
+		ServletContext servletContext = this.getServletConfig()
+				.getServletContext();
+		File repository = (File) servletContext
+				.getAttribute("javax.servlet.context.tempdir");
+		factory.setSizeThreshold(1024 * 100); // 메모리에 저장할 최대 size (100K까지는 메모리에
+												// 저장)
+		factory.setRepository(repository); // 파일 임시 저장소 (100K 이상이면 repository에
+											// 저장)
+
+		// 파일 업로드 핸들러 생성
+		ServletFileUpload upload = new ServletFileUpload(factory);
+
+		// 총 request size 제약 설정
+		upload.setSizeMax(1024 * 1024 * 5); // 최대 size (5M까지 가능)
+
+		// 요청 파싱
+		try {
+			List<FileItem> items = upload.parseRequest(request);
+
+			// 업로드된 items 처리
+			Iterator<FileItem> iter = items.iterator();
+
+			while (iter.hasNext()) {
+				FileItem item = iter.next();
+				// 파일 업로드 처리 (<input type="file">인 경우)
+				if (!item.isFormField()) {
+					/*String fileName = item.getName(); // 경로가 포함된 파일명
+					String contentType = item.getContentType(); // 컨텐트 유형
+*/					// long sizeInBytes = item.getSize(); // 파일 크기
+					byte[] contents = item.get(); // 파일 내용을 byte 배열에 담기
+
+/*					int index = fileName.lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
+					if (index == -1) {
+						index = fileName.lastIndexOf("/");
+					}
+					fileName = fileName.substring(index + 1); // 파일명만 추출
+*/
+					// Image 정보를 데이터베이스에 저장
+
+					Image image = new Image(contents);
+					System.out.println("\t2 " +  image);
+					new ImageDao().insertImage(2, image);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		request.getRequestDispatcher("list").forward(request, response);
+	}
+
+	private void writeBoard_cos(HttpServletRequest request_source,
+			HttpServletResponse response) throws ServletException, IOException,
+			DataNotFoundException {
+
+		String upPath = getServletContext().getRealPath("/images");
+		int mb = 10;
+
+		MultipartRequest request = new MultipartRequest(request_source, upPath,
+				mb * 1024 * 1024, "utf-8");
+
+		// 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
+		String writer = request.getParameter("writer");
+		String title = request.getParameter("title");
+		String photoDir = request.getFilesystemName("photoDir");
+		String contents = request.getParameter("contents");
+
+		String category = request.getParameter("category");
+		String subCategory = request.getParameter("subCategory");
+
+		String ip = request_source.getRemoteAddr();
+		System.err.println(ip);
+		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
+		Board board = new Board(writer, title, contents, ip, category,
+				subCategory, photoDir);
+
+		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+		BoardService service = new BoardServiceImpl();
+		service.writeBoard(board);
+
+		request_source.setAttribute("category", category);
+		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
+
 		RequestDispatcher dispatcher = request_source
 				.getRequestDispatcher("list");
 		dispatcher.forward(request_source, response);
