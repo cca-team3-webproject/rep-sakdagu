@@ -10,7 +10,7 @@
          <td rowspan="2"><a
                      href="<c:url value="/board/list"/>">
          <img src="<c:url value="/images/logo.png"/>"></a></td>
-         <td><c:if test="${empty sessionScope.loginMember}">
+         <td id="session"><c:if test="${empty sessionScope.loginMember}">
                <c:import url="/login.jsp" />
             </c:if> <c:if test="${not empty sessionScope.loginMember}">
                <c:import url="/logout.jsp" />
@@ -52,25 +52,25 @@
                <tr>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=베스트"/>"><img
-                        src="<c:url value="/images/best.jpg"/>"><br>베스트</a></td>
+                        src="<c:url value="/images/best.png"/>"><br>베스트</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=여성의류"/>"><img
-                        src="<c:url value="/images/women.gif"/>"><br>여성의류</a></td>
+                        src="<c:url value="/images/woman.png"/>"><br>여성의류</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=남성의류"/>"><img
-                        src="<c:url value="/images/man.gif"/>"><br>남성의류</a></td>
+                        src="<c:url value="/images/man.png"/>"><br>남성의류</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=패션잡화"/>"><img
-                        src="<c:url value="/images/best.jpg"/>"><br>패션잡화</a></td>
+                        src="<c:url value="/images/fasiongoods.png"/>"><br>패션잡화</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=뷰티"/>"><img
-                        src="<c:url value="/images/best.jpg"/>"><br>뷰티</a></td>
+                        src="<c:url value="/images/beauty.png"/>"><br>뷰티</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=스포츠패션"/>"><img
-                        src="<c:url value="/images/best.jpg"/>"><br>스포츠패션</a></td>
+                        src="<c:url value="/images/sports.png"/>"><br>스포츠패션</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=해외배송"/>"><img
-                        src="<c:url value="/images/best.jpg"/>"><br>해외배송</a></td>
+                        src="<c:url value="/images/international.png"/>"><br>해외배송</a></td>
                </tr>
             </table></td>
       </tr>
