@@ -54,8 +54,7 @@
                      href="<c:url value="/board/list?category=베스트"/>"><img
                         src="<c:url value="/images/best.png"/>"><br>베스트</a></td>
                   <td class="category"><a
-                     href="<c:url value="/board/list?category=여성의류"/>"><img
-                        src="<c:url value="/images/woman.png"/>"><br>여성의류</a></td>
+                     href="<c:url value="/board/list?category=여성의류"/>"><br>여성의류</a></td>
                   <td class="category"><a
                      href="<c:url value="/board/list?category=남성의류"/>"><img
                         src="<c:url value="/images/man.png"/>"><br>남성의류</a></td>
