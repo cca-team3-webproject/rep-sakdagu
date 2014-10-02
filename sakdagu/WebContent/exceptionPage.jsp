@@ -14,7 +14,7 @@
 		<div class="tableRow">
 			<c:import url="top-bar.jsp" />
 		</div>
-		<div class="tableRow"></div><div class="tableRow">
+		<div class="tableRow">
 			<!-- START of main content-->
 			<div class="main">
 				<p class="exceptionname">${pageContext.exception}</p>

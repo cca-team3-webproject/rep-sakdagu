@@ -114,7 +114,7 @@
 
 					</form>
 					<c:if test="${not empty sessionScope.loginMember}">
-						<form name="writeForm" action="writeForm" method="GET">
+						<form name="writeForm" action="<c:url value="/board/writeForm"/>" method="GET">
 							<select name="category">
 								<option value="여성의류"
 									<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>
