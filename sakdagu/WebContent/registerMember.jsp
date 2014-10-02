@@ -31,13 +31,12 @@
 						<tr>
 							<td class="label">비밀번호 :</td>
 							<td><input type="password" name="password" size="20"
-								maxlength="10" ></td>
+								maxlength="10"></td>
 						</tr>
 						<tr>
 							<td class="label">비밀번호확인 :</td>
 							<td><input type="password" name="password2" size="20"
-								maxlength="10" onblur="passchk(this.form)">
-   								</td>
+								maxlength="10" onblur="passchk(this.form)"></td>
 						</tr>
 						<tr>
 							<td class="label">이름 :</td>
@@ -54,8 +53,8 @@
 						<tr>
 							<td class="label">우편번호 :</td>
 							<td><input type="text" name="zipcode1" size="15"
-								maxlength="7">-<input type="text" name="zipcode2" size="15"
-								maxlength="7"></td>
+								maxlength="7">-<input type="text" name="zipcode2"
+								size="15" maxlength="7"></td>
 						</tr>
 						<tr>
 							<td class="label">주소 :</td>
@@ -64,9 +63,12 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-						</tr>
+									<textarea>
+										<c:import url="access_terms.jsp" />
+									</textarea></td>
+									</tr>
 						<tr>
-							<td></td>
+								
 							<td><input type="submit" value="회원가입"> <input
 								type="reset" value="취소"></td>
 						</tr>
