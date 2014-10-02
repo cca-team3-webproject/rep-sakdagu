@@ -6,10 +6,32 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 등록</title>
-<link rel="stylesheet" href="../css/board.css">
+<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<!--  -->
 <script src="../ckeditor/ckeditor.js"></script>
 <script src="../js/board.js"></script>
-<link rel="stylesheet" href="../css/dukeshop.css">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script>
+	var proNo = 1;
+	var addProduct = function() {
+		var proNo = $('#proNo').attr('value');
+		$('#proNo').attr('value', Number(proNo) + 1);
+		var url1 = '<c:import url="products.jsp?proNo=상품 '.concat(proNo)
+				.concat('"/>');
+		$(url1).appendTo('#productArea');
+	};
+
+	var addOption = function() {
+		var optNo = $('#optNo').attr('value');
+		$('#optNo').attr('value', Number(optNo) + 1);
+		var url2 = '<c:import url="options.jsp?optNo=옵션 '.concat(optNo).concat(
+				'"/>');
+		$(url2).appendTo('#optionArea');
+	};
+</script>
+
 </head>
 <body>
 	<div class="tableContainer">
@@ -25,7 +47,7 @@
 					<tr>
 						<th>카테고리</th>
 						<td>
-							<form name="categoryForm" action="writeForm" method="GET">
+							<form name="categoryForm" action="writeForm" method="get">
 								<select name="category" onchange=" submit();">
 									<option value="여성의류"
 										<c:if test="${param.category eq '여성의류'}"> selected="selected"</c:if>>여성의류</option>
@@ -75,7 +97,7 @@
 								<td><input type="file" name="photoDir"></td>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="productArea">
 
 							<tr>
 								<th>구매시<br>주의사항
@@ -89,59 +111,22 @@
 	CKEDITOR.replace('ckeditor');
 </script></td>
 							</tr>
-							<!-- 상품정보 등록 -->
-							<tr>
-								<th>상품 추가</th>
-								<td><input type="button" name="btnAddProduct" value="상품 추가"></td>
-								<!-- 상품들 -->
-								<td>
-									<table>
-										<tr>
-											<th>선택 1</th>
 
-											<td>
-												<table>
 
-													<tr>
-														<th>제목</th>
-														<td><input type="text" name="select" width="100px"></td>
-													</tr>
-													<tr>
-														<td><input type="button" name="btnAddOption"
-															value="옵션 추가"></td>
-													</tr>
-													<!-- 옵션들 -->
-													<tr>
-														<td colspan="2">
-															<table>
-																<tr>
-																	<td rowspan="2">옵션 1</td>
-																	<th>제목</th>
-																	<td><input type="text" name="option"></td>
-																	<th>시중가</th>
-																	<td><input type="text" name="option"></td>
-																	<th>판매가</th>
-																	<td><input type="text" name="option"></td>
-																</tr>
-																<tr>
-																	<th>수량</th>
-																	<td><input type="text" name="option"></td>
-																	<th>사진</th>
-																	<td><input type="file" name="option"></td>
-																</tr>
-															</table>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>
-									</table>
-								</td>
-
-							</tr>
-
+							<!-- 상품들 -->
+							<c:import url="products.jsp?proNo=상품 1" />
 						</tbody>
 						<tfoot>
+
+							<!-- 상품정보 등록 -->
+	<!-- 						<tr>
+								<th rowspan="1">상품 추가</th>
+								<td><input type="button" name="btnAddProduct"
+									onclick="addProduct();" value="상품 추가"> <input
+									type="hidden" value="1" id="proNo"></td>
+							</tr>
+
+ -->
 							<tr>
 								<td colspan="2"><div class="buttonbar">
 										<input type="submit" value="등록"> <input type="button"

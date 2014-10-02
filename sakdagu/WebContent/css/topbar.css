@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+* { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
+a:link { text-decoration: none; color: #000000; }
+a:visited { text-decoration: none; color: #000000; }
+a:hover, a:active { text-decoration: underline; color: #cc6600; }
+
+ul#loginerrormsg { padding: 0px 10px 0px 20px; }
+table#topbartable {margin:0 auto;}
+table#categoryPosition{ float: right;}
+table#logintable, table#logouttable { float: right;}
+table#logotable {float: left;}
+table#logintable td.label { text-align: center; color: red; font-weight: bold;}
+.logo { text-align: center; vertical-align: middle; width: 160px; height: 100px; }  
+.maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
+
+#searchinput { width: 200px; }

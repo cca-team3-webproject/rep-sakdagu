@@ -7,8 +7,7 @@
         있으면 로그아웃 페이지(logout.jsp)를 포함시킨다.(include 액션 사용) --%>
    <table id="topbartable">
       <tr>
-         <td rowspan="2"><a
-                     href="<c:url value="/board/list"/>">
+         <td rowspan="2"><a href="<c:url value="/"/>">
          <img src="<c:url value="/images/logo.png"/>"></a></td>
          <td id="session"><c:if test="${empty sessionScope.loginMember}">
                <c:import url="/login.jsp" />
@@ -21,6 +20,7 @@
             <form name="searchForm" action="<c:url value="/board/list"/>"method="GET">
                <table id="categoryPosition">
                   <tr>
+                  
                      <td><select name="category">
                            <option value="전체"
                               <c:if test="${param.category eq '베스트'}"> selected="selected"</c:if>>전체</option>

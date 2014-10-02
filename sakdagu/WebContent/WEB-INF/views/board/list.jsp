@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
-<link rel="stylesheet" href="<c:url value="/css/board.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <script src="../js/board.js"></script>
 </head>
 <body>
@@ -114,7 +114,7 @@
 
 					</form>
 					<c:if test="${not empty sessionScope.loginMember}">
-						<form name="writeForm" action="writeForm" method="GET">
+						<form name="writeForm" action="<c:url value="/board/writeForm"/>" method="GET">
 							<select name="category">
 								<option value="여성의류"
 									<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>

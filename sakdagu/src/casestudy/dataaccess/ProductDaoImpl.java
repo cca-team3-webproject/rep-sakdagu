@@ -81,12 +81,12 @@ public class ProductDaoImpl implements ProductDao {
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
-				product = new Product(rs.getString("ProductID"),
-						rs.getString("MallID"), rs.getString("ProductName"),
-						rs.getString("Company"), rs.getInt("Price1"),
-						rs.getInt("Price2"), rs.getString("Installment"),
-						rs.getString("Keyword"), rs.getString("Detail"),
-						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
+//				product = new Product(rs.getString("ProductID"),
+//						rs.getString("MallID"), rs.getString("ProductName"),
+//						rs.getString("Company"), rs.getInt("Price1"),
+//						rs.getInt("Price2"), rs.getString("Installment"),
+//						rs.getString("Keyword"), rs.getString("Detail"),
+//						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
 			}
 
 		} catch (SQLException se) {
@@ -150,12 +150,12 @@ public class ProductDaoImpl implements ProductDao {
 			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
-				product = new Product(rs.getString("ProductID"),
-						rs.getString("MallID"), rs.getString("ProductName"),
-						rs.getString("Company"), rs.getInt("Price1"),
-						rs.getInt("Price2"), rs.getString("Installment"),
-						rs.getString("Keyword"), rs.getString("Detail"),
-						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
+//				product = new Product(rs.getString("ProductID"),
+//						rs.getString("MallID"), rs.getString("ProductName"),
+//						rs.getString("Company"), rs.getInt("Price1"),
+//						rs.getInt("Price2"), rs.getString("Installment"),
+//						rs.getString("Keyword"), rs.getString("Detail"),
+//						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
 				temp.add(product);
 			}
 
@@ -273,7 +273,7 @@ public class ProductDaoImpl implements ProductDao {
 
 		try {
 			connection = obtainConnection();
-			stmt = connection.prepareStatement(query);
+/*			stmt = connection.prepareStatement(query);
 			stmt.setString(1, product.getProductID());
 			stmt.setString(2, product.getMallID());
 			stmt.setString(3, product.getProductName());
@@ -284,7 +284,7 @@ public class ProductDaoImpl implements ProductDao {
 			stmt.setString(8, product.getKeyword());
 			stmt.setString(9, product.getDetail());
 			stmt.setDate(10, product.getProductDate());
-			stmt.setString(11, product.getPhotoDir());
+			stmt.setString(11, product.getPhotoDir());*/
 			stmt.execute();
 
 		} catch (SQLException se) {
