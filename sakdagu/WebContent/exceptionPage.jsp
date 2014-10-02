@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>${pageContext.errorData.throwable.message}</title>
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 </head>
 <body>
 	<div class="tableContainer">

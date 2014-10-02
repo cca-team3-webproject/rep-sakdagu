@@ -1,11 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
+<script src="/js/script.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
@@ -26,7 +31,13 @@
 						<tr>
 							<td class="label">비밀번호 :</td>
 							<td><input type="password" name="password" size="20"
-								maxlength="10"></td>
+								maxlength="10" ></td>
+						</tr>
+						<tr>
+							<td class="label">비밀번호확인 :</td>
+							<td><input type="password" name="password2" size="20"
+								maxlength="10" onblur="passchk(this.form)">
+   								</td>
 						</tr>
 						<tr>
 							<td class="label">이름 :</td>
@@ -48,7 +59,7 @@
 						</tr>
 						<tr>
 							<td class="label">주소 :</td>
-							<td><input type="text" name="address" size="50"
+							<td><input id="addr" type="text" name="address" size="50"
 								maxlength="70"></td>
 						</tr>
 						<tr>

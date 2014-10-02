@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 보기</title>
-<link rel="stylesheet" href="../css/board.css">
+<link rel="stylesheet" href="../css/topbar.css">
 <script src="../js/board.js"></script>
-<link rel="stylesheet" href="../css/dukeshop.css">
+<link rel="stylesheet" href="../css/body.css">
 </head>
 <body>
 	<div class="tableContainer">
@@ -51,8 +51,6 @@
 					</tbody>
 				</table>
 				<div class="buttonbar">
-
-
 					<input type="button" value="목록"
 						onclick="goUrl('list?pageNumber=${currentPageNumber}&searchType=${param.searchType}&searchText=${param.searchText}');">
 					<input type="button" value="답글"
