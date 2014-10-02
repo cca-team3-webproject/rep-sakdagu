@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>404 - Not Found</title>
-<link rel="stylesheet" href="<c:url value='/css/dukeshop.css'/>">
+<link rel="stylesheet" href="<c:url value='/css/boby.css'/>">
 </head>
 <body>
 	<div class="tableContainer">

@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>${pageContext.exception.message}</title>
-   <link rel="stylesheet" href="../css/dukeshop.css">
+   <link rel="stylesheet" href="../css/body.css">
    <script src="../js/board.js"></script>
 </head>
 <body>

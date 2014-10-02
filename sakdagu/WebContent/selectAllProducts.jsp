@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>상품 리스트</title>
-    <link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 </head>
 <body>
 

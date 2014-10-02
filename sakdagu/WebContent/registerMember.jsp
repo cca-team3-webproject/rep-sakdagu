@@ -3,22 +3,14 @@
 
 <!DOCTYPE html>
 <html>
+<script src="/js/script.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
-<script>
-	function openDaumPostcode() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				document.getElementById('zipcode1').value = data.postcode1;
-				document.getElementById('zipcode2').value = data.postcode2;
-				document.getElementById('addr').value = data.address;
-			}
-		}).open();
-	}
-</script>
+
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
@@ -39,7 +31,13 @@
 						<tr>
 							<td class="label">비밀번호 :</td>
 							<td><input type="password" name="password" size="20"
-								maxlength="10"></td>
+								maxlength="10" ></td>
+						</tr>
+						<tr>
+							<td class="label">비밀번호확인 :</td>
+							<td><input type="password" name="password2" size="20"
+								maxlength="10" onblur="passchk(this.form)">
+   								</td>
 						</tr>
 						<tr>
 							<td class="label">이름 :</td>
@@ -55,7 +53,7 @@
 						</tr>
 						<tr>
 							<td class="label">우편번호 :</td>
-							<td><input id="zipcode1" type="text" name="zipcode" size="3"
+							<td><input id="zipcode1" type="text" name="zipcode" size="7"
 								maxlength="7">-<input id="zipcode2" type="text" name="zipcode" size="3"
 								maxlength="7"><input type="button" name="search" value="우편번호검색" onclick="openDaumPostcode()"></td>
 						</tr>

@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 목록</title>
-<link rel="stylesheet" href="<c:url value="/css/board.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/dukeshop.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <script src="../js/board.js"></script>
 </head>
 <body>
