@@ -12,13 +12,15 @@ table#sidebartable hr { margin: 0px 0px 5px 0px; width: 120px; }
 table#categoryPosition{ float: right;}
 table#logintable, table#logouttable { float: right;}
 table#logotable {float: left;}
+table#logo {text-align: center;}
+
 table#logintable td.label { text-align: center; color: red; font-weight: bold;}
 .logo { text-align: center; vertical-align: middle; width: 160px; height: 100px; }  
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
 
 .tableRow {display: table-row;}
 .tableCell { display: table-cell; vertical-align: top; }
-.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top; width: 100%;}
+.topbar { display: table-cell; height: 200px; padding: 20px 10px 0px 10px; vertical-align: top;}
 .category { padding: 0px 20px 0px 20px; text-align: center;}
 td.category a {
 		position: relative;

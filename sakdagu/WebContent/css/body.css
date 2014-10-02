@@ -18,10 +18,9 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
  
 #tableRowThin{border-bottom: blue 30px;}
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
-.maintable table.hover{border-color: blue; border-width: 5px;}
+.maintable table.hover{border-color: blue;}
 
-table#listtableHead {background-color: black; font-size: 15px; color: white;}
-table#listtableHead a:link {font-size: 15px; color: white;}
+table#listtableHead {font-size: 15px;}
 
 #listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: src:css/훈하얀고양이R.ttf;}
 #listtable .image img{width: 300px; height: 300px; text-align: center;}
