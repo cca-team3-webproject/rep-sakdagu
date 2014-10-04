@@ -18,6 +18,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import casestudy.business.domain.Product;
+import casestudy.business.domain.productOption;
 import casestudy.business.service.ProductDao;
 
 /**
@@ -63,11 +64,11 @@ public class ProductDaoImpl implements ProductDao {
 	 * 인자로 받은 productID로 레코드를 찾아(select) 해당 정보를 가진 Product 객체를 리턴한다.
 	 */
 	@Override
-	public Product selectProduct(String productID) {
-		Product product = null;
+	public Product[] selectProduct(int num) {
+		ArrayList<Product> products = new ArrayList<Product>();
 
-		String query = "SELECT ProductID, MallID, ProductName, Company, Price1, Price2, Installment, Keyword, Detail, ProductDate, PhotoDir "
-				+ "FROM sakdagu_Product WHERE ProductID=?";
+		String query = "SELECT board_num, product_id, product_title "
+				+ "FROM sakdagu_Product WHERE board_num=?";
 		System.out.println("ProductDAOImpl selectProduct() query: " + query);
 
 		Connection connection = null;
@@ -77,16 +78,14 @@ public class ProductDaoImpl implements ProductDao {
 		try {
 			connection = obtainConnection();
 			stmt = connection.prepareStatement(query);
-			stmt.setString(1, productID);
+			stmt.setInt(1, num);
 			rs = stmt.executeQuery();
 
-			if (rs.next()) {
-//				product = new Product(rs.getString("ProductID"),
-//						rs.getString("MallID"), rs.getString("ProductName"),
-//						rs.getString("Company"), rs.getInt("Price1"),
-//						rs.getInt("Price2"), rs.getString("Installment"),
-//						rs.getString("Keyword"), rs.getString("Detail"),
-//						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
+			while (rs.next()) {
+				Product product = new Product(rs.getInt("board_num"),
+						rs.getInt("product_id"), rs.getString("product_title"),
+						selectOption(num, rs.getInt("product_id")));
+				products.add(product);
 			}
 
 		} catch (SQLException se) {
@@ -117,7 +116,7 @@ public class ProductDaoImpl implements ProductDao {
 			}
 		}
 
-		return product;
+		return products.toArray(new Product[0]);
 	}
 
 	/*
@@ -150,12 +149,12 @@ public class ProductDaoImpl implements ProductDao {
 			rs = stmt.executeQuery(query);
 
 			while (rs.next()) {
-//				product = new Product(rs.getString("ProductID"),
-//						rs.getString("MallID"), rs.getString("ProductName"),
-//						rs.getString("Company"), rs.getInt("Price1"),
-//						rs.getInt("Price2"), rs.getString("Installment"),
-//						rs.getString("Keyword"), rs.getString("Detail"),
-//						rs.getDate("ProductDate"), rs.getString("PhotoDir"));
+				// product = new Product(rs.getString("ProductID"),
+				// rs.getString("MallID"), rs.getString("ProductName"),
+				// rs.getString("Company"), rs.getInt("Price1"),
+				// rs.getInt("Price2"), rs.getString("Installment"),
+				// rs.getString("Keyword"), rs.getString("Detail"),
+				// rs.getDate("ProductDate"), rs.getString("PhotoDir"));
 				temp.add(product);
 			}
 
@@ -203,10 +202,10 @@ public class ProductDaoImpl implements ProductDao {
 	 * 리턴한다.
 	 */
 	@Override
-	public boolean productIDExists(String productID) {
+	public boolean productIDExists(int num) {
 		boolean result = false;
 
-		String query = "SELECT ProductID FROM PRODUCT WHERE PRODUCTID = ?";
+		String query = "SELECT board_num FROM sakdagu_PRODUCT WHERE board_num = ?";
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -214,7 +213,7 @@ public class ProductDaoImpl implements ProductDao {
 		try {
 			connection = obtainConnection();
 			stmt = connection.prepareStatement(query);
-			stmt.setString(1, productID);
+			stmt.setInt(1, num);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
 				result = true;
@@ -251,7 +250,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public void insertProduct(Product product) {
-		String query = "INSERT INTO sakdagu_product VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? , ? , ? )";
+		String query = "INSERT INTO sakdagu_product VALUES (?, ?, ?)";
 
 		// INSERT INTO "SKU"."PRODUCT" (PRODUCTID, MALLID, PRODUCTNAME, COMPANY,
 		// PRICE1, PRICE2, INSTALLMENT, KEYWORD, DETAIL, PRODUCTDATE, PHOTODIR)
@@ -273,18 +272,10 @@ public class ProductDaoImpl implements ProductDao {
 
 		try {
 			connection = obtainConnection();
-/*			stmt = connection.prepareStatement(query);
-			stmt.setString(1, product.getProductID());
-			stmt.setString(2, product.getMallID());
-			stmt.setString(3, product.getProductName());
-			stmt.setString(4, product.getCompany());
-			stmt.setInt(5, product.getPrice1());
-			stmt.setInt(6, product.getPrice2());
-			stmt.setString(7, product.getInstallment());
-			stmt.setString(8, product.getKeyword());
-			stmt.setString(9, product.getDetail());
-			stmt.setDate(10, product.getProductDate());
-			stmt.setString(11, product.getPhotoDir());*/
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, product.getBoardNum());
+			stmt.setInt(2, product.getProductID());
+			stmt.setString(3, product.getProductTitle());
 			stmt.execute();
 
 		} catch (SQLException se) {
@@ -308,5 +299,106 @@ public class ProductDaoImpl implements ProductDao {
 				se.printStackTrace(System.err);
 			}
 		}
+	}
+
+	@Override
+	public void insertOption(int num, productOption option) {
+		String query = "INSERT INTO sakdagu_product_option VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+		System.out.println("productDAOImpl insertOption() query: " + query);
+
+		Connection connection = null;
+		PreparedStatement stmt = null;
+
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, num);
+			stmt.setInt(2, option.getProductID());
+			stmt.setInt(3, option.getOptionID());
+			stmt.setString(4, option.getOptionTitle());
+			stmt.setInt(5, option.getPrice1());
+			stmt.setInt(6, option.getPrice2());
+			stmt.setInt(7, option.getQuantity());
+			stmt.setString(8, option.getInstallment());
+			stmt.execute();
+
+		} catch (SQLException se) {
+			System.err.println("productDAOImpl insertOption() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occurred. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+	}
+
+	@Override
+	public productOption[] selectOption(int num, int product_id) {
+		ArrayList<productOption> options = new ArrayList<productOption>();
+
+		String query = "SELECT option_id, option_title "
+				+ "FROM sakdagu_Product_option WHERE board_num=? and product_id=?";
+		System.out.println("ProductDAOImpl selectProduct() query: " + query);
+
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, num);
+			stmt.setInt(2, product_id);
+			rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				productOption option = new productOption(product_id,
+						rs.getInt("option_id"), rs.getString("option_title"));
+				options.add(option);
+			}
+
+		} catch (SQLException se) {
+			System.err.println("ProductDAOImpl selectProduct() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occured. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace(System.err);
+			}
+		}
+
+		return options.toArray(new productOption[0]);
 	}
 }

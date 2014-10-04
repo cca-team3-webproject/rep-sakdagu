@@ -4,9 +4,11 @@ import java.util.Map;
 
 import casestudy.business.domain.Board;
 import casestudy.dataaccess.BoardDaoImpl;
+import casestudy.dataaccess.photoDao;
 
 public class BoardServiceImpl implements BoardService {
 	BoardDao BoardDataAccess = new BoardDaoImpl();
+	photoDao photoDataAccess = new photoDao();
 
 	/*
 	 * (non-Javadoc)
@@ -67,8 +69,10 @@ public class BoardServiceImpl implements BoardService {
 	 * .domain.Board)
 	 */
 	@Override
-	public void writeBoard(Board board) {
+	public int writeBoard(Board board) {
 		BoardDataAccess.insertBoard(board);
+		
+		return BoardDataAccess.getThisNum();
 	}
 
 	/*
@@ -102,8 +106,7 @@ public class BoardServiceImpl implements BoardService {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * casestudy.business.service.BoardService#replyBoard(Board)
+	 * @see casestudy.business.service.BoardService#replyBoard(Board)
 	 * 
 	 * BoardDao 객체를 사용해 답글 정보를 등록한다.
 	 */
@@ -117,7 +120,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public String[] getSubCategoryList(String category) {
-		return BoardDataAccess.getSubCategoryList(category).toArray(new String[0]);
+		return BoardDataAccess.getSubCategoryList(category).toArray(
+				new String[0]);
 	}
 
 }

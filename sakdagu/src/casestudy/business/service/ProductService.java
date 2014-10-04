@@ -6,6 +6,7 @@
 package casestudy.business.service;
 
 import casestudy.business.domain.Product;
+import casestudy.business.domain.productOption;
 
 /**
  * 상품과 관련한 업무나 처리에 관련한 서비스를 담당할 객체의 규격을 정의한 인터페이스.<br/> 
@@ -26,15 +27,16 @@ public interface ProductService {
      * @return 검색된 상품정보를 담고 있는 Product 객체
      * @throws DataNotFoundException productID에 해당하는 상품이 존재하지 않을 경우 발생
      */
-	public Product findProduct(String productID) throws DataNotFoundException;
+	public Product[] findProduct(int num) throws DataNotFoundException;
 	
     /**
      * 인수로 주어진 productID에 해당하는 상품을 등록한다.
+     * @param num 
      *
      * @param product 등록하고자 하는 상품 정보를 담고있는 Product 객체
      * @throws DataNotFoundException product와 중복되는 상품이 있을 경우 발생
      */
-	public void registerProduct(Product product) throws DataDuplicatedException;
+	public void registerProduct(int num, Product product) throws DataDuplicatedException;
 	
     /**
      * 모든 상품을 검색한다.
@@ -44,5 +46,7 @@ public interface ProductService {
 	public Product[] getAllProducts();
 
 	public void removeProduct(Product product);
+
+	public productOption[] findOprion(int num) throws DataNotFoundException;
 	
 }

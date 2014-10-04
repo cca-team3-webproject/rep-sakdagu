@@ -14,19 +14,19 @@
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <script>
-	var proNo = 1;
 	var addProduct = function() {
+		alert('add');
 		var proNo = $('#proNo').attr('value');
 		$('#proNo').attr('value', Number(proNo) + 1);
-		var url1 = '<c:import url="products.jsp?proNo=상품 '.concat(proNo)
-				.concat('"/>');
+		var url1 = '<c:import url="products.jsp?proNo='.concat(proNo).concat(
+				'"/>');
 		$(url1).appendTo('#productArea');
 	};
 
 	var addOption = function() {
 		var optNo = $('#optNo').attr('value');
 		$('#optNo').attr('value', Number(optNo) + 1);
-		var url2 = '<c:import url="options.jsp?optNo=옵션 '.concat(optNo).concat(
+		var url2 = '<c:import url="options.jsp?optNo='.concat(optNo).concat(
 				'"/>');
 		$(url2).appendTo('#optionArea');
 	};
@@ -114,19 +114,18 @@
 
 
 							<!-- 상품들 -->
-							<c:import url="products.jsp?proNo=상품 1" />
+
 						</tbody>
 						<tfoot>
 
 							<!-- 상품정보 등록 -->
-	<!-- 						<tr>
-								<th rowspan="1">상품 추가</th>
+							<tr>
+								<th>상품 추가</th>
 								<td><input type="button" name="btnAddProduct"
 									onclick="addProduct();" value="상품 추가"> <input
 									type="hidden" value="1" id="proNo"></td>
 							</tr>
 
- -->
 							<tr>
 								<td colspan="2"><div class="buttonbar">
 										<input type="submit" value="등록"> <input type="button"

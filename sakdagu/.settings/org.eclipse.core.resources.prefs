@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//WebContent/NewFile.jsp=UTF-8
 encoding//WebContent/NewFile1.jsp=UTF-8
 encoding//WebContent/WEB-INF/views/board/products.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/board/readProducts.jsp=UTF-8
 encoding//WebContent/js/board.js=UTF-8
 encoding//WebContent/js/script.js=UTF-8
 encoding//WebContent/thankYou.jsp=UTF-8
