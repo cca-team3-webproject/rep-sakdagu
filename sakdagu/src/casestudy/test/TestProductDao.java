@@ -15,7 +15,7 @@ public class TestProductDao {
         
         System.out.println("ProductID: " + selectedProduct.getProductID());
         System.out.println("MallID: " + selectedProduct.getMallID());
-        System.out.println("ProductName: " + selectedProduct.getProductName());
+        System.out.println("ProductName: " + selectedProduct.getProductTitle());
         System.out.println("Company: " + selectedProduct.getCompany());
         System.out.println("Price1: " + selectedProduct.getPrice1());
         System.out.println("Price2: " + selectedProduct.getPrice2());
