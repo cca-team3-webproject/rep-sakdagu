@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <tr>
-	<td class="image" rowspan="8" colspan="2"><img
+	<td class="image" rowspan="9" colspan="2"><img
 		src="<c:url value="/board/img?boardNum=${board.num}"/>"></td>
 	<td class="writer">${board.writer}</td>
 </tr>
@@ -14,35 +15,74 @@
 	<td class="regdate">${board.regDate}</td>
 </tr>
 <tr>
-	<th colspan="2"><select name="selectedProduct">
+	<th colspan="2"><select name="selectedProduct"
+		onchange="selectProduct(this);">
+			<option value="0">상품을 선택하세요</option>
 			<c:forEach items="${products}" var="product">
-				<option value="${product.productID}">상품
+				<option value="${product.productID}"
+					<c:if test="${param.productID eq product.productID}"> selected="selected"</c:if>>상품
 					${product.productID}-${product.productTitle}</option>
 			</c:forEach>
 	</select></th>
 </tr>
 <tr>
-	<th colspan="2"><select name="selectedOption">
-			<c:forEach items="${products}" var="product">
-				<c:forEach items="${product.option}" var="option">
-					<option value="${option.optionID}">선택
-						${option.optionID}-${option.optionTitle}</option>
-				</c:forEach>
-			</c:forEach>
-	</select></th>
+	<th colspan="2" class="optionArea"><c:forEach items="${products}"
+			var="product">
+			<c:if test="${product.productID eq param.productID}">
+				<select name="selectedOption" onchange="selectOption(this);">
+					<option value="0">사이즈/색깔/날짜 등을 선택하세요.</option>
+					<c:forEach items="${product.option}" var="option">
+						<option value="${option.optionID}"
+							<c:if test="${param.optionID eq option.optionID}"> selected="selected"</c:if>>선택${option.optionID}-${option.optionTitle}
+							\ ${option.price2}</option>
+					</c:forEach>
+				</select>
+			</c:if>
+		</c:forEach></th>
 </tr>
 <tr>
 	<td colspan="2"><hr></td>
 </tr>
 <tr>
-	<td colspan="2" background="#ff55ff">${products[0].productTitle}-${products[0].option[1].optionTitle}
-		x <select><c:forEach begin="1" end="10" varStatus="v">
-				<option value="${v.count}">${v.count}</option>
-			</c:forEach></select>개 =
-	</td>
+	<td colspan="2" style=""><c:if test="${not empty param.optionID}">
+			<c:forEach items="${products}" var="product">
+				<c:if test="${product.productID eq param.productID}">
+					<c:forEach items="${product.option}" var="option">
+						<c:if test="${option.optionID eq param.optionID}">
+		${product.productTitle}-${option.optionTitle}
+		</c:if>
+					</c:forEach>
+				</c:if>
+			</c:forEach> x <select name="quantity" onchange="selectQuantity(this);">
+				<c:forEach begin="1" end="11" varStatus="v">
+					<option value="${v.count-1}"
+						<c:if test="${param.quantity eq v.count-1}"> selected="selected"</c:if>>${v.count-1}</option>
+				</c:forEach>
+			</select>개 =
+</c:if></td>
 </tr>
 <tr>
-	<td colspan="2" align="right">${products[0].option[0].price1}원</td>
+	<td colspan="2" align="right">
+		<form action="buyForm">
+			<c:forEach items="${products}" var="product">
+				<c:if test="${product.productID eq param.productID}">
+					<c:forEach items="${product.option}" var="option">
+						<c:if test="${option.optionID eq param.optionID}">
+							<s> ${option.price1*param.quantity}</s>  ${option.price2*param.quantity}
+					</c:if>
+					</c:forEach>
+				</c:if>
+			</c:forEach>
+			원
+		</form> <!-- <div id="order_area" class="btnB">
+			<input id="instantOrderButton" data-cclick="PDP,TOP_DIRECT,BUY,3"
+				type="button" value="구매하기" class="btnBg btn_buy"
+				data-gaclick="{&quot;hitType&quot;:&quot;event&quot;, &quot;eventCategory&quot;:&quot;PDP&quot;, &quot;eventAction&quot;:&quot;click&quot;, &quot;eventLabel&quot;:&quot;/click_pdp_directpurchase&quot;, &quot;eventValue&quot;:71615516">
+			<button id="orderButton" data-cclick="PDP,TOP_CART,BUY,3"
+				type="button" value="장바구니" class="cartButton"
+				data-gaclick="{&quot;hitType&quot;:&quot;event&quot;, &quot;eventCategory&quot;:&quot;PDP&quot;, &quot;eventAction&quot;:&quot;click&quot;, &quot;eventLabel&quot;:&quot;/click_pdp_cart&quot;, &quot;eventValue&quot;:71615516}">장바구니</button>
+		</div> -->
+	</td>
 </tr>
 
 <c:forEach items="${products}" var="product">
@@ -56,6 +96,5 @@
 				src="<c:url value="/board/img?boardNum=${board.num}&productID=${option.productID}&optionID=${option.optionID}"/>">
 			</td>
 		</tr>
-
 	</c:forEach>
 </c:forEach>

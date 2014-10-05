@@ -350,7 +350,7 @@ public class ProductDaoImpl implements ProductDao {
 	public productOption[] selectOption(int num, int product_id) {
 		ArrayList<productOption> options = new ArrayList<productOption>();
 
-		String query = "SELECT option_id, option_title "
+		String query = "SELECT * "
 				+ "FROM sakdagu_Product_option WHERE board_num=? and product_id=?";
 		System.out.println("ProductDAOImpl selectProduct() query: " + query);
 
@@ -367,7 +367,10 @@ public class ProductDaoImpl implements ProductDao {
 
 			while (rs.next()) {
 				productOption option = new productOption(product_id,
-						rs.getInt("option_id"), rs.getString("option_title"));
+						rs.getInt("option_id"), rs.getString("option_title"),
+						rs.getInt("price1"),
+						rs.getInt("price2"),
+						rs.getInt("quantity"), rs.getString("installment"));
 				options.add(option);
 			}
 

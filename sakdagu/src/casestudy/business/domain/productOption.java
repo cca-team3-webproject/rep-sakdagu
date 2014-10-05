@@ -91,6 +91,18 @@ public class productOption {
 		Photo = photo;
 	}
 
+	public productOption(int productID, int optionID, String optionTitle,
+			int price1, int price2, int quantity, String installment) {
+		super();
+		this.productID = productID;
+		this.optionID = optionID;
+		this.optionTitle = optionTitle;
+		this.price1 = price1;
+		this.price2 = price2;
+		this.quantity = quantity;
+		this.installment = installment;
+	}
+	
 	public productOption(int productID, int optionID, String optionTitle) {
 		this.productID = productID;
 		this.optionID = optionID;

@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page isErrorPage="true"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -8,7 +7,33 @@
 <title>게시글 보기</title>
 <link rel="stylesheet" href="../css/topbar.css">
 <link rel="stylesheet" href="../css/body.css">
-<script src="../js/board.js"></script>
+<script src="<c:url value="/js/product.js"/>"></script>
+<script type="text/javascript">
+function selectProduct(obj) {
+	var radios = obj.value;
+
+	location.href = '<c:url value="/board/read?num=' + ${param.num} +'&productID=' + radios + '"/>';
+	/* 
+	 var opt = '';
+
+	 $('.optionArea').html('');
+	 $(opt).appendTo('.optionArea'); */
+
+};
+function selectOption(obj) {
+	var radios = obj.value;
+
+	location.href = '<c:url value="/board/read?num=' + ${param.num} +'&productID=' + ${param.productID} +'&optionID=' + radios + '"/>';
+
+};
+
+function selectQuantity(obj) {
+	var radios = obj.value;
+	location.href = '<c:url value="/board/read?num=' + ${param.num}+'&productID=' + ${param.productID}+'&optionID=' + ${param.optionID}+'&quantity=' + radios + '"/>';
+};
+
+</script>
+
 </head>
 <body>
 	<div class="tableContainer">

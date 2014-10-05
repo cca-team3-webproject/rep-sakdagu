@@ -15,7 +15,7 @@
 
 <script>
 	var addProduct = function() {
-		alert('add');
+		//alert('add');
 		var proNo = $('#proNo').attr('value');
 		$('#proNo').attr('value', Number(proNo) + 1);
 		var url1 = '<c:import url="products.jsp?proNo='.concat(proNo).concat(
