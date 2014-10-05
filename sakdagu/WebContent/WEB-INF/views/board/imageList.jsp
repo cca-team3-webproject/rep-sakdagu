@@ -8,6 +8,7 @@
 <title>게시글 목록</title>
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
 <script src="../js/board.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
