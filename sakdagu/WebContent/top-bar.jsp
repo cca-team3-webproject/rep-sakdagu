@@ -4,6 +4,7 @@
 <script type="text/javascript" src="js/script.js"></script>
 <div class="topbar">
 	<%-- 1. session scope에 설정된 "loginMember" 속성이 없으면 로그인 페이지(login.jsp)를,
+
         있으면 로그아웃 페이지(logout.jsp)를 포함시킨다.(include 액션 사용) --%>
 	<c:if test="${empty sessionScope.loginMember}">
 		<c:import url="/login.jsp" />
@@ -15,7 +16,6 @@
 	<br>
 	<br> <a href="<c:url value="/"/>"> <img id="logoP"
 		src="<c:url value="/images/logo.png"/>"></a><br>
-
 
 	<form name="searchForm" action="<c:url value="/board/list"/>"
 		method="GET">
@@ -46,8 +46,5 @@
 	</form><br><br>
 
 	<p><c:import url="/menubar.jsp" /></p><br>
-
-
-
 
 </div>

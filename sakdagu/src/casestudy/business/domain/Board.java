@@ -24,6 +24,8 @@ public class Board {
 
 	private String photoDir;
 
+	private productPhoto productPhoto;
+
 	public Board() {
 
 	}
@@ -55,7 +57,8 @@ public class Board {
 	// 게시글 상세 조회용
 	public Board(int num, String writer, String title, String contents,
 			String ip, int readCount, String regDate, String modDate,
-			int masterNum, int replyOrder, int replyStep, String photoDir, String category, String subCategory) {
+			int masterNum, int replyOrder, int replyStep, String category,
+			String subCategory) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -68,14 +71,13 @@ public class Board {
 		this.masterNum = masterNum;
 		this.replyOrder = replyOrder;
 		this.replyStep = replyStep;
-		this.photoDir = photoDir;
 		this.category = category;
 		this.subCategory = subCategory;
 	}
 
 	// 리스트 조회용
 	public Board(int num, String writer, String title, int readCount,
-			String regDate, String category, String subCategory, String photoDir) {
+			String regDate, String category, String subCategory) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -84,13 +86,12 @@ public class Board {
 		this.regDate = regDate;
 		this.category = category;
 		this.subCategory = subCategory;
-		this.photoDir = photoDir;
 		// this.replyStep = replyStep;
 	}
 
 	// 게시글 쓰기용
 	public Board(String writer, String title, String contents, String ip,
-			String category, String subCategory, String photoDir) {
+			String category, String subCategory, productPhoto productPhoto) {
 		super();
 		this.writer = writer;
 		this.title = title;
@@ -98,7 +99,7 @@ public class Board {
 		this.ip = ip;
 		this.category = category;
 		this.subCategory = subCategory;
-		this.setPhotoDir(photoDir);
+		this.setProductPhoto(productPhoto);
 	}
 
 	// 게시글 수정용
@@ -232,6 +233,14 @@ public class Board {
 				+ ", replyStep=" + replyStep + ", category=" + category
 				+ ", subCategory=" + subCategory + ", photoDir=" + photoDir
 				+ "]";
+	}
+
+	public productPhoto getProductPhoto() {
+		return productPhoto;
+	}
+
+	public void setProductPhoto(productPhoto productPhoto) {
+		this.productPhoto = productPhoto;
 	}
 
 }

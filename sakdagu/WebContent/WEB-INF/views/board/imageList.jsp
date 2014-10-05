@@ -12,11 +12,15 @@
 <script src="../js/board.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
-    // 문서가 로드되면 호출된다. $(document).ready(function(){}); 과 동일
-    $(function() {
-    	$('.maintable table').mouseenter(function() { $(this).addClass('hover'); });
-    	$('.maintable table').mouseleave(function() { $(this).removeClass('hover'); });
-    });
+	// 문서가 로드되면 호출된다. $(document).ready(function(){}); 과 동일
+	$(function() {
+		$('.maintable table').mouseenter(function() {
+			$(this).addClass('hover');
+		});
+		$('.maintable table').mouseleave(function() {
+			$(this).removeClass('hover');
+		});
+	});
 </script>
 </head>
 <body>
@@ -26,16 +30,15 @@
 		</div>
 		<div class="tableRow">
 			<div class="boardpage">
-			
-			<table id="listtableHead" class="maintable">
+
+				<table id="listtableHead" class="maintable">
 					<thead>
 						<tr>
 							<th class="location" colspan="2"><a
 								href="<c:url value="/board/list?category=${param.category}"/>">
 									${param.category}</a>&gt;<a
 								href="<c:url value="/board/list?category=${param.category}"/>">
-											전체
-							</a> <c:forEach items="${subCategoryList}" var="subCategory">
+									전체 </a> <c:forEach items="${subCategoryList}" var="subCategory">
 									<a
 										href="<c:url value="/board/list?category=${param.category}&subCategory=${subCategory}"/>">
 										<c:choose>
@@ -52,8 +55,8 @@
 						</tr>
 					</thead>
 				</table>
-					
-					
+
+
 				<table id="listtable" class="maintable">
 					<tbody>
 
@@ -75,12 +78,12 @@
 													<td><a
 														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">
 															<em class="image"><img
-																src="<c:url value="/images/${board.photoDir}"/>">
-														</em> <br> <%-- <td class="num">${board.num}</td> --%> <br><br><em
-															class="title">${board.title} </em> 
-															
-													</a><br> <em class="category"><a
+																src="<c:url value="/board/img?boardNum=${board.num}"/>">
+														</em> <br> <%-- <td class="num">${board.num}</td> --%> <br>
+														<br>
+														<em class="title">${board.title} </em>
 
+													</a><br> <em class="category"><a
 															href="<c:url value="/board/list?category=${board.category}"/>">
 																${board.category}</a> <c:if
 																test="${not empty board.subCategory}">

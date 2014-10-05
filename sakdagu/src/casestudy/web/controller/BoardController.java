@@ -3,8 +3,6 @@ package casestudy.web.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,11 +23,15 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import casestudy.business.domain.Board;
 import casestudy.business.domain.Member;
+import casestudy.business.domain.Product;
+import casestudy.business.domain.productOption;
 import casestudy.business.domain.productPhoto;
 import casestudy.business.service.BoardService;
 import casestudy.business.service.BoardServiceImpl;
 import casestudy.business.service.DataNotFoundException;
-import casestudy.dataaccess.ImageDao;
+import casestudy.business.service.ProductService;
+import casestudy.business.service.ProductServiceImpl;
+import casestudy.dataaccess.photoDao;
 import casestudy.util.PageHandler;
 
 import com.oreilly.servlet.MultipartRequest;
@@ -56,6 +58,8 @@ public class BoardController extends HttpServlet {
 				selectBoardList(request, response);
 			} else if (action.equals("/read")) {
 				readBoard(request, response);
+			} else if (action.equals("/img")) {
+				viewImage(request, response);
 			} else if (action.equals("/writeForm")) {
 				writeBoardForm(request, response);
 			} else if (action.equals("/write")) {
@@ -194,9 +198,11 @@ public class BoardController extends HttpServlet {
 		// 2. BoardService 객체로부터 해당 글 번호의 게시글을 구해온다.
 		BoardService service = new BoardServiceImpl();
 		Board board = service.readBoard(num);
-
+		ProductService service2 = new ProductServiceImpl();
+		Product products[] = service2.findProduct(num);
 		// 3.1 request scope 속성(board)에 게시글을 저장한다.
 		request.setAttribute("board", board);
+		request.setAttribute("products", products);
 		request.setAttribute("currentPageNumber", currentPageNumber);
 		// 3.2 request scope 속성으로 searchType, searchText를 저장한다.
 		// request.setAttribute("searchType", searchType);
@@ -227,42 +233,43 @@ public class BoardController extends HttpServlet {
 	/*
 	 * 게시글을 등록하는 요청을 처리한다.
 	 */
-	private void writeBoard(HttpServletRequest request_source,
-			HttpServletResponse response) throws ServletException, IOException,
-			DataNotFoundException {
-
-		String upPath = getServletContext().getRealPath("/images");
-		int mb = 10;
-		MultipartRequest request = new MultipartRequest(request_source, upPath,
-				mb * 1024 * 1024, "utf-8");
-
-		// 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
-		String writer = request.getParameter("writer");
-		String title = request.getParameter("title");
-		String photoDir = request.getFilesystemName("photoDir");
-		String contents = request.getParameter("contents");
-
-		String category = request.getParameter("category");
-		String subCategory = request.getParameter("subCategory");
-
-		String ip = request_source.getRemoteAddr();
-		System.err.println(ip);
-		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
-		Board board = new Board(writer, title, contents, ip, category,
-				subCategory, photoDir);
-
-		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
-		BoardService service = new BoardServiceImpl();
-		service.writeBoard(board);
-
-		request_source.setAttribute("category", category);
-		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
-
-		RequestDispatcher dispatcher = request_source
-				.getRequestDispatcher("list");
-		dispatcher.forward(request_source, response);
-
-	}
+	//
+	// private void writeBoard(HttpServletRequest request_source,
+	// HttpServletResponse response) throws ServletException, IOException,
+	// DataNotFoundException {
+	//
+	// String upPath = getServletContext().getRealPath("/images");
+	// int mb = 10;
+	// MultipartRequest request = new MultipartRequest(request_source, upPath,
+	// mb * 1024 * 1024, "utf-8");
+	//
+	// // 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
+	// String writer = request.getParameter("writer");
+	// String title = request.getParameter("title");
+	// String photoDir = request.getFilesystemName("photoDir");
+	// String contents = request.getParameter("contents");
+	//
+	// String category = request.getParameter("category");
+	// String subCategory = request.getParameter("subCategory");
+	//
+	// String ip = request_source.getRemoteAddr();
+	// System.err.println(ip);
+	// // 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
+	// Board board = new Board(writer, title, contents, ip, category,
+	// subCategory);
+	//
+	// // 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+	// BoardService service = new BoardServiceImpl();
+	// service.writeBoard(board);
+	//
+	// request_source.setAttribute("category", category);
+	// // 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
+	//
+	// RequestDispatcher dispatcher = request_source
+	// .getRequestDispatcher("list");
+	// dispatcher.forward(request_source, response);
+	//
+	// }
 
 	private void saveImage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -270,7 +277,7 @@ public class BoardController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		System.out.println("세이브");
-		List<productPhoto> imageList = new ArrayList<productPhoto>();
+
 		// 디스크 기반의 FileItem factory 생성
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// factory 제약 설정
@@ -289,7 +296,6 @@ public class BoardController extends HttpServlet {
 		// 총 request size 제약 설정
 		upload.setSizeMax(1024 * 1024 * 5); // 최대 size (5M까지 가능)
 		Map<String, Object> args = new HashMap<String, Object>();
-		int optNo = 0;
 
 		// 요청 파싱
 		try {
@@ -298,6 +304,12 @@ public class BoardController extends HttpServlet {
 			// 업로드된 items 처리
 			Iterator<FileItem> iter = items.iterator();
 
+			int proNo = 0;
+			int optNo = 0;
+			int[] productID = new int[10];
+			String[] productTitle = new String[10];
+			productOption[][] options = new productOption[10][10];
+			productPhoto mainphoto = null;
 			while (iter.hasNext()) {
 				FileItem item = iter.next();
 				// 일반 폼 필드 처리 (<input type="file">이 아닌 경우)
@@ -305,72 +317,121 @@ public class BoardController extends HttpServlet {
 					String name = item.getFieldName(); // 필드 이름
 					String value = item.getString("utf-8"); // 필드 값
 					args.put(name, value);
-					if (value.equals("")) {
-
-					} else if (value.equals("")) {
+					if (name.equals("productID")) {
+						proNo++;
+						optNo = 0;
+						productID[proNo - 1] = Integer.parseInt(value);
+						options[proNo - 1] = new productOption[10];
+					} else if (name.equals("productTitle")) {
+						productTitle[proNo - 1] = value;
+					} else if (name.equals("optionTitle")) {
+						optNo++;
 					}
-					out.println("폼 파라미터 : " + name + " = " + value + "<br>");
+
+					out.println("폼 파라미터 : " + name + " = " + value + " proNo="
+							+ proNo + " optNo=" + optNo + "<br>");
 					// 파일 업로드 처리 (<input type="file">인 경우)
 				} else {
-					String name = item.getFieldName(); // 필드 이름
+
 					String fileName = item.getName(); // 경로가 포함된 파일명
 					String contentType = item.getContentType(); // 컨텐트 유형
 					// long sizeInBytes = item.getSize(); // 파일 크기
 					byte[] contents = item.get(); // 파일 내용을 byte 배열에 담기
-
+					out.print(contents);
 					int index = fileName.lastIndexOf("\\"); // 디렉터리 구분자 위치를 통해
 					if (index == -1) {
 						index = fileName.lastIndexOf("/");
 					}
 					fileName = fileName.substring(index + 1); // 파일명만 추출
 
-					// Image 정보를 데이터베이스에 저장
-					if (name.equals("optionPhoto")) {
+					int optionID;
+					try {
+						optionID = Integer.parseInt((String) args
+								.get("optionID"));
+						int price1 = Integer.parseInt((String) args
+								.get("optionPrice1"));
+						int price2 = Integer.parseInt((String) args
+								.get("optionPrice2"));
+						int quantity = Integer.parseInt((String) args
+								.get("optionQuantity"));
+						String installment = (String) args.get("installment");
 
-						productPhoto image = new productPhoto(optNo, fileName,
+						String optionTitle = (String) args.get("optionTitle");
+						productPhoto photo = new productPhoto(
+								productID[proNo - 1], optionID, fileName,
 								contentType, contents);
-						out.println("사진 " + name + " <img src='"
-								+ image.getContents() + "'>");
-
-						new ImageDao().insertImage(image);
-					} else {
-						productPhoto image = new productPhoto(0, fileName,
+						options[proNo - 1][optNo - 1] = new productOption(
+								productID[proNo - 1], optionID, optionTitle,
+								price1, price2, quantity, installment, photo);
+					} catch (NumberFormatException nfe) {
+						optionID = 0;
+						mainphoto = new productPhoto(0, optionID, fileName,
 								contentType, contents);
-						new ImageDao().insertImage(image);
 					}
+
 				}
 
 			}
+
 			String writer = (String) args.get("writer");
 			String title = (String) args.get("title");
-
 			String contents = (String) args.get("contents");
-
 			String category = (String) args.get("category");
 			String subCategory = (String) args.get("subCategory");
+
 			String ip = request.getRemoteAddr();
 			System.err.println(ip);
 
 			// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
 			Board board = new Board(writer, title, contents, ip, category,
-					subCategory, null);
+					subCategory, mainphoto);
 
 			// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
 			BoardService service = new BoardServiceImpl();
-			service.writeBoard(board);
 
+			int num = service.writeBoard(board);
+			photoDao photoDataAccess = new photoDao();
+			photoDataAccess.insertPhoto(num, board.getProductPhoto());
+			out.println("글번호 : " + num + "<hr>");
+			out.println("상품번호 : " + proNo + "<hr>");
+
+			ProductService service2 = new ProductServiceImpl();
+
+			for (int i = 0; i < proNo; i++) {
+				Product product = new Product(num, productID[i],
+						productTitle[i], options[i]);
+				service2.registerProduct(num, product);
+			}
+
+			/*
+			 * for (productOption option : options[i]) { productPhoto image =
+			 * option.getPhoto(); out.println("사진 " + image.getImageName() +
+			 * " <img src='img?targetId=" + num + "&imageId=" +
+			 * image.getImageId() + "'><br>"); }
+			 */
+			request.setAttribute("num", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// request.getRequestDispatcher("list").forward(request, response);
+		request.getRequestDispatcher("read?num=" + request.getAttribute("num"))
+				.forward(request, response);
 	}
 
 	private void viewImage(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// Image 정보를 데이터베이스에서 조회
-		productPhoto image = new ImageDao().selectImage(Integer
-				.parseInt(request.getParameter("imageId")));
+		photoDao service = new photoDao();
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		String productID = request.getParameter("productID");
+		String optionID = request.getParameter("optionID");
+		productPhoto image;
+		if (productID == null) {
+			image = service.selectImage(boardNum);
+		} else {
+			image = service.selectImage(boardNum, Integer.parseInt(productID),
+					Integer.parseInt(optionID));
+		}
 		byte[] photo = image.getContents();
 
 		// image 바이너리를 응답
@@ -381,42 +442,42 @@ public class BoardController extends HttpServlet {
 		os.close();
 	}
 
-	private void writeBoard_cos(HttpServletRequest request_source,
-			HttpServletResponse response) throws ServletException, IOException,
-			DataNotFoundException {
-
-		String upPath = getServletContext().getRealPath("/images");
-		int mb = 10;
-
-		MultipartRequest request = new MultipartRequest(request_source, upPath,
-				mb * 1024 * 1024, "utf-8");
-
-		// 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
-		String writer = request.getParameter("writer");
-		String title = request.getParameter("title");
-		String photoDir = request.getFilesystemName("photoDir");
-		String contents = request.getParameter("contents");
-
-		String category = request.getParameter("category");
-		String subCategory = request.getParameter("subCategory");
-
-		String ip = request_source.getRemoteAddr();
-		System.err.println(ip);
-		// 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
-		Board board = new Board(writer, title, contents, ip, category,
-				subCategory, photoDir);
-
-		// 3. BoardService 객체를 통해 해당 게시글을 등록한다.
-		BoardService service = new BoardServiceImpl();
-		service.writeBoard(board);
-
-		request_source.setAttribute("category", category);
-		// 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
-
-		RequestDispatcher dispatcher = request_source
-				.getRequestDispatcher("list");
-		dispatcher.forward(request_source, response);
-	}
+	// private void writeBoard_cos(HttpServletRequest request_source,
+	// HttpServletResponse response) throws ServletException, IOException,
+	// DataNotFoundException {
+	//
+	// String upPath = getServletContext().getRealPath("/images");
+	// int mb = 10;
+	//
+	// MultipartRequest request = new MultipartRequest(request_source, upPath,
+	// mb * 1024 * 1024, "utf-8");
+	//
+	// // 1. 요청 파라미터로 부터 작성자(writer), 제목(title), 내용(contents)를 구한다.
+	// String writer = request.getParameter("writer");
+	// String title = request.getParameter("title");
+	// String photoDir = request.getFilesystemName("photoDir");
+	// String contents = request.getParameter("contents");
+	//
+	// String category = request.getParameter("category");
+	// String subCategory = request.getParameter("subCategory");
+	//
+	// String ip = request_source.getRemoteAddr();
+	// System.err.println(ip);
+	// // 2. 구해 온 요청 파라미터 값와 ip 값을 지닌 Board 객체를 생성한다.
+	// Board board = new Board(writer, title, contents, ip, category,
+	// subCategory);
+	//
+	// // 3. BoardService 객체를 통해 해당 게시글을 등록한다.
+	// BoardService service = new BoardServiceImpl();
+	// service.writeBoard(board);
+	//
+	// request_source.setAttribute("category", category);
+	// // 4. RequestDispatcher 객체를 통해 목록 보기(list)로 요청을 전달한다.
+	//
+	// RequestDispatcher dispatcher = request_source
+	// .getRequestDispatcher("list");
+	// dispatcher.forward(request_source, response);
+	// }
 
 	/*
 	 * 게시글 수정을 위해 적절한 내용이 채워진 폼을 응답한다.

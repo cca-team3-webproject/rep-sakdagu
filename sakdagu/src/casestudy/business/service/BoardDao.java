@@ -64,6 +64,7 @@ public interface BoardDao {
 	 * 
 	 * @param board
 	 *            등록할 게시글 정보를 담고 있는 Board 객체
+	 * @return 
 	 */
 	public void insertBoard(Board board);
 
@@ -95,5 +96,7 @@ public interface BoardDao {
 	 * 
 	 */
 	public List<String> getSubCategoryList(String category);
+
+	public int getThisNum();
 
 }

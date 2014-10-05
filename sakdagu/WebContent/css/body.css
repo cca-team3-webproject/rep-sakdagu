@@ -19,11 +19,13 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
  
 #tableRowThin{border-bottom: blue 30px;}
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
-.maintable table.hover{border-color: blue; border-width: 5px;}
+.maintable table.hover{border-color: blue;}
+
 
 #listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: 'Dotum','돋움';}
 
 #listtable .image img{width: 300px; height: 300px; text-align: center;}
+#listtable .images img{text-align: center;}
 #listtable .num { width: 100px; text-align: center; }
 #listtable .title { width: 100px; text-align: center; text-decoration: underline;}
 #listtable .writer { width: 100px; text-align: center; }
@@ -33,12 +35,14 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 #listtable .subCategory { width: 100px; text-align: left; font-family: font-family: 'Dotum','돋움';}
 #searchinput { width: 200px; }
 
-#readtable th { width: 75px; }
-#readtable td.title { font-weight: bold; padding-left: 10px;}
-#readtable td.writer { width: 127px; text-align: center; }
-#readtable td.readcount { width: 90px; text-align: center; }		
-#readtable td.regdate { width: 127px; text-align: center; }
+#readtable th {text-align: center; }
+#readtable th.title { font-weight: bolder;  }
+#readtable td.writer { height: 10px;}
+#readtable td.readcount { width: 90px;   }		
+#readtable td.regdate { width: 127px;   }
 #readtable td.contents { width: 578px; height: 250px; padding: 20px; line-height: 1.5em; vertical-align: top;}
+#readtable .image{text-align: center;}
+#readtable .image img{width: 490px; height: 490px; text-align: center;}
 
 #writetable .titleinput, #updatetable .titleinput, #replytable .titleinput { width: 496px; }
 #writetable .writerinput, #updatetable .writerinput, #replytable .writerinput { width: 150px; }

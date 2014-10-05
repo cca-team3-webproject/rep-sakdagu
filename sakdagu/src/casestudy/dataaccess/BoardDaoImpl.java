@@ -77,8 +77,8 @@ public class BoardDaoImpl implements BoardDao {
 		}
 
 		String query = "SELECT * FROM "
-				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category, photo_dir FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category, photo_dir FROM sakdagu_board "
+				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
+				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM sakdagu_board "
 				+ whereSQL
 				+ " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
 
@@ -127,7 +127,7 @@ public class BoardDaoImpl implements BoardDao {
 				Board = new Board(rs.getInt("num"), rs.getString("writer"),
 						title, rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("category"),
-						rs.getString("sub_category"), rs.getString("photo_dir"));
+						rs.getString("sub_category"));
 				temp.add(Board);
 			}
 
@@ -272,7 +272,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Board selectBoard(int num) {
 		String query = "SELECT num,writer,title,contents,ip,read_count,reg_date,mod_date "
-				+ ", master_num, reply_order, reply_step, photo_dir ,category, sub_category "
+				+ ", master_num, reply_order, reply_step, category, sub_category "
 				+ "FROM sakdagu_board WHERE num=?";
 		System.out.println("BoardDAOImpl selectBoard() query: " + query);
 
@@ -294,7 +294,7 @@ public class BoardDaoImpl implements BoardDao {
 						rs.getString("ip"), rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("mod_date"),
 						rs.getInt("master_num"), rs.getInt("reply_order"),
-						rs.getInt("reply_step"), rs.getString("photo_dir"),
+						rs.getInt("reply_step"),
 						rs.getString("category"), rs.getString("sub_category"));
 			}
 
@@ -418,7 +418,7 @@ public class BoardDaoImpl implements BoardDao {
 		System.out.println(board);
 		String query = "INSERT INTO sakdagu_board "
 				+ "(num, writer, title, contents, ip, read_count, reg_date, "
-				+ "mod_date, master_num, category, sub_category, photo_dir) VALUES (sakdagu_board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, sakdagu_board_num_seq.CURRVAL, ?, ?, ?)";
+				+ "mod_date, master_num, category, sub_category) VALUES (sakdagu_board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, sakdagu_board_num_seq.CURRVAL, ?, ?)";
 
 		System.out.println("BoardDAOImpl insertBoard() query: " + query);
 
@@ -433,7 +433,6 @@ public class BoardDaoImpl implements BoardDao {
 			stmt.setString(4, board.getIp());
 			stmt.setString(5, board.getCategory());
 			stmt.setString(6, board.getSubCategory());
-			stmt.setString(7, board.getPhotoDir());
 			stmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -457,6 +456,42 @@ public class BoardDaoImpl implements BoardDao {
 				ex.printStackTrace(System.err);
 			}
 		}
+	}
+
+	public int getThisNum() {
+		String query = "select num from sakdagu_board ORDER by num desc";
+		int num = 0;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+			if (rs.next()) {
+				num = rs.getInt("num");
+			}
+		} catch (SQLException se) {
+			System.err.println("BoardDAOImpl insertBoard() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occurred. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+		}
+		return num;
 	}
 
 	@Override
