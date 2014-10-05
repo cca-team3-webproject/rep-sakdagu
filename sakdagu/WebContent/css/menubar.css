@@ -133,8 +133,9 @@
   *margin-bottom: -1px;
 }
 #cssmenu .has-sub ul li a {
-  background: #0fa1e0;
-  border-bottom: 1px dotted #31b7f1;
+
+  background: #141414;
+  border-bottom: 1px dotted #F6F6F6;
   font-size: 11px;
   filter: none;
   display: block;
@@ -143,10 +144,10 @@
   color: #ffffff;
 }
 #cssmenu .has-sub ul li:hover a {
-  background: #0c7fb0;
+  background: #5D5D5D;
 }
 #cssmenu ul ul li:hover > a {
-  color: #ffffff;
+  color: #141414;
 }
 #cssmenu .has-sub .has-sub:hover > ul {
   display: block;
