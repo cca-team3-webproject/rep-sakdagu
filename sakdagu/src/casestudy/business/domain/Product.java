@@ -17,58 +17,58 @@ package casestudy.business.domain;
  * 
  */
 public class Product {
-	private String boardNum;
-	private String productID;
-	private String productName;
+	private int boardNum;
+	private int productID;
+	private String productTitle;
+	private productPhoto photo;
 	private productOption[] option;
 
-	public Product(String boardNum, String productID, String productName,
+	public Product(int boardNum, int productID, String productTitle,
 			productOption[] option) {
 		super();
 		this.boardNum = boardNum;
 		this.productID = productID;
-		this.productName = productName;
+		this.productTitle = productTitle;
 		this.setOption(option);
 	}
 
 	public Product() {
-
 	}
 
-	public Product(String boardNum, String productID, String productName) {
+	public Product(int boardNum, int productID, String productTitle) {
 		this.boardNum = boardNum;
 		this.productID = productID;
-		this.productName = productName;
+		this.productTitle = productTitle;
 	}
 
-	public String getBoardNum() {
+	public int getBoardNum() {
 		return boardNum;
 	}
 
-	public void setBoardNum(String boardNum) {
+	public void setBoardNum(int boardNum) {
 		this.boardNum = boardNum;
 	}
 
-	public String getProductID() {
+	public int getProductID() {
 		return productID;
 	}
 
-	public void setProductID(String productID) {
+	public void setProductID(int productID) {
 		this.productID = productID;
 	}
 
-	public String getProductName() {
-		return productName;
+	public String getProductTitle() {
+		return productTitle;
 	}
 
-	public void setProductName(String productName) {
-		this.productName = productName;
+	public void setProductTitle(String productTitle) {
+		this.productTitle = productTitle;
 	}
 
 	@Override
 	public String toString() {
 		return "Product [boardNum=" + boardNum + ", productID=" + productID
-				+ ", productName=" + productName + "]";
+				+ ", productTitle=" + productTitle + "]";
 	}
 
 	public productOption[] getOption() {
@@ -77,6 +77,14 @@ public class Product {
 
 	public void setOption(productOption[] option) {
 		this.option = option;
+	}
+
+	public productPhoto getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(productPhoto photo) {
+		this.photo = photo;
 	}
 
 }

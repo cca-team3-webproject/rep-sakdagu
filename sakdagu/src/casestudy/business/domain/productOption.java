@@ -1,9 +1,9 @@
 package casestudy.business.domain;
 
 public class productOption {
-	private String productID;
-	private String optionID;
-	private String optionName;
+	private int productID;
+	private int optionID;
+	private String optionTitle;
 	private int price1;// 시중가
 	private int price2;// 판매가
 	private int quantity;
@@ -13,28 +13,28 @@ public class productOption {
 	public productOption() {
 	}
 
-	public String getProductID() {
+	public int getProductID() {
 		return productID;
 	}
 
-	public void setProductID(String productID) {
+	public void setProductID(int productID) {
 		this.productID = productID;
 	}
 
-	public String getOptionID() {
+	public int getOptionID() {
 		return optionID;
 	}
 
-	public void setOptionID(String optionID) {
+	public void setOptionID(int optionID) {
 		this.optionID = optionID;
 	}
 
-	public String getOptionName() {
-		return optionName;
+	public String getOptionTitle() {
+		return optionTitle;
 	}
 
-	public void setOptionName(String optionName) {
-		this.optionName = optionName;
+	public void setOptionTitle(String optionTitle) {
+		this.optionTitle = optionTitle;
 	}
 
 	public int getPrice1() {
@@ -77,13 +77,13 @@ public class productOption {
 		Photo = photo;
 	}
 
-	public productOption(String productID, String optionID, String optionName,
+	public productOption(int productID, int optionID, String optionTitle,
 			int price1, int price2, int quantity, String installment,
 			productPhoto photo) {
 		super();
 		this.productID = productID;
 		this.optionID = optionID;
-		this.optionName = optionName;
+		this.optionTitle = optionTitle;
 		this.price1 = price1;
 		this.price2 = price2;
 		this.quantity = quantity;
@@ -91,12 +91,35 @@ public class productOption {
 		Photo = photo;
 	}
 
+	public productOption(int productID, int optionID, String optionTitle,
+			int price1, int price2, int quantity, String installment) {
+		super();
+		this.productID = productID;
+		this.optionID = optionID;
+		this.optionTitle = optionTitle;
+		this.price1 = price1;
+		this.price2 = price2;
+		this.quantity = quantity;
+		this.installment = installment;
+	}
+	
+	public productOption(int productID, int optionID, String optionTitle) {
+		this.productID = productID;
+		this.optionID = optionID;
+		this.optionTitle = optionTitle;
+	}
+
+	public productOption(int optionID, String optionTitle) {
+		this.optionID = optionID;
+		this.optionTitle = optionTitle;
+	}
+
 	@Override
 	public String toString() {
 		return "productOption [productID=" + productID + ", optionID="
-				+ optionID + ", optionName=" + optionName + ", price1="
+				+ optionID + ", optionTitle=" + optionTitle + ", price1="
 				+ price1 + ", price2=" + price2 + ", quantity=" + quantity
 				+ ", installment=" + installment + ", Photo=" + Photo + "]";
 	}
-	
+ 
 }
