@@ -43,33 +43,8 @@
 					type="submit" value="검색"></td>
 			</tr>
 		</table>
-	</form>
-	<br>
-	<br>
+	</form><br><br>
 
-<table id="sidebartable">
-		<tr>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=베스트"/>"><button
-						class="categoryButton">베스트</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=여성의류"/>"><button
-						class="categoryButton">여성의류</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=남성의류"/>"><button
-						class="categoryButton">남성의류</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=패션잡화"/>"><button
-						class="categoryButton">패션잡화</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=뷰티"/>"><button
-						class="categoryButton">뷰티</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=스포츠패션"/>"><button
-						class="categoryButton">스포츠패션</button></a></td>
-			<td class="category"><a
-				href="<c:url value="/board/list?category=해외배송"/>"><button
-						class="categoryButton">해외배송</button></a></td>
-		</tr>
-	</table>
+	<p><c:import url="/menubar.jsp" /></p><br>
+
 </div>
