@@ -2,7 +2,7 @@ package casestudy.util;
 
 public class PageHandler {
 	// 한 페이지에 보여줄 게시글 개수
-	private static final int PAGE_LIST_SIZE = 5;
+	private static final int PAGE_LIST_SIZE = 6;
 	// 페이지 선택 바에 보여줄 페이지 개수
 	private static final int PAGE_GROUP_SIZE = 3;
 
