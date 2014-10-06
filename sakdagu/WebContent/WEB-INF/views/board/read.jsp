@@ -43,13 +43,13 @@ function selectQuantity(obj) {
 		<div class="tableRow">
 			<div class="boardpage">
 				<table id="readtable" class="maintable">
-					<caption class="location">
+<%-- 					<caption class="location">
 						<a href="<c:url value="/board/list?category=${board.category}"/>">
 							${board.category}</a> &gt;<br> <a
 							href="<c:url value="/board/list?category=${board.category}&subCategory=${board.subCategory}"/>">
 							<b>${board.subCategory}</b>
 						</a>
-					</caption>
+					</caption> --%>
 					<thead>
 						<tr>
 							<td class="contents" colspan="4">${board.contents}</td>
