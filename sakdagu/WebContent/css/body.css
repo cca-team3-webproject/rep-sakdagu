@@ -9,10 +9,13 @@ body{margin: 0px auto;}
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
+
 .location b{text-decoration: underline;}
 .boardpage { /* width: 800px; */ }
 .maintable { margin-top: 15px; margin-bottom: 8px;}
 .buttonbar { text-align: right; }
+
+
 
 .maintable { caption-side: top; border-collapse: collapse; width: 100%; text-align: left;}
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
