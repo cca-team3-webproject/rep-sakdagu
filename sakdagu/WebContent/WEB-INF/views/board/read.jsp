@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<c:url value="/js/product.js"/>"></script>
 <script type="text/javascript">
 function selectProduct(obj) {
@@ -32,10 +33,8 @@ function selectQuantity(obj) {
 	var radios = obj.value;
 	location.href = '<c:url value="/board/read?num=' + ${param.num}+'&productID=' + ${param.productID}+'&optionID=' + ${param.optionID}+'&quantity=' + radios + '"/>';
 };
-
 </script>
 
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
 	    // 문서 객체 추가 함수
 	    var moveBag = function () {
@@ -97,8 +96,6 @@ function selectQuantity(obj) {
 					<tfoot>
 						<tr>
 							<td>
-
-
 								<div class="buttonbar">
 									<input type="button" value="목록"
 										onclick="goUrl('list?pageNumber=${currentPageNumber}&searchType=${param.searchType}&searchText=${param.searchText}');">

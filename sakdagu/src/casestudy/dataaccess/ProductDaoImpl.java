@@ -368,8 +368,7 @@ public class ProductDaoImpl implements ProductDao {
 			while (rs.next()) {
 				productOption option = new productOption(product_id,
 						rs.getInt("option_id"), rs.getString("option_title"),
-						rs.getInt("price1"),
-						rs.getInt("price2"),
+						rs.getInt("price1"), rs.getInt("price2"),
 						rs.getInt("quantity"), rs.getString("installment"));
 				options.add(option);
 			}
