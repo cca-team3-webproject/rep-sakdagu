@@ -86,7 +86,16 @@ public class BoardController extends HttpServlet {
 	 */
 	private void selectBoardList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		String category = request.getParameter("category");
+		if (category == null || category.length() == 0) {
+			category = (String) request.getAttribute("category");
+			if (category == null || category.length() == 0) {
+				category = "베스트";
+			}
+		}
+		String[] subCategoryList = subCategoryList(category);
 
+		request.setAttribute("subCategoryList", subCategoryList);
 		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
 		HttpSession session = request.getSession(false);
 		Member member = null;
@@ -94,14 +103,14 @@ public class BoardController extends HttpServlet {
 			member = ((Member) session.getAttribute("loginMember"));
 		}
 		RequestDispatcher dispatcher;
-		// if (member != null && member.getMemberID().equals("duke")) {
-		// dispatcher = request
-		// .getRequestDispatcher("/WEB-INF/views/board/list.jsp");
-		// } else {
-		dispatcher = request
-				.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
+		if (member != null && member.getMemberID().equals("duke")) {
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+		} else {
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
 
-		// }
+		}
 		dispatcher.forward(request, response);
 	}
 
@@ -403,7 +412,7 @@ public class BoardController extends HttpServlet {
 
 			int num = service.writeBoard(board);
 			photoDao photoDataAccess = new photoDao();
-			photoDataAccess.insertPhoto(num, board.getProductPhoto());
+			photoDataAccess.insertPhoto(num, mainphoto);
 			out.println("글번호 : " + num + "<hr>");
 			out.println("상품번호 : " + proNo + "<hr>");
 
@@ -444,14 +453,16 @@ public class BoardController extends HttpServlet {
 			image = service.selectImage(boardNum, Integer.parseInt(productID),
 					Integer.parseInt(optionID));
 		}
-		byte[] photo = image.getContents();
+		if (image != null) {
+			byte[] photo = image.getContents();
 
-		// image 바이너리를 응답
-		response.setContentType(image.getContentType());
-		response.setContentLength(photo.length);
-		ServletOutputStream os = response.getOutputStream();
-		os.write(photo);
-		os.close();
+			// image 바이너리를 응답
+			response.setContentType(image.getContentType());
+			response.setContentLength(photo.length);
+			ServletOutputStream os = response.getOutputStream();
+			os.write(photo);
+			os.close();
+		}
 	}
 
 	// private void writeBoard_cos(HttpServletRequest request_source,
