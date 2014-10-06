@@ -28,7 +28,7 @@ public class MemberServlet extends HttpServlet {
 	 */
 	protected void processRequest(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		//request.setCharacterEncoding("UTF-8");
+		// request.setCharacterEncoding("UTF-8");
 
 		// 1.1. action 요청파라미터 값을 확인한다.
 		String action = request.getParameter("action");
@@ -58,37 +58,39 @@ public class MemberServlet extends HttpServlet {
 			throw new ServletException(dde);
 		}
 	}
-	
+
 	public String writeForm() {
 		return null;
 	}
-	
-	
-	private void removeMember(HttpServletRequest request, HttpServletResponse response) throws IOException, DataNotFoundException, ServletException {
-		//1.1 session scope 속성에서 회원정보를 찾아 
+
+	private void removeMember(HttpServletRequest request,
+			HttpServletResponse response) throws IOException,
+			DataNotFoundException, ServletException {
+		// 1.1 session scope 속성에서 회원정보를 찾아
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN, "로그인이 필요합니다.");
 			return;
 		}
-		
+
 		Member member = (Member) session.getAttribute("loginMember");
 		if (member == null) {
 			response.sendError(HttpServletResponse.SC_UNAUTHORIZED,
 					"로그인이 필요합니다.");
 			return;
 		}
-		
-		//1.2 비즈니스 로직을 수행할 memverService 객체를 생성하여
+
+		// 1.2 비즈니스 로직을 수행할 memverService 객체를 생성하여
 		MemberService MemberService = new MemberServiceImpl();
-		
+
 		MemberService.removeMember(member);
-		
-		//1.4
+
+		// 1.4
 		session.removeAttribute("loginMember");
 		session.invalidate();
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -110,7 +112,8 @@ public class MemberServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");
-		String zipcode = request.getParameter("zipcode");
+		String zipcode1 = request.getParameter("zipcode1");
+		String zipcode2 = request.getParameter("zipcode2");
 		String address = request.getParameter("address");
 		int point = 0;
 
@@ -146,7 +149,7 @@ public class MemberServlet extends HttpServlet {
 		// 3.3. 새로운 회원을 등록하는 처리를 한다.
 		// 3.3.1. 적절한 데이터를 가진 Member 객체를 생성하여
 		Member member = new Member(memberID, password, name, email, tel,
-				zipcode, address, point);
+				zipcode1, zipcode2, address, point);
 		// 3.3.2. MemberService 객체에 위임하여 회원을 등록한다.
 		MemberService MemberService = new MemberServiceImpl();
 		MemberService.registerMember(member);
@@ -189,7 +192,8 @@ public class MemberServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");
-		String zipcode = request.getParameter("zipcode");
+		String zipcode1 = request.getParameter("zipcode1");
+		String zipcode2 = request.getParameter("zipcode2");
 		String address = request.getParameter("address");
 
 		// 4.2. 폼 데이터의 유효성을 검증하는 처리를 한다.
@@ -221,7 +225,7 @@ public class MemberServlet extends HttpServlet {
 		// 4.3. 새로운 회원을 등록하는 처리를 한다.
 		// 4.3.1. 적절한 데이터를 가진 Member 객체를 생성하여
 		Member member = new Member(memberID, password, name, email, tel,
-				zipcode, address);
+				zipcode1, zipcode2, address);
 		// 4.3.2. MemberService 객체에 위임하여 회원을 등록한다.
 		MemberService MemberService = new MemberServiceImpl();
 		MemberService.updateMember(member);
@@ -283,8 +287,8 @@ public class MemberServlet extends HttpServlet {
 		String memberID = request.getParameter("memberID");
 		String password = request.getParameter("password");
 		String url = request.getHeader("referer");
-		url=url.substring(url.indexOf("/board"));
-		System.out.println("url	"+url);
+		url = url.substring(url.indexOf("/board"));
+		System.out.println("url	" + url);
 		// 1.2. 비즈니스 로직을 수행할 MemberService 객체를 생성하여
 		MemberService memberService = new MemberServiceImpl();
 
@@ -298,8 +302,7 @@ public class MemberServlet extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("loginMember", member);
 
-			RequestDispatcher dispatcher = request
-					.getRequestDispatcher(url);
+			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
 
 		} else {

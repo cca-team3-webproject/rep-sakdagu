@@ -8,12 +8,12 @@ package casestudy.dataaccess;
 import java.sql.*;
 import java.util.ArrayList;
 
-
 import casestudy.business.domain.Member;
 import casestudy.business.service.MemberDao;
 
 import javax.naming.*;
 import javax.sql.*;
+
 /**
  * 회원 관련 데이터 액세스 처리를 JDBC API를 활용하여 구현한 클래스로 데이터베이스 접속과 Member 테이블을 사용하는 SQL 문의
  * 수행을 통해 관련 처리를 수행한다.
@@ -23,21 +23,22 @@ import javax.sql.*;
  */
 public class MemberDaoImpl implements MemberDao {
 	private DataSource dataSource;
+
 	/*
-	 * 1. JNDI API를 이용하여 네이밍 서비스에 등록(바인딩)된 DataSource를 검색한다
-	 * ("jdbc.sakdaguDB" 이란 논리적 이름으로 검색)
-	 * Driver 클래스(com.mysql.jdbc.Driver)를 Class의 forName 메서드를 사용하여 로딩한다.
+	 * 1. JNDI API를 이용하여 네이밍 서비스에 등록(바인딩)된 DataSource를 검색한다 ("jdbc.sakdaguDB" 이란
+	 * 논리적 이름으로 검색) Driver 클래스(com.mysql.jdbc.Driver)를 Class의 forName 메서드를 사용하여
+	 * 로딩한다.
 	 */
 	public MemberDaoImpl() {
 		try {
 			Context context = new InitialContext();
-			dataSource =(DataSource)context.lookup("java:comp/env/jdbc/sakdaguDB");
-			//Class.forName("oracle.jdbc.OracleDriver");
+			dataSource = (DataSource) context
+					.lookup("java:comp/env/jdbc/sakdaguDB");
+			// Class.forName("oracle.jdbc.OracleDriver");
 		} catch (NamingException ne) {
 			System.err.println("JNDI error occured.");
 			ne.printStackTrace(System.err);
-			throw new RuntimeException("JNDI error occured."
-					+ ne.getMessage());
+			throw new RuntimeException("JNDI error occured." + ne.getMessage());
 		}
 	}
 
@@ -62,11 +63,11 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public void insertMember(Member member) {
-		String query = "INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? )";
+		String query = "INSERT INTO sakdagu_Member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 		/*
 		 * "INSERT INTO Member VALUES ('" + member.getMemberID() + "', '" +
 		 * member.getPassword() + "', '" + member.getName() + "', '" +
-		 * member.getEmail() + "', '" + member.getTel() + "', '" +	
+		 * member.getEmail() + "', '" + member.getTel() + "', '" +
 		 * member.getZipcode() + "', '" + member.getAddress() + "', '" +
 		 * member.getPoint() + "', '" + new
 		 * Date(System.currentTimeMillis()).toString() + "' )";
@@ -84,10 +85,11 @@ public class MemberDaoImpl implements MemberDao {
 			stmt.setString(3, member.getName());
 			stmt.setString(4, member.getEmail());
 			stmt.setString(5, member.getTel());
-			stmt.setString(6, member.getZipcode());
-			stmt.setString(7, member.getAddress());
-			stmt.setInt(8, member.getPoint());
-			stmt.setString(9, new Date(System.currentTimeMillis()).toString());
+			stmt.setString(6, member.getZipcode1());
+			stmt.setString(7, member.getZipcode2());
+			stmt.setString(8, member.getAddress());
+			stmt.setInt(9, member.getPoint());
+			stmt.setString(10, new Date(System.currentTimeMillis()).toString());
 			stmt.execute();
 
 		} catch (SQLException se) {
@@ -128,14 +130,14 @@ public class MemberDaoImpl implements MemberDao {
 	public Member selectMember(String memberID) {
 		Member member = null;
 
-		String query = "SELECT * FROM Member where MEMBERID = ?";
+		String query = "SELECT * FROM sakdagu_Member where MEMBERID = ?";
 
 		System.out.println("MemberDAOImpl selectMember() query: " + query);
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		
+
 		try {
 			connection = obtainConnection();
 			stmt = connection.prepareStatement(query);
@@ -146,8 +148,9 @@ public class MemberDaoImpl implements MemberDao {
 				member = new Member(rs.getString("MemberID"),
 						rs.getString("Password"), rs.getString("Name"),
 						rs.getString("Email"), rs.getString("Tel"),
-						rs.getString("Zipcode"), rs.getString("Address"),
-						rs.getInt("Point"), rs.getDate("MemberDate"));
+						rs.getString("Zipcode1"), rs.getString("Zipcode2"),
+						rs.getString("Address"), rs.getInt("Point"),
+						rs.getDate("MemberDate"));
 			}
 
 		} catch (SQLException se) {
@@ -195,15 +198,16 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public void updateMember(Member member) {
-		String query = "UPDATE Member SET Password=? , Name=?, Email=?, Tel=?, Zipcode=?, Address=?"
+		String query = "UPDATE sakdagu_Member SET Password=? , Name=?, Email=?, Tel=?, Zipcode1=?, Zipcode2=?, Address=?"
 				+ " WHERE MemberID=?";
-/*		String query = "UPDATE Member SET Password='" + member.getPassword()
-				+ "', " + "Name='" + member.getName() + "', Email='"
-				+ member.getEmail() + "', " + "Tel='" + member.getTel()
-				+ "', Zipcode='" + member.getZipcode() + "', " + "Address='"
-				+ member.getAddress() + "'" + " WHERE MemberID='"
-				+ member.getMemberID() + "'";
-*/		System.out.println("MemberDAOImpl updateMember() query: " + query);
+		/*
+		 * String query = "UPDATE Member SET Password='" + member.getPassword()
+		 * + "', " + "Name='" + member.getName() + "', Email='" +
+		 * member.getEmail() + "', " + "Tel='" + member.getTel() +
+		 * "', Zipcode='" + member.getZipcode() + "', " + "Address='" +
+		 * member.getAddress() + "'" + " WHERE MemberID='" +
+		 * member.getMemberID() + "'";
+		 */System.out.println("MemberDAOImpl updateMember() query: " + query);
 
 		Connection connection = null;
 		PreparedStatement stmt = null;
@@ -215,9 +219,10 @@ public class MemberDaoImpl implements MemberDao {
 			stmt.setString(2, member.getName());
 			stmt.setString(3, member.getEmail());
 			stmt.setString(4, member.getTel());
-			stmt.setString(5, member.getZipcode());
-			stmt.setString(6, member.getAddress());
-			stmt.setString(7, member.getMemberID());
+			stmt.setString(5, member.getZipcode1());
+			stmt.setString(6, member.getZipcode2());
+			stmt.setString(7, member.getAddress());
+			stmt.setString(8, member.getMemberID());
 			stmt.executeUpdate();
 
 		} catch (SQLException se) {
@@ -258,7 +263,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public void deleteMember(Member member) {
 
-		String query = "DELETE FROM Member WHERE MemberID=?";
+		String query = "DELETE FROM sakdagu_Member WHERE MemberID=?";
 
 		System.out.println("MemberDAOImpl deleteMember() query: " + query);
 		Connection connection = null;
@@ -306,7 +311,7 @@ public class MemberDaoImpl implements MemberDao {
 	public Member checkMember(String memberID, String password) {
 		Member member = new Member(memberID, password);
 
-		String query = "SELECT Password, Name, Email, Tel, Zipcode, Address, Point, MemberDate FROM Member WHERE MemberID=?";
+		String query = "SELECT Password, Name, Email, Tel, Zipcode1,Zipcode2, Address, Point, MemberDate FROM sakdagu_Member WHERE MemberID=?";
 		System.out.println("MemberDAOImpl checkMember() query: " + query);
 
 		Connection connection = null;
@@ -325,7 +330,8 @@ public class MemberDaoImpl implements MemberDao {
 					member.setName(rs.getString("Name"));
 					member.setEmail(rs.getString("Email"));
 					member.setTel(rs.getString("Tel"));
-					member.setZipcode(rs.getString("Zipcode"));
+					member.setZipcode1(rs.getString("Zipcode1"));
+					member.setZipcode2(rs.getString("Zipcode2"));
 					member.setAddress(rs.getString("Address"));
 					member.setPoint(rs.getInt("Point"));
 					member.setMemberDate(rs.getDate("MemberDate"));
@@ -381,7 +387,7 @@ public class MemberDaoImpl implements MemberDao {
 	 */
 	@Override
 	public Member[] selectAllMembers() {
-		String query = "SELECT MemberID, Password, Name, Email, Tel, Zipcode, Address, Point, MemberDate FROM Member";
+		String query = "SELECT MemberID, Password, Name, Email, Tel, Zipcode1, Zipcode2, Address, Point, MemberDate FROM sakdagu_Member";
 		System.out.println("MemberDAOImpl selectAllMembers() query: " + query);
 
 		Connection connection = null;
@@ -400,8 +406,9 @@ public class MemberDaoImpl implements MemberDao {
 				member = new Member(rs.getString("MemberID"),
 						rs.getString("Password"), rs.getString("Name"),
 						rs.getString("Email"), rs.getString("Tel"),
-						rs.getString("Zipcode"), rs.getString("Address"),
-						rs.getInt("Point"), rs.getDate("MemberDate"));
+						rs.getString("Zipcode1"), rs.getString("Zipcode2"),
+						rs.getString("Address"), rs.getInt("Point"),
+						rs.getDate("MemberDate"));
 
 				temp.add(member);
 			}
@@ -453,7 +460,7 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean memberIDExists(String memberID) {
 		boolean result = false;
 
-		String query = "SELECT MemberID FROM Member WHERE MEMBERID =?";
+		String query = "SELECT MemberID FROM sakdagu_Member WHERE MEMBERID =?";
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
