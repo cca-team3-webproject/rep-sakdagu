@@ -56,6 +56,8 @@ public class BoardController extends HttpServlet {
 			// action 값에 따라 적절한 메소드를 선택하여 호출한다.
 			if (action.equals("/list")) {
 				selectBoardList(request, response);
+			} else if (action.equals("/images")) {
+				selectImageList(request, response);
 			} else if (action.equals("/read")) {
 				readBoard(request, response);
 			} else if (action.equals("/img")) {
@@ -83,6 +85,27 @@ public class BoardController extends HttpServlet {
 	 * 조건에 맞는 모든 게시물 목록을 보여주는 요청을 처리한다.
 	 */
 	private void selectBoardList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+
+		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if (session != null) {
+			member = ((Member) session.getAttribute("loginMember"));
+		}
+		RequestDispatcher dispatcher;
+		// if (member != null && member.getMemberID().equals("duke")) {
+		// dispatcher = request
+		// .getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+		// } else {
+		dispatcher = request
+				.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
+
+		// }
+		dispatcher.forward(request, response);
+	}
+
+	private void selectImageList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// 1. searchType, searchText 요청파라미터 값을 구한다.
 		String searchText = request.getParameter("searchText");
@@ -153,21 +176,8 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("endPageNumber", endPageNumber);
 		request.setAttribute("totalPageCount", totalPageCount);
 
-		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		if (session != null) {
-			member = ((Member) session.getAttribute("loginMember"));
-		}
-		RequestDispatcher dispatcher;
-		if (member != null && member.getMemberID().equals("duke")) {
-			dispatcher = request
-					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
-		} else {
-			dispatcher = request
-					.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
-
-		}
+		RequestDispatcher dispatcher = request
+				.getRequestDispatcher("/WEB-INF/views/board/images.jsp");
 		dispatcher.forward(request, response);
 
 	}
