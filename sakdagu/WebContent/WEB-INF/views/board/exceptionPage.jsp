@@ -9,12 +9,18 @@
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
+<style type="text/css">
+.main {
+	background-color: purple;
+	text-align: center;
+}
+</style>
 <script src="../js/board.js"></script>
 </head>
 <body>
 	<div class="tableContainer">
 		<div class="tableRow">
-			<c:import url="/side-bar.jsp" />
+			<c:import url="/top-bar.jsp" />
 			<div class="main">
 				<p class="exceptionname">${pageContext.exception.message}</p>
 				<p>

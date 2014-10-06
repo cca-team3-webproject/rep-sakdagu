@@ -7,7 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>${pageContext.errorData.throwable.message}</title>
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
@@ -17,7 +19,8 @@
 		<div class="tableRow">
 			<!-- START of main content-->
 			<div class="main">
-				<p class="exceptionname">${pageContext.exception}</p>
+				<p class="exceptionname">
+				${pageContext.exception}</p>
 				<p>
 					${pageContext.exception}<br> <br> This is the request
 					URI: <br>
