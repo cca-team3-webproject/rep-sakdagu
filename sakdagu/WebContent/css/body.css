@@ -1,8 +1,7 @@
 ﻿@charset "utf-8";
 
-div.tableContainer{width: 100%; text-align: center;}
-
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
+ 
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
