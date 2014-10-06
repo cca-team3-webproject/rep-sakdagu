@@ -19,7 +19,7 @@
   background: -ms-linear-gradient(top, #333333 0%, #141414 100%);
   background: linear-gradient(to bottom, #333333 0%, #141414 100%);
   border-bottom: 2px solid #0fa1e0;
-  width: 1000px;
+  text-align: center;
 }
 #cssmenu:after,
 #cssmenu ul:after {
