@@ -3,13 +3,13 @@
 
 <!DOCTYPE html>
 <html>
-<script src="/js/script.js"></script>
+<script src="/sakdagu/js/script.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/board.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 </head>
 <body>
@@ -34,11 +34,6 @@
 								maxlength="10"></td>
 						</tr>
 						<tr>
-							<td class="label">비밀번호확인 :</td>
-							<td><input type="password" name="password2" size="20"
-								maxlength="10" onblur="passchk(this.form)"></td>
-						</tr>
-						<tr>
 							<td class="label">이름 :</td>
 							<td><input type="text" name="name" size="20" maxlength="20"></td>
 						</tr>
@@ -52,9 +47,9 @@
 						</tr>
 						<tr>
 							<td class="label">우편번호 :</td>
-							<td><input type="text" name="zipcode1" size="15"
-								maxlength="7">-<input type="text" name="zipcode2"
-								size="15" maxlength="7"></td>
+							<td><input id="zipcode1" type="text" name="zipcode" size="3"
+								maxlength="7">-<input id="zipcode2" type="text" name="zipcode" size="3"
+								maxlength="7"><input type="button" name="search" value="우편번호검색" onclick="openDaumPostcode()"></td>
 						</tr>
 						<tr>
 							<td class="label">주소 :</td>
@@ -63,12 +58,9 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-									<textarea rows="20" cols="130">
-										<c:import url="access_terms.jsp" />
-									</textarea></td>
-									</tr>
+						</tr>
 						<tr>
-								
+							<td></td>
 							<td><input type="submit" value="회원가입"> <input
 								type="reset" value="취소"></td>
 						</tr>

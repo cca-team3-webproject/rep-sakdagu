@@ -12,6 +12,7 @@
 <!-- 		</tr>
 		<tr> -->
 			<td><input type="submit" name="logout" value="로그아웃"></td>
+			<td><a href='<c:url value="/cart.jsp"/>'>장바구니</a></td>
 		</tr>
 	</table>
 </form>

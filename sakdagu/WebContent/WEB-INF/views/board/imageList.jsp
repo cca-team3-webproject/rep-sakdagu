@@ -56,9 +56,8 @@
 </head>
 <body>
 	<div class="tableContainer">
-		<div id="tableRowThin" class="tableRow">
 			<c:import url="/top-bar.jsp" />
-		</div>
+			
 		<div class="tableRow">
 			<div class="boardpage">
 
@@ -85,8 +84,7 @@
 						</tr>
 					</thead>
 				</table>
-
-				<%-- <c:import url=""></c:import>
+<%-- <c:import url=""></c:import>
  --%>
 				<div>
 					<table id="listtable" class="maintable">
@@ -96,7 +94,7 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+				</div>
 		</div>
 	</div>
 </body>
