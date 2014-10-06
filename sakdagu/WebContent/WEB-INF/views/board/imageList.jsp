@@ -25,9 +25,8 @@
 </head>
 <body>
 	<div class="tableContainer">
-		<div id="tableRowThin" class="tableRow">
 			<c:import url="/top-bar.jsp" />
-		</div>
+			
 		<div class="tableRow">
 			<div class="boardpage">
 

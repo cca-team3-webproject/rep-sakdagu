@@ -2,6 +2,10 @@
 
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
  
+ 
+body{margin: 0px auto;} 
+.tableContainer{margin: auto;}
+
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
@@ -15,7 +19,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  
- 
+
 #tableRowThin{border-bottom: blue 30px;}
 .maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
 .maintable table.hover{border-color: blue;}
@@ -52,3 +56,4 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 #pagenavigator > a.pagenumber { padding: 2px 4px 1px 4px; border-width: 0px; font-weight: bold;}
 #pagenavigator > a.pagenumber:hover { padding: 1px 3px 0px 3px; border-width: 1px; border-style: solid;}
 #pagenavigator > a.currpage { text-decoration: underline; }
+
