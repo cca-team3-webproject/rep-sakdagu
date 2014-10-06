@@ -11,10 +11,10 @@
 	</c:if>
 	<c:if test="${not empty sessionScope.loginMember}">
 		<c:import url="/logout.jsp" />
-	</c:if>
-	<br>
-	<br>
-	<br> <a href="<c:url value="/"/>"> <img id="logoP"
+	</c:if><br><br><br> 
+	
+	
+	<a href="<c:url value="/"/>"> <img id="logoP"
 		src="<c:url value="/images/logo.png"/>"></a><br>
 
 	<form name="searchForm" action="<c:url value="/board/list"/>"
