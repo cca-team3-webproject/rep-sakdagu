@@ -16,7 +16,7 @@
 		<li><a href="<c:url value="/board/list?category=베스트"/>"><span>베스트</span></a></li>
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=여성의류"/>"><span>여성의류</span></a>
 			<ul>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=여성의류&subCategory=전체"/>"><span>전체</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=여성의류"/>"><span>전체</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=여성의류&subCategory=상의"/>"><span>상의</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=여성의류&subCategory=하의"/>"><span>하의</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=여성의류&subCategory=원피스/세트"/>"><span>원피스/세트</span></a></li>
@@ -25,7 +25,7 @@
 			</ul></li>
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=남성의류"/>"><span>남성의류</span></a>
 			<ul>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=남성의류&subCategory=전체"/>"><span>전체</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=남성의류"/>"><span>전체</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=남성의류&subCategory=상의"/>"><span>상의</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=남성의류&subCategory=하의"/>"><span>하의</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=남성의류&subCategory=정장/세트"/>"><span>정장/세트</span></a></li>
@@ -34,7 +34,7 @@
 			</ul></li>
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=패션잡화"/>"><span>패션잡화</span></a>
 			<ul>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=패션잡화&subCategory=전체"/>"><span>전체</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=패션잡화"/>"><span>전체</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=패션잡화&subCategory=여성신발"/>"><span>여성신발</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=패션잡화&subCategory=남성신발"/>"><span>남성신발</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=패션잡화&subCategory=운동화/캐주얼"/>"><span>운동화/캐주얼</span></a></li>
@@ -44,7 +44,7 @@
 			</ul></li>
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=뷰티"/>"><span>뷰티</span></a>
 			<ul>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=전체"/>"><span>전체</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티"/>"><span>전체</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=기초/기능성케어"/>"><span>기초/기능성케어</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=메이크업/클렌징"/>"><span>메이크업/클렌징</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=헤어/바디"/>"><span>헤어/바디</span></a></li>
@@ -54,7 +54,7 @@
 			</ul></li>
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=스포츠패션"/>"><span>스포츠패션</span></a>
 			<ul>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=스포츠패션&subCategory=전체"/>"><span>전체</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=스포츠패션"/>"><span>전체</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=스포츠의류"/>"><span>스포츠의류</span></a></li>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=스포츠슈즈"/>"><span>스포츠슈즈</span></a></li>
 			</ul></li>
