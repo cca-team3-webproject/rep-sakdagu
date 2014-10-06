@@ -42,8 +42,8 @@
 		<div class="tableRow">
 			<div class="boardpage">
 
+					<h3>게시글 입력</h3>
 				<table class="maintable">
-					<caption>게시글 입력</caption>
 					<tr>
 						<th>카테고리</th>
 						<td>
@@ -102,9 +102,9 @@
 							<tr>
 								<th>구매시<br>주의사항
 								</th>
-
 								<td colspan="2"><textarea id="ckeditor"
 										class="contentsinput" name="contents">
+
 <c:import url="default_info.jsp" />
 
 </textarea> <script>

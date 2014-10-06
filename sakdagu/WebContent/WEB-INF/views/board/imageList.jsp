@@ -103,11 +103,11 @@
 
 					<tfoot>
 						<tr>
-							<td id="pagenavigator" colspan="5"><c:if
-									test="${currentPageNumber > 1}">
-									<a
-										href="list?pageNumber=${startPageNumber-1}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">이전</a>
-								</c:if> <c:forEach begin="${startPageNumber}" end="${endPageNumber}"
+							<td id="pagenavigator" colspan="5">
+								<c:if test="${currentPageNumber > 1}">
+									<a href="list?pageNumber=${startPageNumber-1}&searchType=${param.searchType}&searchText=${param.searchText}&category=${param.category}&subCategory=${param.subCategory}">이전</a>
+								</c:if> 
+								<c:forEach begin="${startPageNumber}" end="${endPageNumber}"
 									var="pageNumber">
 									<c:choose>
 										<c:when test="${pageNumber eq currentPageNumber}">
