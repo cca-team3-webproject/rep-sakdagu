@@ -3,7 +3,6 @@
 <c:if test="${not empty boardList }">
 	<table id="listtable" class="maintable">
 		<tbody>
-
 			<tr>
 				<c:forEach items="${boardList}" var="board" varStatus="loopState">
 					<c:if test="${loopState.count % 3 eq 1}">

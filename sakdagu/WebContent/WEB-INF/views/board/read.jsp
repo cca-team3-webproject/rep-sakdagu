@@ -97,8 +97,6 @@ function selectQuantity(obj) {
 					<tfoot>
 						<tr>
 							<td>
-
-
 								<div class="buttonbar">
 									<input type="button" value="목록"
 										onclick="goUrl('list?pageNumber=${currentPageNumber}&searchType=${param.searchType}&searchText=${param.searchText}');">
