@@ -63,7 +63,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-									<textarea>
+									<textarea rows="20" cols="130">
 										<c:import url="access_terms.jsp" />
 									</textarea></td>
 									</tr>
