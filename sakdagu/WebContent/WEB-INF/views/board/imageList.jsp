@@ -60,30 +60,7 @@
 			
 		<div class="tableRow">
 			<div class="boardpage">
-
-				<table id="listtableHead" class="maintable">
-					<thead>
-						<tr>
-							<th class="location" colspan="2"><a
-								href="<c:url value="/board/list?category=${param.category}"/>">
-									${param.category}</a>&gt;<a
-								href="<c:url value="/board/list?category=${param.category}"/>">
-									전체 </a> <c:forEach items="${subCategoryList}" var="subCategory">
-									<a
-										href="<c:url value="/board/list?category=${param.category}&subCategory=${subCategory}"/>">
-										<c:choose>
-											<c:when test="${param.subCategory eq subCategory}">
-												<b>${subCategory}</b>
-											</c:when>
-											<c:otherwise>
-											${subCategory}
-								</c:otherwise>
-										</c:choose>
-									</a>
-								</c:forEach></th>
-						</tr>
-					</thead>
-				</table>
+	
 <%-- <c:import url=""></c:import>
  --%>
 				<div>

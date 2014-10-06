@@ -15,7 +15,6 @@ table#logintable, table#logouttable { float: right;}
 
 table#logintable td.label { text-align: center; color: red; font-weight: bold;}
 .logo { text-align: center; vertical-align: middle; width: 160px; height: 100px; }  
-.maintable table{text-align: center; padding: 20px; margin: 20px; border: thin solid;}
 
 .tableRow {display: table-row; margin: 0 auto;}
 .tableCell { display: table-cell; vertical-align: top; }

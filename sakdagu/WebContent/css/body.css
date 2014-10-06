@@ -3,7 +3,7 @@
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
  
  
-body{margin: 0px auto;} 
+body{margin: 0% 10% 0% 10%;} 
 .tableContainer{margin: auto;}
 
 
@@ -21,8 +21,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
  
 
 #tableRowThin{border-bottom: blue 30px;}
-.maintable table{text-align: center; padding: 20px; border: thin solid;}
-.maintable table.hover{border-color: blue;}
+.maintable table{text-align: center; padding: 20px;}
 
 #listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: 'Dotum','돋움';}
 

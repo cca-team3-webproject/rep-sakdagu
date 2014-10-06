@@ -315,7 +315,7 @@ public class BoardController extends HttpServlet {
 		ServletFileUpload upload = new ServletFileUpload(factory);
 
 		// 총 request size 제약 설정
-		upload.setSizeMax(1024 * 1024 * 5); // 최대 size (5M까지 가능)
+		upload.setSizeMax(1024 * 1024 * 20); // 최대 size (5M까지 가능)
 		Map<String, Object> args = new HashMap<String, Object>();
 
 		// 요청 파싱
