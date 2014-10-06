@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 보기</title>
-<link rel="stylesheet" href="../css/topbar.css">
-<link rel="stylesheet" href="../css/body.css">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
 <script src="<c:url value="/js/product.js"/>"></script>
 <script type="text/javascript">
 function selectProduct(obj) {
@@ -34,6 +35,40 @@ function selectQuantity(obj) {
 
 </script>
 
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+	    // 문서 객체 추가 함수
+	    var moveBag = function () {
+	            // 요소를 생성하여 삽입
+	            $('.bag').css({
+	            	top: '60%', left: '75%', position: 'fixed', width: '35%'
+	            });
+	    };
+	    var reBag = function () {
+            // 요소를 생성하여 삽입
+            $('.bag').css({	top: '45%', left: '50%'}
+	            );
+    };
+    
+        // 문서가 로드되면 호출. $(document).ready(function(){});과 동일    
+        $(function () {
+            // 최초 문서 객체들을 추가
+                var documentHeight = $(document).height();
+            
+            // 스크롤 이벤트를 처리할 핸들러 등록
+            $(window).scroll(function () {
+                var scrollHeight = $(window).scrollTop() + $(window).height();
+                // 문서 아래까지 스크롤되면 문서 객체 추가
+                if (scrollHeight*2 > documentHeight) {
+                    moveBag();
+                }
+                else
+                {
+                	reBag();
+                };
+            });
+        });
+    </script>
 </head>
 <body>
 	<div class="tableContainer">
@@ -52,7 +87,7 @@ function selectQuantity(obj) {
 					</caption> --%>
 					<thead>
 						<tr>
-							<td class="contents" colspan="4">${board.contents}</td>
+							<td class="contents">${board.contents}</td>
 						</tr>
 					</thead>
 					<tbody>
