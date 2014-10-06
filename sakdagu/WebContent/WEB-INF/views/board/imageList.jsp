@@ -60,7 +60,7 @@
 		<div class="tableRow">
 			<div class="boardpage">
 
-				<table id="listtableHead" class="maintable">
+				<%-- <table id="listtableHead" class="maintable">
 					<thead>
 						<tr>
 							<th class="location" colspan="2"><a
@@ -83,7 +83,7 @@
 								</c:forEach></th>
 						</tr>
 					</thead>
-				</table>
+				</table> --%>
 
 				<%-- <c:import url=""></c:import>
  --%>
