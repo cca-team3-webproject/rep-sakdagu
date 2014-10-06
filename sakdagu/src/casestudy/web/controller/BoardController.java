@@ -138,7 +138,7 @@ public class BoardController extends HttpServlet {
 
 		// 4. BoardService 객체로부터 모든 게시글 리스트를 구해온다.
 		Board[] boardList = service.getBoardList(searchInfo);
-		String[] subCategoryList = service.getSubCategoryList(category);
+		String[] subCategoryList = subCategoryList(category);
 		// 5. request scope 속성(boardList)에 게시글 리스트를 저장한다.
 		request.setAttribute("boardList", boardList);
 		request.setAttribute("subCategoryList", subCategoryList);
@@ -158,9 +158,7 @@ public class BoardController extends HttpServlet {
 		Member member = null;
 		if (session != null) {
 			member = ((Member) session.getAttribute("loginMember"));
-
 		}
-		System.out.println("memememe" + member);
 		RequestDispatcher dispatcher;
 		if (member != null && member.getMemberID().equals("duke")) {
 			dispatcher = request
@@ -172,6 +170,10 @@ public class BoardController extends HttpServlet {
 		}
 		dispatcher.forward(request, response);
 
+	}
+
+	private String[] subCategoryList(String category) {
+		return new BoardServiceImpl().getSubCategoryList(category);
 	}
 
 	/*
