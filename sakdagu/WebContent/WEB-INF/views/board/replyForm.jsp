@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>답글 등록</title>
-<link rel="stylesheet" href="../css/topbar.css">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
 <script src="../ckeditor/ckeditor.js"></script>
 <script src="../js/board.js"></script>
    <link rel="stylesheet" href="../css/body.css">
