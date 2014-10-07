@@ -1,19 +1,15 @@
 ﻿@charset "utf-8";
 
 * { font-family: 굴림, gulim, tahoma, sans-serif; font-size: 12px; }
- 
- 
-body{margin: 0% 10% 0% 10%;} 
-.tableContainer{margin: auto;}
-
 
 a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
-.location b{text-decoration: underline;}
+.location b{text-decoraction: underline;}
 .buttonbar { text-align: right; }
 .maintable { caption-side: top; border-collapse: collapse; text-align: left;}
+.boardpage table {margin: auto}
 .boardpage > h3 { font-weight: bold; text-decoration: underline; text-align: center;}
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
 .maintable th { border: 1px;  padding: 2px; height: 21px; }
