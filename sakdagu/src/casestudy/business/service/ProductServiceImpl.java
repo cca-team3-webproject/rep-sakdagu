@@ -86,15 +86,23 @@ public class ProductServiceImpl implements ProductService {
 		if (!productDataAccess.productIDExists(num)) {
 			throw new DataNotFoundException();
 		}
-		return productDataAccess.selectOption(num,0);
+		return productDataAccess.selectOptions(num,0);
 	}
 
 	@Override
-	public productOption[] findOption(int boardNum, int productID) throws DataNotFoundException {
+	public productOption[] findOptions(int boardNum, int productID) throws DataNotFoundException {
 		if (!productDataAccess.productIDExists(boardNum)) {
 			throw new DataNotFoundException();
 		}
-		return productDataAccess.selectOption(boardNum,productID);
+		return productDataAccess.selectOptions(boardNum,productID);
+	}
+
+	@Override
+	public productOption findOption(int boardNum, int productID, int optionID) throws DataNotFoundException {
+		if (!productDataAccess.productIDExists(boardNum)) {
+			throw new DataNotFoundException();
+		}
+		return productDataAccess.selectOption(boardNum,productID, optionID);
 	}
 
 }

@@ -49,6 +49,8 @@ public interface ProductService {
 
 	public productOption[] findOption(int num) throws DataNotFoundException;
 
-	public productOption[] findOption(int boardNum, int productID) throws DataNotFoundException;
+	public productOption[] findOptions(int boardNum, int productID) throws DataNotFoundException;
+
+	public productOption findOption(int boardNum, int productID, int optionID) throws DataNotFoundException;
 	
 }

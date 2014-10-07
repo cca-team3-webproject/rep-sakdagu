@@ -77,6 +77,8 @@ public class BoardController extends HttpServlet {
 				removeBoard(request, response);
 			} else if (action.equals("/selectProduct")) {
 				selectProduct(request, response);
+			} else if (action.equals("/selectOption")) {
+				selectOption(request, response);
 			} else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
@@ -85,7 +87,8 @@ public class BoardController extends HttpServlet {
 		}
 	}
 
-	@SuppressWarnings("unchecked")//Json 况醋 力芭
+	@SuppressWarnings("unchecked")
+	// Json 况醋 力芭
 	private void selectProduct(HttpServletRequest request,
 			HttpServletResponse response) throws DataNotFoundException,
 			IOException {
@@ -93,7 +96,7 @@ public class BoardController extends HttpServlet {
 		int productID = Integer.parseInt(request.getParameter("productID"));
 		/* String optionID = request.getParameter("optionID"); */
 		ProductService service = new ProductServiceImpl();
-		productOption[] options = service.findOption(boardNum, productID);
+		productOption[] options = service.findOptions(boardNum, productID);
 		JSONObject j;
 		JSONArray arr = new JSONArray();
 		for (productOption option : options) {
@@ -108,6 +111,29 @@ public class BoardController extends HttpServlet {
 		}
 		PrintWriter os = response.getWriter();
 		os.println(arr);
+	}
+
+	@SuppressWarnings("unchecked")
+	// Json 况醋 力芭
+	private void selectOption(HttpServletRequest request,
+			HttpServletResponse response) throws DataNotFoundException,
+			IOException {
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		int productID = Integer.parseInt(request.getParameter("productID"));
+		int optionID = Integer.parseInt(request.getParameter("optionID"));
+		ProductService service = new ProductServiceImpl();
+		productOption option = service
+				.findOption(boardNum, productID, optionID);
+		JSONObject j;
+		j = new JSONObject();
+		j.put("optionID", option.getOptionID());
+		j.put("optionTitle", option.getOptionTitle());
+		j.put("price1", option.getPrice1());
+		j.put("price2", option.getPrice2());
+		j.put("quantity", option.getQuantity());
+
+		PrintWriter os = response.getWriter();
+		os.println(j);
 	}
 
 	/*

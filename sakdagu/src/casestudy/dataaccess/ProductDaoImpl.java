@@ -84,7 +84,7 @@ public class ProductDaoImpl implements ProductDao {
 			while (rs.next()) {
 				Product product = new Product(rs.getInt("board_num"),
 						rs.getInt("product_id"), rs.getString("product_title"),
-						selectOption(num, rs.getInt("product_id")));
+						selectOptions(num, rs.getInt("product_id")));
 				products.add(product);
 			}
 
@@ -347,7 +347,7 @@ public class ProductDaoImpl implements ProductDao {
 	}
 
 	@Override
-	public productOption[] selectOption(int num, int product_id) {
+	public productOption[] selectOptions(int num, int product_id) {
 		ArrayList<productOption> options = new ArrayList<productOption>();
 
 		String query = "SELECT * "
@@ -402,5 +402,62 @@ public class ProductDaoImpl implements ProductDao {
 		}
 
 		return options.toArray(new productOption[0]);
+	}
+
+	@Override
+	public productOption selectOption(int boardNum, int productID, int optionID) {
+		productOption option = null;
+		String query = "SELECT * "
+				+ "FROM sakdagu_Product_option WHERE board_num=? and product_id=? and option_id=?";
+		System.out.println("ProductDAOImpl selectOption() query: " + query);
+
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setInt(1, boardNum);
+			stmt.setInt(2, productID);
+			stmt.setInt(3, optionID);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				option = new productOption(productID, optionID,
+						rs.getString("option_title"), rs.getInt("price1"),
+						rs.getInt("price2"), rs.getInt("quantity"),
+						rs.getString("installment"));
+			}
+
+		} catch (SQLException se) {
+			System.err.println("ProductDAOImpl selectOption() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occured. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace(System.err);
+			}
+		}
+
+		return option;
 	}
 }
