@@ -55,8 +55,8 @@
 		<li class='active has-sub'><a href="<c:url value="/board/list?category=스포츠패션"/>"><span>스포츠패션</span></a>
 			<ul>
 				<li class='has-sub'><a href="<c:url value="/board/list?category=스포츠패션"/>"><span>전체</span></a></li>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=스포츠의류"/>"><span>스포츠의류</span></a></li>
-				<li class='has-sub'><a href="<c:url value="/board/list?category=뷰티&subCategory=스포츠슈즈"/>"><span>스포츠슈즈</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=스포츠패션&subCategory=스포츠의류"/>"><span>스포츠의류</span></a></li>
+				<li class='has-sub'><a href="<c:url value="/board/list?category=스포츠패션&subCategory=스포츠슈즈"/>"><span>스포츠슈즈</span></a></li>
 			</ul></li>
 		<li class='last'><a href="<c:url value="/board/list?category=해외배송"/>"><span>해외배송</span></a></li>
 	</ul>

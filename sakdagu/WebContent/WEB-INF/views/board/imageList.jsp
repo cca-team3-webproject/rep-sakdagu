@@ -21,7 +21,8 @@
 			data : {
 				"pageNumber" : i,
 				"category" : '${param.category}',
-				"subCategory" : '${param.subCategory}'
+				"subCategory" : '${param.subCategory}',				
+				"searchText" : '${param.searchText}',				
 			},
 			success : function(result) {
 				$('#contents').append(result);
