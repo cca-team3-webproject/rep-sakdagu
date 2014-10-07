@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 가입</title>
-<link rel="stylesheet" href="<c:url value="/css/board.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
@@ -30,8 +30,13 @@
 						</tr>
 						<tr>
 							<td class="label">비밀번호 :</td>
-							<td><input type="password" name="password" size="20"
+							<td><input type="password" name="password1" size="20"
 								maxlength="10"></td>
+						</tr>
+						<tr>
+							<td class="label">비밀번호확인 :</td>
+							<td><input type="password" name="password2" size="20"
+								maxlength="10" onblur="passchk(this.form)"></td>
 						</tr>
 						<tr>
 							<td class="label">이름 :</td>
