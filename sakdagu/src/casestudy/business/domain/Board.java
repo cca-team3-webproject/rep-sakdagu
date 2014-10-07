@@ -10,12 +10,6 @@ public class Board {
 	private int readCount;
 	private String regDate;
 	private String modDate;
-	/* 원본 글번호 */
-	private int masterNum;
-	/* 답변 글번호 */
-	private int replyOrder;
-	/* 답변 글깊이 */
-	private int replyStep;
 
 	/* 카테고리 */
 	private String category;
@@ -32,35 +26,10 @@ public class Board {
 
 	}
 
-	public int getMasterNum() {
-		return masterNum;
-	}
-
-	public int getReplyOrder() {
-		return replyOrder;
-	}
-
-	public int getReplyStep() {
-		return replyStep;
-	}
-
-	public void setMasterNum(int masterNum) {
-		this.masterNum = masterNum;
-	}
-
-	public void setReplyOrder(int replyOrder) {
-		this.replyOrder = replyOrder;
-	}
-
-	public void setReplyStep(int replyStep) {
-		this.replyStep = replyStep;
-	}
-
 	// 게시글 상세 조회용
 	public Board(int num, String writer, String title, String contents,
 			String ip, int readCount, String regDate, String modDate,
-			int masterNum, int replyOrder, int replyStep, String category,
-			String subCategory) {
+			String category, String subCategory) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -70,9 +39,7 @@ public class Board {
 		this.readCount = readCount;
 		this.regDate = regDate;
 		this.modDate = modDate;
-		this.masterNum = masterNum;
-		this.replyOrder = replyOrder;
-		this.replyStep = replyStep;
+
 		this.category = category;
 		this.subCategory = subCategory;
 	}
@@ -89,7 +56,6 @@ public class Board {
 		this.category = category;
 		this.subCategory = subCategory;
 		this.setMinPrice(minPrice);
-		// this.replyStep = replyStep;
 	}
 
 	// 게시글 쓰기용
@@ -114,21 +80,6 @@ public class Board {
 		this.title = title;
 		this.contents = contents;
 		this.ip = ip;
-	}
-
-	// 답변글 쓰기용
-
-	public Board(int num, String writer, String title, String contents,
-			String ip, int masterNum, int replyOrder, int replyStep) {
-		super();
-		this.num = num;
-		this.writer = writer;
-		this.title = title;
-		this.contents = contents;
-		this.ip = ip;
-		this.masterNum = masterNum;
-		this.replyOrder = replyOrder;
-		this.replyStep = replyStep;
 	}
 
 	public int getNum() {
@@ -232,10 +183,9 @@ public class Board {
 		return "Board [num=" + num + ", writer=" + writer + ", title=" + title
 				+ ", contents=" + contents + ", ip=" + ip + ", readCount="
 				+ readCount + ", regDate=" + regDate + ", modDate=" + modDate
-				+ ", masterNum=" + masterNum + ", replyOrder=" + replyOrder
-				+ ", replyStep=" + replyStep + ", category=" + category
-				+ ", subCategory=" + subCategory + ", photoDir=" + photoDir
-				+ "]";
+				+ ", category=" + category + ", subCategory=" + subCategory
+				+ ", photoDir=" + photoDir + ", productPhoto=" + productPhoto
+				+ ", minPrice=" + minPrice + "]";
 	}
 
 	public productPhoto getProductPhoto() {
