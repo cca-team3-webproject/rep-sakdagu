@@ -177,17 +177,20 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("totalPageCount", totalPageCount);
 
 		HttpSession session = request.getSession(false);
+
 		Member member = null;
 		if (session != null) {
 			member = ((Member) session.getAttribute("loginMember"));
 		}
+
 		RequestDispatcher dispatcher;
 		MemberService service2 = new MemberServiceImpl();
+
 		if (member != null && service2.isAdmin(member.getMemberID())) {
+			System.out.println("관리자가나타났다");
 			dispatcher = request
 					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
 		} else {
-
 			dispatcher = request
 					.getRequestDispatcher("/WEB-INF/views/board/images.jsp");
 		}
