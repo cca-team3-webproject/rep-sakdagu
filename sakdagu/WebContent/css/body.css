@@ -6,6 +6,7 @@ a:link { text-decoration: none; color: #000000; }
 a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
+.main > h4, p, ul{text-align: center}
 .location b{text-decoraction: underline;}
 .buttonbar { text-align: right; }
 .maintable { caption-side: top; border-collapse: collapse; text-align: left;}
