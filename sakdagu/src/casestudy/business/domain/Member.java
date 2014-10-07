@@ -8,15 +8,15 @@ package casestudy.business.domain;
 import java.sql.Date;
 
 /**
- * 회원과 관련한 정보를 저장하고 있는 객체를 정의한 도메인 클래스.<br/> 
+ * 회원과 관련한 정보를 저장하고 있는 객체를 정의한 도메인 클래스.<br/>
  * 비즈니스 로직 층은 유스케이스로 표현되는 특정 업무나 특정 부서 처리의 통합인 서비스 및 도메인으로 구성된다.<br/>
- * 도메인은 서비스로부터 비즈니스를 실행하는데 있어 당연히 인식되는 클래스(고객이나 주문과 같은)의 집합으로
- * 자신이 무엇인지 나타내는 값과 그 값을 이용한 처리를 실현한다.<br/> 
+ * 도메인은 서비스로부터 비즈니스를 실행하는데 있어 당연히 인식되는 클래스(고객이나 주문과 같은)의 집합으로 자신이 무엇인지 나타내는 값과 그
+ * 값을 이용한 처리를 실현한다.<br/>
  * 도메인이 로직을 포함하지 않고 단순히 값만 저장하기만 하는 객체일 경우 VO(Value Object: 값을 저장하는 객체)나
- * DTO(Data Transfer Object: 값을 전달하기만 하는 객체)라고 부르기도 한다. 
- *  
+ * DTO(Data Transfer Object: 값을 전달하기만 하는 객체)라고 부르기도 한다.
+ * 
  * @author 고범석(kidmania@hotmail.com)
- *
+ * 
  */
 public class Member {
 	private String memberID;
@@ -24,19 +24,20 @@ public class Member {
 	private String name;
 	private String email;
 	private String tel;
-	private String zipcode;
+	private String zipcode1;
+	private String zipcode2;
 	private String address;
 	private int point;
 	private Date memberDate;
-	private int check;	// VALID_MEMBER or INVALID_ID or INVALID_PASSWORD
-	
+	private int check; // VALID_MEMBER or INVALID_ID or INVALID_PASSWORD
+
 	/** 유효한 회원임을 나타내는 상수 */
 	public static final int VALID_MEMBER = 1;
 	/** memberID가 존재하지 않는 회원임을 나타내는 상수 */
-	public static final int INVALID_ID = 0; 
+	public static final int INVALID_ID = 0;
 	/** password가 일치하지 않는 회원임을 나타내는 상수 */
 	public static final int INVALID_PASSWORD = -1;
-	
+
 	public Member() {
 	}
 
@@ -44,27 +45,29 @@ public class Member {
 		this.memberID = memberID;
 		this.password = password;
 	}
-	
+
 	public Member(String memberID, String password, String name, String email,
-			String tel, String zipcode, String address) {
+			String tel, String zipcode1, String zipcode2, String address) {
 		this.memberID = memberID;
 		this.password = password;
 		this.name = name;
 		this.email = email;
 		this.tel = tel;
-		this.zipcode = zipcode;
+		this.zipcode1 = zipcode1;
+		this.zipcode2 = zipcode2;
 		this.address = address;
 	}
-	
+
 	public Member(String memberID, String password, String name, String email,
-			String tel, String zipcode, String address, int point) {
-		this(memberID, password, name, email, tel, zipcode, address);
+			String tel, String zipcode1, String zipcode2, String address, int point) {
+		this(memberID, password, name, email, tel, zipcode1, zipcode2, address);
 		this.point = point;
 	}
-	
+
 	public Member(String memberID, String password, String name, String email,
-			String tel, String zipcode, String address, int point, Date memberDate) {
-		this(memberID, password, name, email, tel, zipcode, address);
+			String tel, String zipcode1, String zipcode2, String address, int point,
+			Date memberDate) {
+		this(memberID, password, name, email, tel, zipcode1, zipcode2, address);
 		this.point = point;
 		this.memberDate = memberDate;
 	}
@@ -109,12 +112,12 @@ public class Member {
 		this.tel = tel;
 	}
 
-	public String getZipcode() {
-		return zipcode;
+	public String getZipcode1() {
+		return zipcode1;
 	}
 
-	public void setZipcode(String zipcode) {
-		this.zipcode = zipcode;
+	public void setZipcode1(String zipcode1) {
+		this.zipcode1 = zipcode1;
 	}
 
 	public String getAddress() {
@@ -145,10 +148,13 @@ public class Member {
 		return check;
 	}
 
-	/** 회원의 유효성 여부를 나타내는 check 값을 설정한다.
-	 * check 인수의 값은 Member.VALID_MEMBER, Member.INVALID_ID, Member.INVALID_PASSWORD 중 하나여야 한다.
-	 * 	
-	 * @param check Member.VALID_MEMBER, Member.INVALID_ID or Member.INVALID_PASSWORD
+	/**
+	 * 회원의 유효성 여부를 나타내는 check 값을 설정한다. check 인수의 값은 Member.VALID_MEMBER,
+	 * Member.INVALID_ID, Member.INVALID_PASSWORD 중 하나여야 한다.
+	 * 
+	 * @param check
+	 *            Member.VALID_MEMBER, Member.INVALID_ID or
+	 *            Member.INVALID_PASSWORD
 	 */
 	public void setCheck(int check) {
 		this.check = check;
@@ -158,8 +164,16 @@ public class Member {
 	public String toString() {
 		return "Member [memberID=" + memberID + ", password=" + password
 				+ ", name=" + name + ", email=" + email + ", tel=" + tel
-				+ ", zipcode=" + zipcode + ", address=" + address + ", point="
+				+ ", zipcode=" + zipcode1 + ", address=" + address + ", point="
 				+ point + ", memberDate=" + memberDate + ", check=" + check
 				+ "]";
+	}
+
+	public String getZipcode2() {
+		return zipcode2;
+	}
+
+	public void setZipcode2(String zipcode2) {
+		this.zipcode2 = zipcode2;
 	}
 }

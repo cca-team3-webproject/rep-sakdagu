@@ -26,6 +26,8 @@ public class Board {
 
 	private productPhoto productPhoto;
 
+	private int minPrice;
+
 	public Board() {
 
 	}
@@ -77,7 +79,7 @@ public class Board {
 
 	// 리스트 조회용
 	public Board(int num, String writer, String title, int readCount,
-			String regDate, String category, String subCategory) {
+			String regDate, String category, String subCategory, int minPrice) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -86,6 +88,7 @@ public class Board {
 		this.regDate = regDate;
 		this.category = category;
 		this.subCategory = subCategory;
+		this.setMinPrice(minPrice);
 		// this.replyStep = replyStep;
 	}
 
@@ -241,6 +244,14 @@ public class Board {
 
 	public void setProductPhoto(productPhoto productPhoto) {
 		this.productPhoto = productPhoto;
+	}
+
+	public int getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
 	}
 
 }
