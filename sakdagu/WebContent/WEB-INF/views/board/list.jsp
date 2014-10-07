@@ -1,17 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Sakdagu</title>
-<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
-<script src="../js/board.js"></script>
-</head>
-<body>
+<c:if test="${not empty boardList }">
+	<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+	<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+	<link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
+	<script src="../js/board.js"></script>
 	<div class="tableContainer">
 
 		<div class="tableTop">
@@ -30,43 +23,32 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:choose>
-							<c:when test="${empty boardList }">
-								<tr>
-									<td colspan="7">등록된 게시물이 없습니다.</td>
-								</tr>
-							</c:when>
-							<c:otherwise>
 
-								<c:forEach items="${boardList}" var="board"
-									varStatus="loopState">
 
-									<tr>
-										<td class="num">${board.num}</td>
 
-										<td class="title"><c:forEach begin="1"
-												end="${board.replyStep}">
-												<c:out value="&nbsp;" escapeXml="false" />
-											</c:forEach> <c:choose>
-												<c:when test="${not empty sessionScope.loginMember}">
-													<a
-														href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}">${board.title}</a>
-												</c:when>
-												<c:otherwise>
-													<c:out value="${board.title}" />
-												</c:otherwise>
-											</c:choose></td>
 
-										<td class="writer">${board.writer}</td>
-										<td class="regdate">${board.regDate}</td>
-										<td class="readcount">${board.readCount}</td>
-										<td class="category">${board.category}</td>
-										<td class="subCategory">${board.subCategory}</td>
-									</tr>
-								</c:forEach>
+						<c:forEach items="${boardList}" var="board" varStatus="loopState">
 
-							</c:otherwise>
-						</c:choose>
+							<tr>
+								<td class="num">${board.num}</td>
+
+								<td class="title"><c:choose>
+										<c:when test="${not empty sessionScope.loginMember}">
+											<a
+												href="read?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}">${board.title}</a>
+										</c:when>
+										<c:otherwise>
+											<c:out value="${board.title}" />
+										</c:otherwise>
+									</c:choose></td>
+
+								<td class="writer">${board.writer}</td>
+								<td class="regdate">${board.regDate}</td>
+								<td class="readcount">${board.readCount}</td>
+								<td class="category">${board.category}</td>
+								<td class="subCategory">${board.subCategory}</td>
+							</tr>
+						</c:forEach>
 
 					</tbody>
 					<tfoot>
@@ -95,7 +77,8 @@
 				</table>
 				<div class="buttonbar">
 					<c:if test="${not empty sessionScope.loginMember}">
-						<form name="writeForm" action="<c:url value="/board/writeForm"/>" method="GET">
+						<form name="writeForm" action="<c:url value="/board/writeForm"/>"
+							method="GET">
 							<select name="category">
 								<option value="여성의류"
 									<c:if test="${param.category eq '여성의류' || param.category eq '베스트'}"> selected="selected"</c:if>>여성의류</option>
@@ -116,5 +99,4 @@
 			</div>
 		</div>
 	</div>
-</body>
-</html>
+</c:if>

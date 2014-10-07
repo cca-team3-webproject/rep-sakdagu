@@ -2,10 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+<script src="/sakdagu/js/script.js"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>회원 정보 수정</title>
-    <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
+    <link rel="stylesheet" href="<c:url value="/css/registerMember.css"/>">
 </head>
 <body>
 
@@ -43,11 +46,13 @@
                         </tr>
                         <tr>
                             <td class="label">우편번호 :</td>
-                            <td><input type="text" name="zipcode" size="15" maxlength="7" value="${ loginMember.zipcode }"></td>
+                            <td><input id="zipcode1" type="text" name="zipcode1" size="3" maxlength="7" value="${ loginMember.zipcode1 }">
+                             - <input id="zipcode2"  type="text" name="zipcode2" size="3" maxlength="7" value="${ loginMember.zipcode2 }">
+                             <input type="button" name="search" value="우편번호검색" onclick="openDaumPostcode()"></td>
                         </tr>
                         <tr>
                             <td class="label">주소 :</td>
-                            <td><input type="text" name="address" size="50" maxlength="70" value="${ loginMember.address }"></td>
+                            <td><input id="addr" type="text" name="address" size="50" maxlength="70" value="${ loginMember.address }"></td>
                         </tr>
                         <tr>
                             <td colspan="2">

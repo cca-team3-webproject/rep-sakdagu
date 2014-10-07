@@ -4,12 +4,13 @@
 --------------------------------------------------------
 --  DDL for Table SAKDAGU_ADMIN
 --------------------------------------------------------
- drop table "SKU"."SAKDAGU_ADMIN" ;
+ --drop table "SKU"."SAKDAGU_ADMIN" ;
   CREATE TABLE "SKU"."SAKDAGU_ADMIN" 
-   (	"ID" VARCHAR2(20 BYTE)
+   (	"ID" VARCHAR2(20 BYTE) not null
    );
 Insert into SKU.SAKDAGU_ADMIN (ID) values ('duke');
 Insert into SKU.SAKDAGU_ADMIN (ID) values ('kwak1696');
 Insert into SKU.SAKDAGU_ADMIN (ID) values ('zing89');
 Insert into SKU.SAKDAGU_ADMIN (ID) values ('zahael');
+commit;
 select * from sakdagu_admin;
