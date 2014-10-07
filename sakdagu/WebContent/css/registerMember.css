@@ -3,5 +3,5 @@
 .main {text-align: center;}
 .main table {margin: auto;
 background-image: url("/sakdagu/images/back.png"); width: 500px; height: 550px}	
-.main table td {text-align: left}
+.main table td {text-align: left; color: white;}
 .main table td.label {color: white; text-align: center}
