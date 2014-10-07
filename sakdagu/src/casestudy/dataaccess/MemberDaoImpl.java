@@ -509,7 +509,8 @@ public class MemberDaoImpl implements MemberDao {
 	public boolean isAdmin(String memberID) {
 		boolean result = false;
 
-		String query = "SELECT ID FROM sakdagu_Admin WHERE ID =?";
+		String query = "SELECT ID FROM sakdagu_Admin WHERE ID = ? ";
+		System.out.println(query + memberID);
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
@@ -521,6 +522,7 @@ public class MemberDaoImpl implements MemberDao {
 			rs = stmt.executeQuery();
 
 			if (rs.next()) {
+				System.err.println(rs.getString("id") + memberID + " ¿÷¿Ω");
 				result = true;
 			}
 		} catch (SQLException se) {

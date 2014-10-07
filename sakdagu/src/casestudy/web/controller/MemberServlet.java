@@ -107,8 +107,7 @@ public class MemberServlet extends HttpServlet {
 
 		// 3.1. 요청 파라미터를 통해 HTML 폼 데이터를 얻어낸다.
 		String memberID = request.getParameter("memberID");
-
-		String password = request.getParameter("password");
+		String password = request.getParameter("password1");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");
@@ -286,6 +285,7 @@ public class MemberServlet extends HttpServlet {
 		// 1.1. memberID password요청파라미터 값을 확인한다.
 		String memberID = request.getParameter("memberID");
 		String password = request.getParameter("password");
+		
 		String url = request.getHeader("referer");
 		url = url.substring(url.indexOf("/board"));
 		System.out.println("url	" + url);
@@ -316,7 +316,7 @@ public class MemberServlet extends HttpServlet {
 			request.setAttribute("loginErrorMsg", loginErrorMsg);
 
 			RequestDispatcher dispatcher = request
-					.getRequestDispatcher("/index.jsp");
+					.getRequestDispatcher("/board/list");
 			dispatcher.forward(request, response);
 		}
 

@@ -1,9 +1,7 @@
 @CHARSET "utf-8";
 
-body{margin: 0 auto;} 
-
 .main {text-align: center;}
 .main table {margin: auto;
-background-image: url("/sakdagu/images/back.png");}	
+background-image: url("/sakdagu/images/back.png"); width: 500px; height: 550px}	
 .main table td {text-align: left}
-
+.main table td.label {color: white; text-align: center}
