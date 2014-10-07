@@ -184,7 +184,7 @@ public class Board {
 				+ ", contents=" + contents + ", ip=" + ip + ", readCount="
 				+ readCount + ", regDate=" + regDate + ", modDate=" + modDate
 				+ ", category=" + category + ", subCategory=" + subCategory
-				+ ", photoDir=" + photoDir + ", productPhoto=" + productPhoto
+				+ ", photoDir=" + photoDir + ", productPhoto=" + productPhoto.getImageName()
 				+ ", minPrice=" + minPrice + "]";
 	}
 

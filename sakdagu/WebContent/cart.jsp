@@ -41,23 +41,18 @@
 							</tr>
 						</thead>
 						<tbody id="item">
-							<tr>
-								<th>곽재혁팜</th>
-								<th>10000원</th>
-								<th>무료</th>
-								<th></th>
-							</tr>
-							<tr>
-								<th>곽재혁팜</th>
-								<th>10000원</th>
-								<th>무료</th>
-								<th></th>
-							</tr>
-							<h1></h1>
+							<c:forEach begin="1" end="1">
+								<tr>
+									<th>----</th>
+									<th>${param.sum}</th>
+									<th>무료</th>
+									<th>${param.sum}</th>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 
-					<h1>총 주문금액 =</h1>
+					<h1>총 주문금액 =${param.sum}</h1>
 				</div>
 				<div>
 					<input type="button" id="shopping" onclick="goUrl('board/list');"
