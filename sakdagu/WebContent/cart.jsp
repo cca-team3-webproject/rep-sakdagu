@@ -10,7 +10,12 @@
 
 <script src="../js/board.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-
+<script>
+var buy =function(){
+	alert('감사');
+	location.href="<c:url value="/"/>";
+}
+</script>
 </head>
 <body>
 	<div id="content" class="order">
@@ -50,9 +55,9 @@
 				<h1>총 주문금액 = </h1>
 			</div>
 			<div>
-				<button id="shopping">계속 쇼핑하기</button>
+				<button id="shopping" onclick="history.back();">계속 쇼핑하기</button>
 				
-				<button id="get">바로 구매하기 > </button>
+				<button id="get" onclick="buy();">바로 구매하기 </button>
 			</div>
 		</div>
 	</div>
