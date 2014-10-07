@@ -71,8 +71,11 @@
 									<c:forEach items="${product.option}" var="option">
 										<c:if test="${option.optionID eq param.optionID}">
 											<s> ${option.price1*param.quantity}</s>
-											<span>${option.price2*param.quantity} <script type="text/javascript">
-											$('#select_box option:selected').text(); </script></span>
+											<span>${option.price2*param.quantity} <script
+													type="text/javascript">
+												$('#select_box option:selected')
+														.text();
+											</script></span>
 										</c:if>
 									</c:forEach>
 								</c:if>

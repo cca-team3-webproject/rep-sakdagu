@@ -73,4 +73,6 @@ public interface MemberService {
      */
 	public Member[] getAllMembers();
 	
+	public boolean isAdmin(String memberID);
+	
 }

@@ -504,4 +504,53 @@ public class MemberDaoImpl implements MemberDao {
 
 		return result;
 	}
+
+	@Override
+	public boolean isAdmin(String memberID) {
+		boolean result = false;
+
+		String query = "SELECT ID FROM sakdagu_Admin WHERE ID =?";
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connection = obtainConnection();
+			stmt = connection.prepareStatement(query);
+			stmt.setString(1, memberID);
+			rs = stmt.executeQuery();
+
+			if (rs.next()) {
+				result = true;
+			}
+		} catch (SQLException se) {
+			System.err.println("MemberDAOImpl isAdmin() Error :"
+					+ se.getMessage());
+			se.printStackTrace(System.err);
+			// throw new RuntimeException("A database error occurred. " +
+			// se.getMessage());
+
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+			try {
+				if (connection != null)
+					connection.close();
+			} catch (SQLException ex) {
+				ex.printStackTrace(System.err);
+			}
+		}
+
+		return result;
+	}
 }
