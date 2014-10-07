@@ -13,9 +13,6 @@
 </head>
 <body>
 	<div class="tableContainer">
-		<div class="tabletop">
-			<c:import url="/top-bar.jsp" />
-		</div>
 
 		<div class="tableRow">
 			<div class="boardpage">
@@ -23,7 +20,7 @@
 					<caption>게시글 목록</caption>
 					<thead>
 						<tr>
-							<th class="num"></th>
+							<th class="num">글번호</th>
 							<th class="title">제 목</th>
 							<th class="writer">글쓴이</th>
 							<th class="regdate">작성일</th>

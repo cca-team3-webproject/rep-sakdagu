@@ -52,8 +52,8 @@
 						</tr>
 						<tr>
 							<td class="label">우편번호 :</td>
-							<td><input id="zipcode1" type="text" name="zipcode" size="3"
-								maxlength="7">-<input id="zipcode2" type="text" name="zipcode" size="3"
+							<td><input id="zipcode1" type="text" name="zipcode1" size="3"
+								maxlength="7">-<input id="zipcode2" type="text" name="zipcode2" size="3"
 								maxlength="7"><input type="button" name="search" value="우편번호검색" onclick="openDaumPostcode()"></td>
 						</tr>
 						<tr>

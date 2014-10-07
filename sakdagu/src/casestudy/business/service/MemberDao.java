@@ -75,4 +75,7 @@ public interface MemberDao {
      */
 	public boolean memberIDExists(String memberID);
 	
+
+	public boolean isAdmin(String memberID);
+	
 }
