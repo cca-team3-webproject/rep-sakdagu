@@ -47,6 +47,8 @@ public interface ProductService {
 
 	public void removeProduct(Product product);
 
-	public productOption[] findOprion(int num) throws DataNotFoundException;
+	public productOption[] findOption(int num) throws DataNotFoundException;
+
+	public productOption[] findOption(int boardNum, int productID) throws DataNotFoundException;
 	
 }

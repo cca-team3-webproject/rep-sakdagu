@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import casestudy.business.domain.Board;
 import casestudy.business.domain.Member;
@@ -73,12 +75,39 @@ public class BoardController extends HttpServlet {
 				updateBoard(request, response);
 			} else if (action.equals("/remove")) {
 				removeBoard(request, response);
+			} else if (action.equals("/selectProduct")) {
+				selectProduct(request, response);
 			} else {
 				response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			}
 		} catch (Exception ex) {
 			throw new ServletException(ex);
 		}
+	}
+
+	@SuppressWarnings("unchecked")//Json 워닝 제거
+	private void selectProduct(HttpServletRequest request,
+			HttpServletResponse response) throws DataNotFoundException,
+			IOException {
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		int productID = Integer.parseInt(request.getParameter("productID"));
+		/* String optionID = request.getParameter("optionID"); */
+		ProductService service = new ProductServiceImpl();
+		productOption[] options = service.findOption(boardNum, productID);
+		JSONObject j;
+		JSONArray arr = new JSONArray();
+		for (productOption option : options) {
+			j = new JSONObject();
+			j.put("optionID", option.getOptionID());
+			j.put("optionTitle", option.getOptionTitle());
+			j.put("price1", option.getPrice1());
+			j.put("price2", option.getPrice2());
+			j.put("quantity", option.getQuantity());
+
+			arr.add(j);
+		}
+		PrintWriter os = response.getWriter();
+		os.println(arr);
 	}
 
 	/*
@@ -467,8 +496,15 @@ public class BoardController extends HttpServlet {
 			response.setContentType(image.getContentType());
 			response.setContentLength(photo.length);
 			ServletOutputStream os = response.getOutputStream();
-			os.write(photo);
-			os.close();
+			try {
+				os.write(photo);
+			} catch (IOException e) {
+				System.out.println("쓰기 실패" + boardNum + "-" + productID + "-"
+						+ optionID);
+				throw e;
+			} finally {
+				os.close();
+			}
 		}
 	}
 

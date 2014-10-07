@@ -64,6 +64,7 @@ public class ProductServiceImpl implements ProductService {
 		if (productDataAccess.productIDExists(product.getProductID())) {
 			throw new DataDuplicatedException();
 		}
+		
 		productDataAccess.insertProduct(product);
 		for (productOption option : product.getOption()) {
 			if (option != null) {
@@ -81,11 +82,19 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public productOption[] findOprion(int num) throws DataNotFoundException {
+	public productOption[] findOption(int num) throws DataNotFoundException {
 		if (!productDataAccess.productIDExists(num)) {
 			throw new DataNotFoundException();
 		}
 		return productDataAccess.selectOption(num,0);
+	}
+
+	@Override
+	public productOption[] findOption(int boardNum, int productID) throws DataNotFoundException {
+		if (!productDataAccess.productIDExists(boardNum)) {
+			throw new DataNotFoundException();
+		}
+		return productDataAccess.selectOption(boardNum,productID);
 	}
 
 }

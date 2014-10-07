@@ -28,41 +28,21 @@
 				<tr>
 					<th colspan="2" class="optionArea"><c:forEach
 							items="${products}" var="product">
-							<c:if test="${product.productID eq param.productID}">
-								<select name="selectedOption" onchange="selectOption(this);">
-									<option value="0">사이즈/색깔/날짜 등을 선택하세요.</option>
-									<c:forEach items="${product.option}" var="option">
-										<option value="${option.optionID}"
-											<c:if test="${param.optionID eq option.optionID}"> selected="selected"</c:if>>선택${option.optionID}-${option.optionTitle}
-											\ ${option.price2}</option>
-									</c:forEach>
-								</select>
-							</c:if>
+
+
+							<select name="selectedOption" onchange="selectOption(this);"
+								id="testSelect">
+								<option value="0">사이즈/색깔/날짜 등을 선택하세요.</option>
+							</select>
+
 						</c:forEach></th>
 				</tr>
 				<tr>
 					<td colspan="2"><hr></td>
 				</tr>
-				<tr>
-					<td colspan="2" style=""><c:if
-							test="${not empty param.optionID}">
-							<c:forEach items="${products}" var="product">
-								<c:if test="${product.productID eq param.productID}">
-									<c:forEach items="${product.option}" var="option">
-										<c:if test="${option.optionID eq param.optionID}">
-											${product.productTitle}-${option.optionTitle}
-										</c:if>
-									</c:forEach>
-								</c:if>
-							</c:forEach> x <select name="quantity" onchange="selectQuantity(this);"
-								id="select_box">
-								<c:forEach begin="1" end="11" varStatus="v">
-									<option value="${v.count-1}"
-										<c:if test="${param.quantity eq v.count-1}"> selected="selected"</c:if>>${v.count-1}</option>
-								</c:forEach>
-							</select>개 =
-</c:if></td>
-				</tr>
+				<tbody id="calc">
+
+				</tbody>
 				<tr>
 					<td colspan="2" align="right">
 						<form action="buyForm">
@@ -84,8 +64,7 @@
 						</form>
 						<div id="order_area" class="btnB">
 							<input id="instantOrderButton" type="button" value="구매하기"
-								class="btnBg btn_buy"
-								onclick="alert($('#select_box option:selected').text());">
+								class="btnBg btn_buy" onclick="buy();">
 							<button id="orderButton" data-cclick="PDP,TOP_CART,BUY,3"
 								type="button" value="장바구니" class="cartButton"
 								data-gaclick="{&quot;hitType&quot;:&quot;event&quot;, &quot;eventCategory&quot;:&quot;PDP&quot;, &quot;eventAction&quot;:&quot;click&quot;, &quot;eventLabel&quot;:&quot;/click_pdp_cart&quot;, &quot;eventValue&quot;:71615516}">장바구니</button>
