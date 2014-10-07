@@ -8,9 +8,9 @@
 
 <head>
 <meta charset="UTF-8">
-<title>회원 가입</title>
+<title>Sakdagu</title>
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
-<link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/registerMember.css"/>">
 </head>
 <body>
 	<div class="tableContainer">

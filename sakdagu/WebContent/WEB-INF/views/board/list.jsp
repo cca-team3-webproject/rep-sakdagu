@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 목록</title>
+<title>Sakdagu</title>
 <link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
 <link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
@@ -13,7 +13,7 @@
 </head>
 <body>
 	<div class="tableContainer">
-		<div class="tableRow">
+		<div class="tabletop">
 			<c:import url="/top-bar.jsp" />
 		</div>
 

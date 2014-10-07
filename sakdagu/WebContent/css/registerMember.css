@@ -1,0 +1,9 @@
+@CHARSET "utf-8";
+
+body{margin: 0 auto;} 
+
+.main {text-align: center;}
+.main table {margin: auto;
+background-image: url("/sakdagu/images/back.png");}	
+.main table td {text-align: left}
+

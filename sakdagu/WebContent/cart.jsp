@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 목록</title>
+<title>Sakdagu</title>
 <link rel="stylesheet" href="<c:url value="/css/cart.css"/>">
 
 <script src='<c:url value="/js/board.js"/>'></script>
