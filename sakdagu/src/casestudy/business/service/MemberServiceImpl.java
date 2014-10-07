@@ -107,4 +107,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDataAccess.selectAllMembers();
 	}
 
+	@Override
+	public boolean isAdmin(String memberID) {
+		return memberDataAccess.isAdmin(memberID);
+	}
+
 }

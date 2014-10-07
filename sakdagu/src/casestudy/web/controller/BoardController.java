@@ -29,12 +29,12 @@ import casestudy.business.domain.productPhoto;
 import casestudy.business.service.BoardService;
 import casestudy.business.service.BoardServiceImpl;
 import casestudy.business.service.DataNotFoundException;
+import casestudy.business.service.MemberService;
+import casestudy.business.service.MemberServiceImpl;
 import casestudy.business.service.ProductService;
 import casestudy.business.service.ProductServiceImpl;
 import casestudy.dataaccess.photoDao;
 import casestudy.util.PageHandler;
-
-import com.oreilly.servlet.MultipartRequest;
 
 /**
  * Servlet implementation class BoardController
@@ -97,20 +97,11 @@ public class BoardController extends HttpServlet {
 
 		request.setAttribute("subCategoryList", subCategoryList);
 		// 6. RequestDispatcher 객체를 통해 뷰 페이지(list.jsp)로 요청을 전달한다.
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		if (session != null) {
-			member = ((Member) session.getAttribute("loginMember"));
-		}
-		RequestDispatcher dispatcher;
-		if (member != null && member.getMemberID().equals("duke")) {
-			dispatcher = request
-					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
-		} else {
-			dispatcher = request
-					.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
 
-		}
+		RequestDispatcher dispatcher;
+		dispatcher = request
+				.getRequestDispatcher("/WEB-INF/views/board/imageList.jsp");
+
 		dispatcher.forward(request, response);
 	}
 
@@ -185,8 +176,21 @@ public class BoardController extends HttpServlet {
 		request.setAttribute("endPageNumber", endPageNumber);
 		request.setAttribute("totalPageCount", totalPageCount);
 
-		RequestDispatcher dispatcher = request
-				.getRequestDispatcher("/WEB-INF/views/board/images.jsp");
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if (session != null) {
+			member = ((Member) session.getAttribute("loginMember"));
+		}
+		RequestDispatcher dispatcher;
+		MemberService service2 = new MemberServiceImpl();
+		if (member != null && service2.isAdmin(member.getMemberID())) {
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/list.jsp");
+		} else {
+
+			dispatcher = request
+					.getRequestDispatcher("/WEB-INF/views/board/images.jsp");
+		}
 		dispatcher.forward(request, response);
 
 	}

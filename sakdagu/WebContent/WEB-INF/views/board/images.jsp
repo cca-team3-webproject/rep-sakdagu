@@ -14,7 +14,8 @@
 								<em class="image"><img
 									src="<c:url value="/board/img?boardNum=${board.num}"/>">
 							</em> <br> <%-- <td class="num">${board.num}</td> --%> <br>
-								<br> <em class="title">${board.title} </em>
+								<br> <em class="title">${board.title}
+									${board.minPrice} </em>
 
 						</a><br> <em class="category"><a
 								href="<c:url value="/board/list?category=${board.category}"/>">
