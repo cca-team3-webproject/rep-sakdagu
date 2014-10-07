@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 목록</title>
+<title>Sakdagu</title>
 <link rel="stylesheet" href="<c:url value="/css/cart.css"/>">
 
-<script src="../js/board.js"></script>
+<script src='<c:url value="/js/board.js"/>'></script>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
 var buy =function(){
@@ -55,8 +55,7 @@ var buy =function(){
 				<h1>총 주문금액 = </h1>
 			</div>
 			<div>
-				<button id="shopping" onclick="history.back();">계속 쇼핑하기</button>
-				
+				<input type="button" id="shopping" onclick="goUrl('board/list');" value="계속 쇼핑하기">
 				<button id="get" onclick="buy();">바로 구매하기 </button>
 			</div>
 		</div>

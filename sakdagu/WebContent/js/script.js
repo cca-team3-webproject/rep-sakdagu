@@ -24,10 +24,10 @@ function passchk(form){
 
 	  
 	 } 
-	 else if (form.password.value != form.password2.value) {
+	 else if (form.password1.value != form.password2.value) {
 		 alert('패스워드를 재입력해주세요.');
 		 form.password2.value = "";
-		 form.password.value = "";
+		 form.password1.value = "";
 	 }
 	 return;
 	}
