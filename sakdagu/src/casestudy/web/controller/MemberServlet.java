@@ -107,8 +107,7 @@ public class MemberServlet extends HttpServlet {
 
 		// 3.1. 요청 파라미터를 통해 HTML 폼 데이터를 얻어낸다.
 		String memberID = request.getParameter("memberID");
-
-		String password = request.getParameter("password");
+		String password = request.getParameter("password1");
 		String name = request.getParameter("name");
 		String email = request.getParameter("email");
 		String tel = request.getParameter("tel");

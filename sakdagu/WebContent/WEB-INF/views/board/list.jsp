@@ -14,7 +14,7 @@
 <body>
 	<div class="tableContainer">
 
-		<div class="tableRow">
+		<div class="tableTop">
 			<div class="boardpage">
 				<table id="listtable" class="maintable">
 					<caption>게시글 목록</caption>

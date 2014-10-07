@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>오류 발생</title>
 <link rel="stylesheet" href="<c:url value="/css/body.css"/>">
+<link rel="stylesheet" href="<c:url value="/css/topbar.css"/>">
 </head>
 <body>
 	<div class="tableContainer">
