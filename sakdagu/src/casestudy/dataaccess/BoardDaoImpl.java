@@ -420,7 +420,7 @@ public class BoardDaoImpl implements BoardDao {
 		System.out.println(board);
 		String query = "INSERT INTO sakdagu_board "
 				+ "(num, writer, title, contents, ip, read_count, reg_date, "
-				+ "mod_date, master_num, category, sub_category) VALUES (sakdagu_board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, sakdagu_board_num_seq.CURRVAL, ?, ?)";
+				+ "mod_date, category, sub_category) VALUES (sakdagu_board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE, ?, ?)";
 
 		System.out.println("BoardDAOImpl insertBoard() query: " + query);
 
