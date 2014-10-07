@@ -65,7 +65,7 @@
 							<td colspan="2">
 						</tr>
 						<tr>
-							<td></td>
+							
 							<td><input type="submit" value="회원가입"> <input
 								type="reset" value="취소"></td>
 						</tr>
