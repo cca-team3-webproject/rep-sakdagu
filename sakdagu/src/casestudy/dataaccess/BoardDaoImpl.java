@@ -54,18 +54,13 @@ public class BoardDaoImpl implements BoardDao {
 				|| (category.equals("전체"))) {
 			// whereSQL = "WHERE ";
 		} else if (category.equals("베스트")) {
-			whereSQL = "WHERE read_count > 2 ";
+			whereSQL = "AND read_count > 2 ";
 		} else {
-			whereSQL = "WHERE category = ? ";
+			whereSQL = "AND category = ? ";
 		}
 
 		if ((searchText != null) && (searchText.length() != 0)) {
-			if (whereSQL.equals("")) {
-				whereSQL = "WHERE ";
-			} else {
-				whereSQL += "AND ";
-			}
-			whereSQL += "title LIKE ? OR writer LIKE ? OR contents LIKE ?";
+			whereSQL += " AND title LIKE ? OR writer LIKE ? OR contents LIKE ? ";
 		}
 		if (subCategory != null && subCategory.length() != 0) {
 			whereSQL += "AND sub_category = ? ";
@@ -76,11 +71,20 @@ public class BoardDaoImpl implements BoardDao {
 			searchText = "%" + searchText.trim() + "%";
 		}
 
-		String query = "SELECT * FROM "
-				+ "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
-				+ "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM sakdagu_board "
-				+ whereSQL
-				+ " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
+		String query = "SELECT * FROM ("
+				+ "select  rownum AS r , num, writer, title, read_count, reg_date, category, sub_category,min_price from ( "
+				+ "SELECT  num, writer, title, contents, read_count, reg_date, category, sub_category, min_price FROM  "
+				+ "(SELECT num, writer, title, contents, read_count, reg_date, category, sub_category FROM sakdagu_board bor) , "
+				+ " (select board_num, min(price2) as min_price from sakdagu_product_option opt group by BOARD_NUM ) "
+				+ " where num=board_num " + whereSQL
+				+ "ORDER BY num DESC ) )  WHERE r BETWEEN ? AND ?";
+		/*
+		 * String query = "SELECT * FROM " +
+		 * "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
+		 * +
+		 * "(SELECT num, writer, title, read_count, reg_date, category, sub_category FROM sakdagu_board "
+		 * + whereSQL + " ORDER BY master_num DESC) ) WHERE r BETWEEN ? AND ?";
+		 */
 
 		System.out.println("BoardDAOImpl selectBoardList() query: " + query
 				+ "\n searchText: " + searchText + "\n category: " + category
@@ -127,7 +131,7 @@ public class BoardDaoImpl implements BoardDao {
 				Board = new Board(rs.getInt("num"), rs.getString("writer"),
 						title, rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("category"),
-						rs.getString("sub_category"));
+						rs.getString("sub_category"), rs.getInt("min_price"));
 				temp.add(Board);
 			}
 
@@ -294,8 +298,8 @@ public class BoardDaoImpl implements BoardDao {
 						rs.getString("ip"), rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("mod_date"),
 						rs.getInt("master_num"), rs.getInt("reply_order"),
-						rs.getInt("reply_step"),
-						rs.getString("category"), rs.getString("sub_category"));
+						rs.getInt("reply_step"), rs.getString("category"),
+						rs.getString("sub_category"));
 			}
 
 		} catch (SQLException se) {
