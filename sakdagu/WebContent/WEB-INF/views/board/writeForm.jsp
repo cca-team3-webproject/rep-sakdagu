@@ -41,9 +41,9 @@
 			<!-- START of main content-->
 		</div>
 		<div class="tableRow">
-			<div class="boardpage">
-
-					<h3>게시글 입력</h3>
+			<div class="writepage">
+				<h3>게시글 입력</h3>
+				<div class="writetable">
 				<table class="maintable">
 					<tr>
 						<th>카테고리</th>
@@ -94,6 +94,11 @@
 									value="${sessionScope.loginMember.name}" maxlength="20"></td>
 							</tr>
 							<tr>
+								<th>택배비</th>
+								<td><input class="writerinput" type="text" name="delivery"
+									value="0" maxlength="20"></td>
+							</tr>
+							<tr>
 								<th class="label">사 진</th>
 								<td><input type="file" name="photoDir"></td>
 							</tr>
@@ -139,7 +144,9 @@
 
 				</form>
 			</div>
+			</div>
 		</div>
 	</div>
+	
 </body>
 </html>
