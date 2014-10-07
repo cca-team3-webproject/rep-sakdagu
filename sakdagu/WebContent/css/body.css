@@ -11,15 +11,23 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .location b{text-decoraction: underline;}
 .buttonbar { text-align: right; }
 .maintable { caption-side: top; border-collapse: collapse; text-align: left;}
+.writepage h3 {text-align: center;}
 .boardpage table {margin: auto}
 .boardpage > h3 { font-weight: bold; text-decoration: underline; text-align: center;}
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
 .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
  .bag s {color: red}
+.writepage {display: table; margin: auto}
 
+#writetable th{text-align: center;}
+
+
+.writetable > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(1) > th:nth-child(1) {width: 90px; text-align: center;}
+#cke_ckeditor {width: 900px;}
 #tableRowThin{border-bottom: blue 30px;}
 .maintable table{text-align: center; padding: 20px;}
+
 
 #listtable.maintable em{margin: 0px; padding: 0px; font-size: 100%; font-style:normal; font-weight:bold; font-family: 'Dotum','돋움';}
 
