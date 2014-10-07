@@ -4,7 +4,7 @@ CREATE TABLE sakdagu_product_image (
 	board_num integer NOT NULL,
 	product_id integer ,
   option_id integer ,
-	image_name VARCHAR(50) NOT NULL,
+	image_name VARCHAR(100) NOT NULL,
 	content_type VARCHAR(50) NOT NULL,
 	contents BLOB NOT NULL  
 );
@@ -20,7 +20,7 @@ CREATE TABLE sakdagu_product_option(
 	board_num integer NOT NULL,
 	product_id integer ,
 	option_id integer ,
-	option_title VARCHAR(50),
+	option_title VARCHAR(100),
   price1 integer,
   price2 integer,
   quantity integer,

@@ -50,6 +50,8 @@ public interface ProductDao {
 
 	public void insertOption(int num, productOption option);
 
-	public productOption[] selectOption(int num, int product_id);
+	public productOption[] selectOptions(int num, int product_id);
+
+	public productOption selectOption(int boardNum, int productID, int optionID);
 
 }
