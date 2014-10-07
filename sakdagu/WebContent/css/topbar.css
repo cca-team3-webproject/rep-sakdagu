@@ -11,7 +11,7 @@ ul#loginerrormsg { padding: 0px 10px 0px 20px; }
 #logintable td.label {color: red; font-weight: bold;}
 
 .tableCell {vertical-align: top; }
-.topbar { display: table-cell; height: 200px; vertical-align: top; text-align: center; margin: 0 auto;}
+.topbar { display: table; height: 200px; vertical-align: top; text-align: center; margin: 0 auto;}
 
 td.category a {
 		position: relative;
@@ -159,6 +159,6 @@ td.category a:hover:before, td.category a:hover:after{
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#a5cc52', endColorstr='#b8e356');
 	background-color:#a5cc52;
 }.categoryButton:active {
- */	position:relative;
+ 	position:relative;
 	top:1px;
 }

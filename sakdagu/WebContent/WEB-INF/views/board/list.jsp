@@ -14,7 +14,7 @@
 <body>
 	<div class="tableContainer">
 
-		<div class="tableRow">
+		<div class="tableTop">
 			<div class="boardpage">
 				<table id="listtable" class="maintable">
 					<caption>게시글 목록</caption>
@@ -94,23 +94,6 @@
 					</tfoot>
 				</table>
 				<div class="buttonbar">
-					<form name="searchForm" action="list" method="GET">
-						<input type="hidden" name="category" value="${param.category}">
-						<select name="searchType">
-							<option value="all"
-								<c:if test="${empty param.searchType}"> selected="selected"</c:if>>전체검색</option>
-							<option value="title"
-								<c:if test="${param.searchType eq 'title'}"> selected="selected"</c:if>>제목</option>
-							<option value="writer"
-								<c:if test="${param.searchType eq 'writer'}"> selected="selected"</c:if>>글쓴이</option>
-							<option value="contents"
-								<c:if test="${param.searchType eq 'contents'}"> selected="selected"</c:if>>내용</option>
-						</select> <input id="searchinput" type="text" name="searchText"
-							value="${param.searchText}" onclick="select();"> <input
-							type="submit" value="검색"> <input type="button" value="목록"
-							onclick="goUrl('list');">
-
-					</form>
 					<c:if test="${not empty sessionScope.loginMember}">
 						<form name="writeForm" action="<c:url value="/board/writeForm"/>" method="GET">
 							<select name="category">
