@@ -7,6 +7,7 @@ a:visited { text-decoration: none; color: #000000; }
 a:hover, a:active { text-decoration: underline; color: #cc6600; }
 
 .main > h4, p, ul{text-align: center}
+.main table {margin: auto;}
 .location b{text-decoraction: underline;}
 .buttonbar { text-align: right; }
 .maintable { caption-side: top; border-collapse: collapse; text-align: left;}
@@ -15,7 +16,7 @@ a:hover, a:active { text-decoration: underline; color: #cc6600; }
 .maintable > caption { font-weight: bold; text-decoration: underline; margin-bottom: 10px;}
 .maintable th { border: 1px;  padding: 2px; height: 21px; }
 .maintable th, .maintable tr { border-top: 1px; border-bottom: 1px; padding: 2px; height: 21px; } 
- 
+ .bag s {color: red}
 
 #tableRowThin{border-bottom: blue 30px;}
 .maintable table{text-align: center; padding: 20px;}

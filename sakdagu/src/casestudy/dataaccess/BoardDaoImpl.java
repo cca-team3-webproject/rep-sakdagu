@@ -276,7 +276,7 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public Board selectBoard(int num) {
 		String query = "SELECT num,writer,title,contents,ip,read_count,reg_date,mod_date "
-				+ ", master_num, reply_order, reply_step, category, sub_category "
+				+ ", category, sub_category "
 				+ "FROM sakdagu_board WHERE num=?";
 		System.out.println("BoardDAOImpl selectBoard() query: " + query);
 
@@ -297,9 +297,7 @@ public class BoardDaoImpl implements BoardDao {
 						rs.getString("title"), rs.getString("contents"),
 						rs.getString("ip"), rs.getInt("read_count"),
 						rs.getString("reg_date"), rs.getString("mod_date"),
-						rs.getInt("master_num"), rs.getInt("reply_order"),
-						rs.getInt("reply_step"), rs.getString("category"),
-						rs.getString("sub_category"));
+						rs.getString("category"), rs.getString("sub_category"));
 			}
 
 		} catch (SQLException se) {
@@ -560,73 +558,6 @@ public class BoardDaoImpl implements BoardDao {
 
 		} catch (SQLException se) {
 			System.err.println("BoardDAOImpl deleteBoard() Error :"
-					+ se.getMessage());
-			se.printStackTrace(System.err);
-			// throw new RuntimeException("A database error occurred. " +
-			// se.getMessage());
-
-		} finally {
-			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
-			}
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
-			}
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see casestudy.business.service.BoardDao#insertReplyBoard(Board)
-	 * 
-	 * 답글 추가 작업을 위해 원글의 기존 답글들에 대한 정보(reply_order)를 일부 갱신하고 신규 답글에 해당하는 레코드를
-	 * 추가한다.
-	 */
-	@Override
-	public void insertReplyBoard(Board board) {
-		String query1 = "UPDATE sakdagu_board SET reply_order = reply_order + 1 "
-				+ "WHERE master_num = ? AND reply_order > ?";
-		System.out.println("BoardDAOImpl insertReplyBoard() query: " + query1);
-
-		String query2 = "INSERT INTO sakdagu_board"
-				+ "(num, writer, title, contents, ip, read_count, reg_date,	mod_date, "
-				+ "master_num, reply_order, reply_step) "
-				+ "VALUES (board_num_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, SYSDATE,"
-				+ " ?, ?, ?)";
-
-		System.out.println("BoardDAOImpl insertReplyBoard() query: " + query2);
-
-		Connection connection = null;
-		PreparedStatement stmt = null;
-		try {
-			connection = obtainConnection();
-			stmt = connection.prepareStatement(query1);
-			stmt.setInt(1, board.getMasterNum());
-			stmt.setInt(2, board.getReplyOrder());
-			stmt.executeUpdate();
-			stmt.close();
-
-			stmt = connection.prepareStatement(query2);
-			stmt.setString(1, board.getWriter());
-			stmt.setString(2, board.getTitle());
-			stmt.setString(3, board.getContents());
-			stmt.setString(4, board.getIp());
-			stmt.setInt(5, board.getMasterNum());
-			stmt.setInt(6, board.getReplyOrder() + 1); // 현재 게시글 다음에 위치시켜야 하므로
-														// reply_order + 1
-			stmt.setInt(7, board.getReplyStep() + 1); // 현재 게시글에 대한 답글이므로
-														// reply_step + 1
-			stmt.executeUpdate();
-
-		} catch (SQLException se) {
-			System.err.println("BoardDAOImpl insertReplyBoard() Error :"
 					+ se.getMessage());
 			se.printStackTrace(System.err);
 			// throw new RuntimeException("A database error occurred. " +

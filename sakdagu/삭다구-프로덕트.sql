@@ -1,6 +1,4 @@
-
-
-DROP TABLE sakdagu_product_image;
+--DROP TABLE sakdagu_product_image;
 
 CREATE TABLE sakdagu_product_image (
 	board_num integer NOT NULL,
@@ -16,7 +14,7 @@ COMMIT;
 select * from SAKDAGU_PRODUCT_IMAGE; 
 
 
-DROP TABLE sakdagu_product_option;
+--DROP TABLE sakdagu_product_option;
 
 CREATE TABLE sakdagu_product_option(
 	board_num integer NOT NULL,
@@ -33,7 +31,7 @@ select * from SAKDAGU_PRODUCt_option;
 
 
 
-DROP TABLE sakdagu_product;
+--DROP TABLE sakdagu_product;
 
 CREATE TABLE sakdagu_product(
 	board_num integer NOT NULL,
@@ -42,6 +40,7 @@ CREATE TABLE sakdagu_product(
 );
 COMMIT;
 select * from SAKDAGU_PRODUCt; 
+
 --
 --SELECT image_name, content_type, contents FROM sakdagu_product_image WHERE target_id=0;
 --select sakdagu_board_num_seq.currval from dual;

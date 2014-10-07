@@ -71,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int writeBoard(Board board) {
 		BoardDataAccess.insertBoard(board);
-		
+
 		return BoardDataAccess.getThisNum();
 	}
 
@@ -101,21 +101,6 @@ public class BoardServiceImpl implements BoardService {
 			throw new DataNotFoundException("존재하지 않는 게시물입니다.");
 		}
 		BoardDataAccess.deleteBoard(num);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see casestudy.business.service.BoardService#replyBoard(Board)
-	 * 
-	 * BoardDao 객체를 사용해 답글 정보를 등록한다.
-	 */
-	@Override
-	public void replyBoard(Board board) throws DataNotFoundException {
-		if (!BoardDataAccess.boardNumExists(board.getNum())) {
-			throw new DataNotFoundException("존재하지 않는 게시물입니다.");
-		}
-		BoardDataAccess.insertReplyBoard(board);
 	}
 
 	@Override

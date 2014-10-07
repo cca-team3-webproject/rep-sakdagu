@@ -9,9 +9,9 @@
 		<tr>
 			<td class="message">${ loginMember.name}님 <!--<br>  -->환영합니다.
 			</td>
-<!-- 		</tr>
-		<tr> -->
 			<td><input type="submit" name="logout" value="로그아웃"></td>
+			<td><a href="<c:url value='/updateMember.jsp'/>">회원정보수정</a></td>
+			<td><a onclick="removeCheck('<c:url value="/member?action=remove"/>');">회원탈퇴</a></td>
 			<td><a href='<c:url value="/cart.jsp"/>'>장바구니</a></td>
 		</tr>
 	</table>
