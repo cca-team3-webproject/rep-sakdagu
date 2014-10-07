@@ -8,7 +8,6 @@ package casestudy.business.service;
 import java.util.Map;
 
 import casestudy.business.domain.Board;
-import casestudy.business.domain.Product;
 
 /**
  * 게시판과 관련한 업무나 처리에 관련한 서비스를 담당할 객체의 규격을 정의한 인터페이스.<br/> 
@@ -61,13 +60,7 @@ public interface BoardService {
      */
 	public int writeBoard(Board board);
     
-	/**
-     * 기존 게시글에 답글을 등록한다.
-     *
-     * @param board 등록할 답글 정보를 담고 있는 Board 객체
-     * @throws DataNotFoundException 답글을 달 원게시글이 존재하지 않을 경우 발생 
-     */
-	public void replyBoard(Board board)throws DataNotFoundException;
+
 	
     /**
      * 기존 게시글을 수정한다.

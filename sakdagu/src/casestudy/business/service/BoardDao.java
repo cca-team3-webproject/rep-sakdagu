@@ -64,17 +64,9 @@ public interface BoardDao {
 	 * 
 	 * @param board
 	 *            등록할 게시글 정보를 담고 있는 Board 객체
-	 * @return 
+	 * @return
 	 */
 	public void insertBoard(Board board);
-
-	/**
-	 * 인수로 주어진 Board 객체의 정보로 답글을 등록한다.
-	 * 
-	 * @param board
-	 *            등록할 답글 정보를 담고 있는 Board 객체
-	 */
-	public void insertReplyBoard(Board board);
 
 	/**
 	 * 인수로 주어진 Board 객체의 정보로 기존 게시글을 수정한다.
@@ -91,7 +83,7 @@ public interface BoardDao {
 	 *            삭제하려는 게시글의 번호
 	 */
 	public void deleteBoard(int num);
-	
+
 	/*
 	 * 
 	 */

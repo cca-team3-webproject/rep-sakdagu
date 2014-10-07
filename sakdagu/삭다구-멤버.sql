@@ -1,4 +1,4 @@
-drop TABLE sakdagu_MEMBER ;
+--drop TABLE sakdagu_MEMBER ;
 
 CREATE TABLE sakdagu_MEMBER 
 (
@@ -13,5 +13,6 @@ CREATE TABLE sakdagu_MEMBER
 , POINT int 
 , MEMBERDATE DATE NOT NULL 
 );
-INSERT INTO Member VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? );
+commit;
+
 select * from sakdagu_member;
