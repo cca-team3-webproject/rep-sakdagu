@@ -48,6 +48,7 @@ public class BoardDaoImpl implements BoardDao {
 
 		// 2. searchType 값에 따라 사용될 조건절을 생성한다.
 		String whereSQL = "";
+		String 정렬 = "num";
 		//
 
 		if ((category == null) || (category.length() == 0)
@@ -55,6 +56,7 @@ public class BoardDaoImpl implements BoardDao {
 			// whereSQL = "WHERE ";
 		} else if (category.equals("베스트")) {
 			whereSQL = "AND read_count > 2 ";
+			정렬 = "read_count";
 		} else {
 			whereSQL = "AND category = ? ";
 		}
@@ -76,8 +78,8 @@ public class BoardDaoImpl implements BoardDao {
 				+ "SELECT  num, writer, title, contents, read_count, reg_date, category, sub_category, min_price FROM  "
 				+ "(SELECT num, writer, title, contents, read_count, reg_date, category, sub_category FROM sakdagu_board bor) , "
 				+ " (select board_num, min(price2) as min_price from sakdagu_product_option opt group by BOARD_NUM ) "
-				+ " where num=board_num " + whereSQL
-				+ "ORDER BY num DESC ) )  WHERE r BETWEEN ? AND ?";
+				+ " where num=board_num " + whereSQL + "ORDER BY " + 정렬
+				+ " DESC ) )  WHERE r BETWEEN ? AND ?";
 		/*
 		 * String query = "SELECT * FROM " +
 		 * "(SELECT rownum AS r , num, writer, title, read_count, reg_date, category, sub_category FROM "
@@ -544,39 +546,44 @@ public class BoardDaoImpl implements BoardDao {
 	 */
 	@Override
 	public void deleteBoard(int num) {
-		String query = "DELETE FROM sakdagu_board WHERE num = ?";
+		String querys[] = { "DELETE FROM sakdagu_board WHERE num = ?",
+				"delete from sakdagu_product where BOARD_NUM=?",
+				"delete from SAKDAGU_PRODUCT_IMAGE where BOARD_NUM=?",
+				"delete from SAKDAGU_PRODUCT_OPTION where BOARD_NUM=?" };
 
-		System.out.println("BoardDAOImpl deleteBoard() query: " + query);
-
-		Connection connection = null;
-		PreparedStatement stmt = null;
-		try {
-			connection = obtainConnection();
-			stmt = connection.prepareStatement(query);
-			stmt.setInt(1, num);
-			stmt.executeUpdate();
-
-		} catch (SQLException se) {
-			System.err.println("BoardDAOImpl deleteBoard() Error :"
-					+ se.getMessage());
-			se.printStackTrace(System.err);
-			// throw new RuntimeException("A database error occurred. " +
-			// se.getMessage());
-
-		} finally {
+		for (String query : querys) {
+			System.out.println("BoardDAOImpl deleteBoard() query: " + query);
+			Connection connection = null;
+			PreparedStatement stmt = null;
 			try {
-				if (stmt != null)
-					stmt.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
-			}
-			try {
-				if (connection != null)
-					connection.close();
-			} catch (SQLException ex) {
-				ex.printStackTrace(System.err);
+				connection = obtainConnection();
+				stmt = connection.prepareStatement(query);
+				stmt.setInt(1, num);
+				stmt.executeUpdate();
+
+			} catch (SQLException se) {
+				System.err.println("BoardDAOImpl deleteBoard() Error :"
+						+ se.getMessage());
+				se.printStackTrace(System.err);
+				// throw new RuntimeException("A database error occurred. " +
+				// se.getMessage());
+
+			} finally {
+				try {
+					if (stmt != null)
+						stmt.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace(System.err);
+				}
+				try {
+					if (connection != null)
+						connection.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace(System.err);
+				}
 			}
 		}
+
 	}
 
 	@Override

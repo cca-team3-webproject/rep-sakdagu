@@ -10,15 +10,17 @@
 <link rel="stylesheet" href="<c:url value="/css/menubar.css"/>">
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="<c:url value="/js/product.js"/>"></script>
+<script src="<c:url value="/js/board.js"/>"></script>
 <script type="text/javascript">
 	var buy = function(obj) {
-		var str = $("form").serialize();
+		/* var str = $("form").serialize(); */
 		var sum = $('#sum').text();
 		if (confirm('총 금액 ' + sum + ' 구매 하시겠습니까?')) {
 			alert('=======================\n구매가 완료되었습니다.');
 			return false;
 		} else {
-			location.href = '/sakdagu/cart.jsp?sum=' + sum + '&' + str;
+			location.href = '/sakdagu/cart.jsp?sum=' + sum
+			/* + '&' + str */;
 		}
 	};
 
@@ -153,13 +155,20 @@
 							<td>
 								<div class="buttonbar">
 									<input type="button" value="목록"
-										onclick="goUrl('list?pageNumber=${currentPageNumber}&searchType=${param.searchType}&searchText=${param.searchText}');">
-									<input type="button" value="답글"
-										onclick="goUrl('replyForm?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}');">
-									<input type="button" value="수정"
-										onclick="goUrl('updateForm?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}');">
-									<input type="button" value="삭제"
-										onclick="deleteCheck('remove?pageNumber=${currentPageNumber}&num=${board.num}&searchType=${param.searchType}&searchText=${param.searchText}');">
+										onclick="goUrl('list?pageNumber=${currentPageNumber}&category=${param.category}&searchText=${param.searchText}');">
+
+									<c:if test="${isAdmin}">
+
+										<%-- <input type="button" value="답글"
+											onclick="goUrl('replyForm?pageNumber=${currentPageNumber}&num=${board.num}&category=${param.category}&searchText=${param.searchText}');">
+										 --%>
+										<input type="button" value="수정"
+											onclick="goUrl('updateForm?pageNumber=${currentPageNumber}&num=${board.num}&category=${param.category}&searchText=${param.searchText}');">
+										<input type="button" value="삭제"
+											onclick="deleteCheck('remove?pageNumber=${currentPageNumber}&num=${board.num}&category=${param.category}&searchText=${param.searchText}');">
+
+									</c:if>
+
 								</div>
 							</td>
 						</tr>

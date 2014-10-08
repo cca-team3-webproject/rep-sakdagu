@@ -20,7 +20,6 @@
 			<div class="main">
 				<h4 id="error">입력 정보 오류</h4>
 				<ul>
-
 					<c:forEach var="message" items="${errorMsgs }">
 						<li>${message}...</li>
 

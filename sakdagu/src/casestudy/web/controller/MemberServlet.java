@@ -134,6 +134,16 @@ public class MemberServlet extends HttpServlet {
 			errorMsgs.add("이메일주소를 입력해주세요.");
 		}
 
+		if ((tel == null) || (tel.length() == 0)) {
+			errorMsgs.add("전화번호를 입력해주세요.");
+		}
+
+		if ((zipcode1 == null) || (zipcode1.length() == 0)
+				|| (zipcode2 == null) || (zipcode2.length() == 0)
+				|| (address == null) || (address.length() == 0)) {
+			errorMsgs.add("주소를 입력해주세요.");
+		}
+
 		// 3.2.3. 유효하지 않은 데이터가 있으면
 		if (!errorMsgs.isEmpty()) {
 			// 3.2.4. 에러 내용을 request scope 속성에 저장하고
@@ -289,10 +299,8 @@ public class MemberServlet extends HttpServlet {
 		String url = request.getHeader("referer");
 		if (url.indexOf("/board") != -1) {
 			url = url.substring(url.indexOf("/board"));
-		}
-		else
-		{
-			url="/";
+		} else {
+			url = "/";
 		}
 		// 1.2. 비즈니스 로직을 수행할 MemberService 객체를 생성하여
 		MemberService memberService = new MemberServiceImpl();

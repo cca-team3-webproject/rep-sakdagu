@@ -283,10 +283,23 @@ public class BoardController extends HttpServlet {
 		Board board = service.readBoard(num);
 		ProductService service2 = new ProductServiceImpl();
 		Product products[] = service2.findProduct(num);
+
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		boolean isAdmin = false;
+		if (session != null) {
+			member = ((Member) session.getAttribute("loginMember"));
+			if (member != null) {
+				MemberService service3 = new MemberServiceImpl();
+				isAdmin = service3.isAdmin(member.getMemberID());
+			}
+		}
+
 		// 3.1 request scope 속성(board)에 게시글을 저장한다.
 		request.setAttribute("board", board);
 		request.setAttribute("products", products);
 		request.setAttribute("currentPageNumber", currentPageNumber);
+		request.setAttribute("isAdmin", isAdmin);
 		// 3.2 request scope 속성으로 searchType, searchText를 저장한다.
 		// request.setAttribute("searchType", searchType);
 		// request.setAttribute("searchText", searchText);
